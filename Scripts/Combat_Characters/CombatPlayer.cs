@@ -10,11 +10,16 @@ public class CombatPlayer : CombatUnits
 
     private GameState gameState;
 
+    public GameObject targetedEnemy;
+
+    public Animator anim;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         actionCount = baseActionCount;
+        anim = GetComponent<Animator>();
     }
 
     /*
@@ -24,6 +29,12 @@ public class CombatPlayer : CombatUnits
      * 
      *  Every movement tool gained in platforming can also be used as an attack in combat
      *  Different movement tools can be combined to create more powerful atttacks
+     *  
+     *  
+     *  TODO: player valitsee abilityn ja sen jälkeen targettaa vihollista!!!!
+     *  
+     *  
+     *  
      */
 
     // Update is called once per frame
@@ -38,10 +49,29 @@ public class CombatPlayer : CombatUnits
         {
             actionCount = baseActionCount;
         }
+
+        TargetEnemy();
     }
 
     public void ChangeActionCount()
     {
         actionCount--;
+    }
+
+    private void TargetEnemy()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+        if (Input.GetMouseButton(0))
+        {
+            if (!hit)
+                return;
+
+            if (hit.transform.tag == "Enemy")
+            {
+                targetedEnemy = hit.transform.gameObject;
+                Debug.Log("Target changed");
+            }
+        }
     }
 }

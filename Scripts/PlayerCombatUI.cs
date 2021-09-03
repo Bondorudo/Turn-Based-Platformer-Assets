@@ -6,7 +6,6 @@ using TMPro;
 
 public class PlayerCombatUI : MonoBehaviour
 {
-    private GameState gameState;
     private PlayerAbilityHolder abilityHolder;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject button;
@@ -27,19 +26,18 @@ public class PlayerCombatUI : MonoBehaviour
         for (int i = 0; i < abilityHolder.ability.Count; i++)
         {
             int id = i;
-            Debug.Log(abilityHolder.ability[i].abilityName);
             GameObject btn = Instantiate(button);
             btn.transform.SetParent(GameObject.Find("PlayerCommands").transform);
             btn.transform.localPosition = new Vector2(0, -40 * i);
             btn.GetComponentInChildren<TextMeshProUGUI>().text = abilityHolder.ability[id].abilityName;
-            btn.GetComponent<Button>().onClick.AddListener(() => abilityHolder.ability[id].Active(player));
+            btn.GetComponent<Button>().onClick.AddListener(() => abilityHolder.ability[id].Active());
             btn.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 30);
         }
     }
 
     private void Update()
     {
-        if (gameState == GameState.PlayerTurn)
+        if (CombatGameManager.instance.gameState == GameState.PlayerTurn)
         {
             Show();
         }

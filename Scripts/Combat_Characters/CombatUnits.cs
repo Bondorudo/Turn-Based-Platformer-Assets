@@ -36,5 +36,11 @@ public class CombatUnits : MonoBehaviour
     protected virtual void Death()
     {
         Debug.Log(gameObject.name + " has Died");
+        Destroy(gameObject);
+    }
+
+    protected virtual void EndAnim()
+    {
+        CombatGameManager.instance.EndAnimation();
     }
 }

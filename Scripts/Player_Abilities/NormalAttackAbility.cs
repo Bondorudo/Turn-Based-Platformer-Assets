@@ -5,11 +5,10 @@ using UnityEngine;
 [CreateAssetMenu (fileName = "NormalAttackAbility", menuName = "PlayerAbilities/PlayerAttacks/NormalAttack")]
 public class NormalAttackAbility : Ability
 {
-    public override void Active()
+    public override void Activate()
     {
-        base.Active();
+        base.Activate();
 
-        player.anim.SetTrigger("AttackNormal");
-        Debug.Log("Normal Attack: Deal " + attackDamage + " Damage to enemy");
+        CombatGameManager.instance.player.anim.SetTrigger("AttackNormal");
     }
 }

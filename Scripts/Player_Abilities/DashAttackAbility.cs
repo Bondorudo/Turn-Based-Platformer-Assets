@@ -5,11 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DashAttackAbility", menuName = "PlayerAbilities/PlayerAttacks/DashAttack")]
 public class DashAttackAbility : Ability
 {
-    public override void Active()
+    public override void Activate()
     {
-        base.Active();
+        base.Activate();
 
-        player.anim.SetTrigger("AttackDash");
-        Debug.Log("Dash Attack: Deal " + attackDamage + " Damage to enemy");
+        CombatGameManager.instance.player.anim.SetTrigger("AttackDash");
     }
 }

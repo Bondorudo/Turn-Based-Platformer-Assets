@@ -6,12 +6,12 @@ using TMPro;
 public class DamagePopup : MonoBehaviour
 {
     // Create new text object
-    public static DamagePopup Create(Vector3 position, int damageAmount, bool isCriticalHit)
+    public static DamagePopup Create(Vector3 position, int damageAmount, int fontSize)
     {
         Transform damagePopupTransform = Instantiate(GameAssets.i.prefabDamagePopup, position, Quaternion.identity);
 
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        damagePopup.SetUp(damageAmount, isCriticalHit);
+        damagePopup.SetUp(damageAmount, fontSize);
 
         return damagePopup;
     }
@@ -26,20 +26,11 @@ public class DamagePopup : MonoBehaviour
         textMesh = transform.GetComponent<TextMeshPro>();
     }
 
-    public void SetUp(int damage, bool isCriticalHit)
+    public void SetUp(int damage, int fontSize)
     {
         textMesh.SetText(damage.ToString());
 
-        if (!isCriticalHit)
-        {
-            // Normal hit
-            textMesh.fontSize = 9;
-        }
-        else
-        {
-            // Critical hit
-            textMesh.fontSize = 13;
-        }
+        textMesh.fontSize = fontSize;
 
         textColor = textMesh.color;
         disappearTimer = 3;

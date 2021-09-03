@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class CombatUnits : MonoBehaviour
 {
+    public GameObject target;
+
     [SerializeField] protected int maxHealth;
     protected int currentHealth;
 
-    // Start is called before the first frame update
+
     protected virtual void Start()
     {
         currentHealth = maxHealth;
-    }
-
-    protected virtual void DoAction()
-    {
-        Debug.Log("No Action Logic Implemented");
     }
 
     protected virtual void ChangeHealth(int change)
@@ -35,7 +32,6 @@ public class CombatUnits : MonoBehaviour
 
     protected virtual void Death()
     {
-        Debug.Log(gameObject.name + " has Died");
         Destroy(gameObject);
     }
 

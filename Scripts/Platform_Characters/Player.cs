@@ -49,6 +49,10 @@ public class Player : Fighter
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeight);
         }
 
+        if (xInput != 0)
+        {
+            anim.SetTrigger("run");
+        }
 
 
         if (!isFacingRight && xInput < 0)

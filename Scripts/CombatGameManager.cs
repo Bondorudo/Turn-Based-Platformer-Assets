@@ -27,23 +27,27 @@ public class CombatGameManager : MonoBehaviour
      * -> enemy advantage
      *      for each enemy in scene. in this case 3, call do action for all of them
      *      then call end turn
+     *      
+     *      
+     *      
+     *      GameObject enemyPrefabista list of a list:
+     *      have a list with all enemies in an area
+     *      and put that list in another list that has all the area listss in it
      */
 
     public static CombatGameManager instance;
 
     public GameState gameState;
 
-    /* GameObject enemyPrefabista list of a list:
-     * have a list with all enemies in an area
-     * 
-     * and put that list in another list that has all the area listss in it
-     */
-    private CombatPlayer player;
+    public CombatPlayer player;
+
+    public GameObject targeteddEnemy;
+    public GameObject targetIndicator;
+
     [SerializeField] private GameObject enemyPrefab;
     private Vector3[] spawnPositions = new Vector3[4];
 
     private List<GameObject> listOfCurrentEnemies = new List<GameObject>();
-    GameObject[] enemies;
 
     private int combatAdv;
     private int enemyIndex;
@@ -59,8 +63,6 @@ public class CombatGameManager : MonoBehaviour
 
     private void Start()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
         combatAdv = StaticGameData.combatAdvantage;
         enemyIndex = 0;
 
@@ -73,16 +75,13 @@ public class CombatGameManager : MonoBehaviour
 
         DetermineAdvantage();
         SetUpEnemyStats();
-
-        foreach (GameObject e in enemies)
-        {
-            Debug.Log(e.name);
-        }
     }
 
     private void Update()
     {
         EnemyTurn();
+
+        targeteddEnemy = player.target;
 
         Debug.Log("CURRENT STATE: " + gameState);
     }

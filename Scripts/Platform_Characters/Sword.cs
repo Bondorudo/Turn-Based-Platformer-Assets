@@ -15,8 +15,6 @@ public class Sword : Collidable
             StaticGameData.combatAdvantage = 0;
             StaticGameData.enemyAmount = 1;
 
-            Debug.Log("Hit " + coll.name);
-
             SceneManager.LoadScene("CombatScene");
         }
 

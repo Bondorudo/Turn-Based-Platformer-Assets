@@ -10,36 +10,30 @@ public class CombatPlayer : CombatUnits
 
     private GameState gameState;
 
-    public GameObject targetedEnemy;
+    private GameObject targetIndicator;
+
+    private PlayerAbilityHolder abilityHolder;
 
     public Animator anim;
 
-    // Start is called before the first frame update
+    private bool isAbilitySelected;
+
+    private int abilityIndex = 0;
+    private int damage;
+
+
     protected override void Start()
     {
         base.Start();
         actionCount = baseActionCount;
         anim = GetComponent<Animator>();
+        isAbilitySelected = false;
     }
 
-    /*
-     * pelaaja valitsee tallennus pisteess‰ omat combat abilityt(?)
-     * valitut abilityt lis‰t‰‰‰n listaan.
-     * 
-     * 
-     *  Every movement tool gained in platforming can also be used as an attack in combat
-     *  Different movement tools can be combined to create more powerful atttacks
-     *  
-     *  
-     *  TODO: player valitsee abilityn ja sen j‰lkeen targettaa vihollista!!!!
-     *  
-     *  
-     *  
-     */
-
-    // Update is called once per frame
     void Update()
     {
+        abilityHolder = transform.GetComponent<PlayerAbilityHolder>();
+
         if (actionCount <= 0)
         {
             gameState = GameState.EnemyTurn;
@@ -51,6 +45,35 @@ public class CombatPlayer : CombatUnits
         }
 
         TargetEnemy();
+        UseAbility();
+    }
+
+    // use abilites -> target -> use abilities -> space bar
+
+    public void SelectAbility(int id)
+    {
+        isAbilitySelected = true;
+        abilityIndex = id;
+    }
+
+    public void UseAbility()
+    {
+        if (target != null)
+        {
+            if (Input.GetKeyDown("space"))
+            {
+                abilityHolder.ability[abilityIndex].Activate();
+                damage = abilityHolder.ability[abilityIndex].attackDamage;
+                isAbilitySelected = false;
+            }
+        }
+    }
+
+    public void DealDamage()
+    {
+        target.SendMessage("ChangeHealth", -damage);
+        DamagePopup.Create(target.transform.position, damage, 15);
+        RemoveTarget();
     }
 
     public void ChangeActionCount()
@@ -62,16 +85,33 @@ public class CombatPlayer : CombatUnits
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-        if (Input.GetMouseButton(0))
+        if (CombatGameManager.instance.gameState == GameState.PlayerTurn && isAbilitySelected)
         {
-            if (!hit)
-                return;
-
-            if (hit.transform.tag == "Enemy")
+            if (Input.GetMouseButton(0))
             {
-                targetedEnemy = hit.transform.gameObject;
-                Debug.Log("Target changed");
+                if (!hit)
+                    return;
+
+                if (hit.transform.tag == "Enemy")
+                {
+                    target = hit.transform.gameObject;
+                    targetIndicator = CombatGameManager.instance.targetIndicator;
+                    //targetIndicator.transform.SetParent(hit.transform);
+                    targetIndicator.transform.position = hit.transform.position;
+                    targetIndicator.SetActive(true);
+                }
             }
         }
+
+        if (CombatGameManager.instance.gameState == GameState.EnemyTurn)
+        {
+            RemoveTarget();
+        }
+    }
+
+    public void RemoveTarget()
+    {
+        targetIndicator.SetActive(false);
+        target = null;
     }
 }

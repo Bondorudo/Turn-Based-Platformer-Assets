@@ -7,21 +7,12 @@ public class Ability : ScriptableObject
     public new string abilityName;
     public int attackDamage;
 
-    protected CombatPlayer player;
-
     protected GameObject targetedEnemy;
 
-    private void OnEnable()
+    public virtual void Activate()
     {
-        player = GameObject.Find("Player").GetComponent<CombatPlayer>();
-    }
-
-    public virtual void Active()
-    {
-        player.ChangeActionCount();
-        targetedEnemy = player.targetedEnemy;
+        targetedEnemy = CombatGameManager.instance.targeteddEnemy;
+        CombatGameManager.instance.player.ChangeActionCount();
         CombatGameManager.instance.gameState = GameState.PlayerAnimation;
-        targetedEnemy.SendMessage("ChangeHealth", -attackDamage);
-        DamagePopup.Create(targetedEnemy.transform.position, attackDamage, false);
     }
 }

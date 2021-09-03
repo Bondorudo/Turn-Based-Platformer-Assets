@@ -11,13 +11,9 @@ public class CombatEnemy : CombatUnits
 
     public void Action()
     {
-        DoAction();
+
     }
 
-    protected override void DoAction()
-    {
-        NormalAttack();
-    }
 
     private void NormalAttack()
     {

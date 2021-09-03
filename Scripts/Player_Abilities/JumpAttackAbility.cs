@@ -5,11 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "JumpAttackAbility", menuName = "PlayerAbilities/PlayerAttacks/JumpAttack")]
 public class JumpAttackAbility : Ability
 {
-    public override void Active()
+    public override void Activate()
     {
-        base.Active();
+        base.Activate();
 
-        player.anim.SetTrigger("AttackJump");
-        Debug.Log("Jump Attack: Deal " + attackDamage + " Damage to enemy");
+        CombatGameManager.instance.player.anim.SetTrigger("AttackJump");
     }
 }

@@ -7,8 +7,11 @@ public class CombatUnits : MonoBehaviour
     public GameObject target;
     public Animator anim;
     protected AbilityHolder abilityHolder;
+    protected HealthBarBehaviour healthBar;
 
     protected GameState gameState;
+
+    public bool isPlayerDead;
 
     public int maxHealth;
     protected int currentHealth;
@@ -17,7 +20,10 @@ public class CombatUnits : MonoBehaviour
 
     protected virtual void Start()
     {
+        healthBar = GetComponentInChildren<HealthBarBehaviour>();
+        isPlayerDead = false;
         currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth, maxHealth);
         anim = GetComponent<Animator>();
     }
 
@@ -28,7 +34,8 @@ public class CombatUnits : MonoBehaviour
 
     protected virtual void ChangeHealth(int change)
     {
-        currentHealth += change;
+        currentHealth += change; 
+        healthBar.SetHealth(currentHealth, maxHealth);
 
         if (currentHealth >= maxHealth)
         {
@@ -46,8 +53,12 @@ public class CombatUnits : MonoBehaviour
         if (gameObject.tag == "Enemy")
         {
             CombatGameManager.instance.listOfCurrentEnemies.Remove(gameObject);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        else if (gameObject.tag == "Player")
+        {
+            isPlayerDead = true;
+        }
     }
 
     protected virtual void EndAnim()

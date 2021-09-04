@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState { PlayerTurn, PlayerAnimation, EnemyTurn, EnemyAnimation }
 public class CombatGameManager : MonoBehaviour
@@ -91,8 +92,15 @@ public class CombatGameManager : MonoBehaviour
         if (listOfCurrentEnemies.Count <= 0)
         {
             Debug.Log("Player WIN");
+            // TODO: Go to platform scene, reward player with money, remove platform enemy.
+            SceneManager.LoadScene("PlatformScene");
         }
-        // else if player is dead: lose
+        if (player.isPlayerDead)
+        {
+            Debug.Log("Player Died");
+            // TODO: Fade to black and then, Load last save.
+            SceneManager.LoadScene("PlatformScene");
+        }
 
         if (gameState == GameState.EnemyTurn)
         {
@@ -189,15 +197,12 @@ public class CombatGameManager : MonoBehaviour
             case GameState.PlayerAnimation:
                 // Jos pelaajalla on action counttea jäljellä mene Player turniin
                 // Toisin mene Enemy Turniin
-                Debug.Log("player or enemy turn? = " + player.actionCount);
                 if (player.actionCount > 0)
                 {
-                    Debug.Log("Player Turn");
                     gameState = GameState.PlayerTurn;
                 }
                 else
                 {
-                    Debug.Log("Enemy Turn");
                     gameState = GameState.EnemyTurn;
                 }
                 break;

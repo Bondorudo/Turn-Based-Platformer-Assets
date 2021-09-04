@@ -9,6 +9,7 @@ public class PlayerAttackJump : AbilityPlayer
     {
         base.Activate();
 
+        Animation();
         CombatGameManager.instance.player.anim.SetTrigger("AttackJump");
     }
 }

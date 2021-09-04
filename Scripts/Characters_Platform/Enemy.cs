@@ -9,6 +9,7 @@ public class Enemy : Fighter
     [SerializeField] private int level;
     [SerializeField] private int xpToGive;
     [SerializeField] private int dmg;
+    [SerializeField] private int maxHealth;
     [SerializeField] private List<int> enemyTypes = new List<int>();
     [SerializeField] private int[] enemyAmount = new int[2];
 
@@ -33,6 +34,7 @@ public class Enemy : Fighter
         StaticGameData.enemyLevel = level;
         StaticGameData.enemyXpToGive = xpToGive;
         StaticGameData.enemyBaseDmg = dmg;
+        StaticGameData.enemyMaxHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -68,7 +70,7 @@ public class Enemy : Fighter
         {
             // 1 = neutral adv
             StaticGameData.combatAdvantage = 1;
-            StaticGameData.enemyAmount = 2;
+            StaticGameData.enemyAmount = 3;
 
             SceneManager.LoadScene("CombatScene");
         }

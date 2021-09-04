@@ -13,7 +13,7 @@ public class Sword : Collidable
 
             // 0 = player adv
             StaticGameData.combatAdvantage = 0;
-            StaticGameData.enemyAmount = 1;
+            StaticGameData.enemyAmount = 2;
 
             SceneManager.LoadScene("CombatScene");
         }
@@ -22,7 +22,7 @@ public class Sword : Collidable
         {
             // 2 = enemy adv
             StaticGameData.combatAdvantage = 2;
-            StaticGameData.enemyAmount = 3;
+            StaticGameData.enemyAmount = 4;
 
             SceneManager.LoadScene("CombatScene");
         }

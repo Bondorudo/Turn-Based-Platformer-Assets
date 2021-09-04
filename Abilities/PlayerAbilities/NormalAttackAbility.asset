@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: NormalAttackAbility
   m_EditorClassIdentifier: 
   abilityName: Normal Attack
-  cooldown: 1
-  activeTime: 0.3
   attackDamage: 3
+  animLenght: 0.65

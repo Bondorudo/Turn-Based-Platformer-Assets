@@ -8,20 +8,41 @@ public class CombatEnemy : CombatUnits
     public int xpToGive;
     public int baseDamage;
 
-
-    public void Action()
+    protected override void Start()
     {
+        base.Start();
 
+        target = GameObject.Find("Player");
+        abilityHolder = transform.GetComponent<AbilityHolder>();
     }
 
-
-    private void NormalAttack()
+    protected override void Update()
     {
-        Debug.Log("Normal Attack Action");
+        base.Update();
     }
 
-    private void Defend()
+    public void DealDamage()
     {
-        Debug.Log("Defend Action");
+        target.SendMessage("ChangeHealth", -damage);
+        DamagePopup.Create(target.transform.position, damage, 15);
+    }
+
+    public void SelectAbilityToUse()
+    {
+        // TODO: Make enemy A.I more complex and more diverse
+
+        // Select random ability to use
+
+        // Then call useAbility
+
+        int count = abilityHolder.ability.Count;
+        int randomAbilityId = Random.Range(0, count);
+        UseAbility(randomAbilityId);
+    }
+
+    private void UseAbility(int abilityIndex)
+    {
+        abilityHolder.ability[abilityIndex].Activate();
+        damage = abilityHolder.ability[abilityIndex].attackDamage;
     }
 }

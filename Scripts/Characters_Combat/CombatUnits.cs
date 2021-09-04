@@ -5,14 +5,25 @@ using UnityEngine;
 public class CombatUnits : MonoBehaviour
 {
     public GameObject target;
+    public Animator anim;
+    protected AbilityHolder abilityHolder;
 
-    [SerializeField] protected int maxHealth;
+    protected GameState gameState;
+
+    public int maxHealth;
     protected int currentHealth;
+    protected int damage;
 
 
     protected virtual void Start()
     {
         currentHealth = maxHealth;
+        anim = GetComponent<Animator>();
+    }
+
+    protected virtual void Update()
+    {
+        abilityHolder = transform.GetComponent<AbilityHolder>();
     }
 
     protected virtual void ChangeHealth(int change)
@@ -32,6 +43,10 @@ public class CombatUnits : MonoBehaviour
 
     protected virtual void Death()
     {
+        if (gameObject.tag == "Enemy")
+        {
+            CombatGameManager.instance.listOfCurrentEnemies.Remove(gameObject);
+        }
         Destroy(gameObject);
     }
 

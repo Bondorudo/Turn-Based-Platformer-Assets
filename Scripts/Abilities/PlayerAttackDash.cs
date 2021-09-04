@@ -9,6 +9,7 @@ public class PlayerAttackDash : AbilityPlayer
     {
         base.Activate();
 
+        Animation();
         CombatGameManager.instance.player.anim.SetTrigger("AttackDash");
     }
 }

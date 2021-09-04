@@ -1949,6 +1949,7 @@ MonoBehaviour:
   level: 0
   xpToGive: 0
   dmg: 0
+  maxHealth: 30
   enemyTypes: 
   enemyAmount: 00000000
   whatIsGround:

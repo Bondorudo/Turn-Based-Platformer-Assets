@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: JumpAttackAbility
   m_EditorClassIdentifier: 
   abilityName: Jump Attack
-  cooldown: 3
-  activeTime: 2
   attackDamage: 10
+  animLenght: 1.35

@@ -7,5 +7,7 @@ public class AbilityEnemy : Ability
     public override void Activate()
     {
         base.Activate();
+
+        CombatGameManager.instance.gameState = GameState.EnemyAnimation;
     }
 }

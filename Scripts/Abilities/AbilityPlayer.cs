@@ -8,7 +8,6 @@ public class AbilityPlayer : Ability
     {
         base.Activate();
 
-        targetedEnemy = CombatGameManager.instance.targeteddEnemy;
         CombatGameManager.instance.player.ChangeActionCount();
         CombatGameManager.instance.gameState = GameState.PlayerAnimation;
     }

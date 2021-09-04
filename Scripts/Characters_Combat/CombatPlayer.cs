@@ -4,45 +4,25 @@ using UnityEngine;
 
 public class CombatPlayer : CombatUnits
 {
-    [SerializeField] private int baseActionCount = 1;
-
-    public int actionCount { get; private set; }
-
-    private GameState gameState;
-
     private GameObject targetIndicator;
-
-    private AbilityHolder abilityHolder;
-
-    public Animator anim;
 
     private bool isAbilitySelected;
 
+    public int actionCount;
+    public int baseActionCount = 1;
     private int abilityIndex = 0;
-    private int damage;
 
 
     protected override void Start()
     {
         base.Start();
         actionCount = baseActionCount;
-        anim = GetComponent<Animator>();
         isAbilitySelected = false;
     }
 
-    void Update()
+    protected override void Update()
     {
-        abilityHolder = transform.GetComponent<AbilityHolder>();
-
-        if (actionCount <= 0)
-        {
-            gameState = GameState.EnemyTurn;
-        }
-
-        if (gameState == GameState.EnemyTurn)
-        {
-            actionCount = baseActionCount;
-        }
+        base.Update();
 
         TargetEnemy();
         UseAbility();
@@ -96,7 +76,6 @@ public class CombatPlayer : CombatUnits
                 {
                     target = hit.transform.gameObject;
                     targetIndicator = CombatGameManager.instance.targetIndicator;
-                    //targetIndicator.transform.SetParent(hit.transform);
                     targetIndicator.transform.position = hit.transform.position;
                     targetIndicator.SetActive(true);
                 }

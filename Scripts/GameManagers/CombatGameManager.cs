@@ -40,14 +40,21 @@ public class CombatGameManager : MonoBehaviour
     public GameState gameState;
 
     public CombatPlayer player;
+    public CombatEnemy actingEnemy;
 
-    public GameObject targeteddEnemy;
+    public GameObject targetedEnemy;
     public GameObject targetIndicator;
-
     [SerializeField] private GameObject enemyPrefab;
+
     private Vector3[] spawnPositions = new Vector3[4];
 
-    private List<GameObject> listOfCurrentEnemies = new List<GameObject>();
+    public List<GameObject> listOfCurrentEnemies = new List<GameObject>();
+
+    private GameObject[][] arrayOfEnemies = new GameObject[10][];
+    // [0][0] = area 0, enemy 0
+    // [0][1] = area 0, enemy 1
+    // [1][3] = area 1, enemy 3
+
 
     private int combatAdv;
     private int enemyIndex;
@@ -79,11 +86,21 @@ public class CombatGameManager : MonoBehaviour
 
     private void Update()
     {
-        EnemyTurn();
-
-        targeteddEnemy = player.target;
-
         Debug.Log("CURRENT STATE: " + gameState);
+
+        if (listOfCurrentEnemies.Count <= 0)
+        {
+            Debug.Log("Player WIN");
+        }
+        // else if player is dead: lose
+
+        if (gameState == GameState.EnemyTurn)
+        {
+            EnemyTurn();
+            player.actionCount = player.baseActionCount;
+        }
+
+        targetedEnemy = player.target;
     }
 
     private void DetermineAdvantage()
@@ -123,6 +140,7 @@ public class CombatGameManager : MonoBehaviour
                 cEnemy.level = StaticGameData.enemyLevel;
                 cEnemy.xpToGive = StaticGameData.enemyXpToGive;
                 cEnemy.baseDamage = StaticGameData.enemyBaseDmg;
+                cEnemy.maxHealth = StaticGameData.enemyMaxHealth;
             }
             listOfCurrentEnemies.Add(enemy);
         }
@@ -130,30 +148,37 @@ public class CombatGameManager : MonoBehaviour
 
     private void EnemyTurn()
     {
+        /* Kun on EnemyTurn niin checkataan onko enemy advantage.
+         *  - jos on niin enemyTrunin aikana kaikki viholliset hyˆkk‰‰v‰t kerran.
+         *  
+         *  - jos ei ole silloin vihollinen[0] hyˆkk‰‰
+         *      -> player turn -> vihollinen[1] hyˆkk‰‰
+         *              ja menn‰‰‰n kaikki viholliset l‰pi yksi kerrallaan 
+         * 
+         */
+
         // If is not player turn and enemies dont have advantage
-        if (gameState == GameState.EnemyTurn && !enemyLargeAdvantage)
+        if (!enemyLargeAdvantage)
         {
-            // one enemy does an action
-            Debug.Log(enemyIndex);
-            listOfCurrentEnemies[enemyIndex].GetComponent<CombatEnemy>().Action();
+            actingEnemy = listOfCurrentEnemies[enemyIndex].gameObject.GetComponent<CombatEnemy>();
+            actingEnemy.SelectAbilityToUse();
             enemyIndex++;
             if (enemyIndex >= listOfCurrentEnemies.Count)
                 enemyIndex = 0;
-
-            Debug.Log("1 enemy attacks");
-            gameState = GameState.PlayerTurn;
         }
 
         // If is not player turn and enemies do have advantage
-        else if (gameState == GameState.EnemyTurn && enemyLargeAdvantage)
+        else if (enemyLargeAdvantage)
         {
             // all enemies do some action
-            foreach  (GameObject enemy in listOfCurrentEnemies)
+
+            // Turn is given to player after first enemy finishes attack because the attack has an event to change to player turn
+
+            for (int i = 0; i < listOfCurrentEnemies.Count; i++)
             {
-                enemy.GetComponent<CombatEnemy>().Action();
+                actingEnemy = listOfCurrentEnemies[i].gameObject.GetComponent<CombatEnemy>();
+                actingEnemy.SelectAbilityToUse();
             }
-            Debug.Log("All enemies attack");
-            gameState = GameState.PlayerTurn;
         }
     }
 
@@ -164,12 +189,17 @@ public class CombatGameManager : MonoBehaviour
             case GameState.PlayerAnimation:
                 // Jos pelaajalla on action counttea j‰ljell‰ mene Player turniin
                 // Toisin mene Enemy Turniin
+                Debug.Log("player or enemy turn? = " + player.actionCount);
                 if (player.actionCount > 0)
                 {
+                    Debug.Log("Player Turn");
                     gameState = GameState.PlayerTurn;
                 }
                 else
+                {
+                    Debug.Log("Enemy Turn");
                     gameState = GameState.EnemyTurn;
+                }
                 break;
             case GameState.EnemyAnimation:
                 // Jos enemy advantage, silloin kaikki viholliset attackaavat ja sen j‰lkeen menn‰‰n pelaajaan

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public static class StaticGameData
 {
-    public static int combatAdvantage { get; set; }
-    public static int enemyLevel { get; set; }
-    public static int enemyXpToGive { get; set; }
-    public static int enemyBaseDmg { get; set; }
-    public static int enemyAmount { get; set; }
+    public static int combatAdvantage;
+    public static int enemyLevel;
+    public static int enemyXpToGive;
+    public static int enemyBaseDmg;
+    public static int enemyAmount;
+    public static int enemyMaxHealth;
 
     // TODO: other info about combat: enemy types, background, design
 

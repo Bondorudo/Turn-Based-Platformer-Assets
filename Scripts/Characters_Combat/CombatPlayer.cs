@@ -12,7 +12,7 @@ public class CombatPlayer : CombatUnits
 
     private GameObject targetIndicator;
 
-    private PlayerAbilityHolder abilityHolder;
+    private AbilityHolder abilityHolder;
 
     public Animator anim;
 
@@ -32,7 +32,7 @@ public class CombatPlayer : CombatUnits
 
     void Update()
     {
-        abilityHolder = transform.GetComponent<PlayerAbilityHolder>();
+        abilityHolder = transform.GetComponent<AbilityHolder>();
 
         if (actionCount <= 0)
         {

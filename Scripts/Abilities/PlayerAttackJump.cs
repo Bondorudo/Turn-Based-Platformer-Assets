@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "JumpAttackAbility", menuName = "PlayerAbilities/PlayerAttacks/JumpAttack")]
-public class JumpAttackAbility : Ability
+public class PlayerAttackJump : AbilityPlayer
 {
     public override void Activate()
     {

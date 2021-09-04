@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DashAttackAbility", menuName = "PlayerAbilities/PlayerAttacks/DashAttack")]
-public class DashAttackAbility : Ability
+public class PlayerAttackDash : AbilityPlayer
 {
     public override void Activate()
     {

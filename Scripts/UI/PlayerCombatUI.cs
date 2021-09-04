@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerCombatUI : MonoBehaviour
 {
-    private PlayerAbilityHolder abilityHolder;
+    private AbilityHolder abilityHolder;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject button;
     [SerializeField] private GameObject playerMoveListContainer;
@@ -14,7 +14,7 @@ public class PlayerCombatUI : MonoBehaviour
 
     void Awake()
     {
-        abilityHolder = player.GetComponent<PlayerAbilityHolder>();
+        abilityHolder = player.GetComponent<AbilityHolder>();
 
         for (int i = 0; i < abilityHolder.ability.Count; i++)
         {

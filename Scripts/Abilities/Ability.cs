@@ -11,8 +11,6 @@ public class Ability : ScriptableObject
 
     public virtual void Activate()
     {
-        targetedEnemy = CombatGameManager.instance.targeteddEnemy;
-        CombatGameManager.instance.player.ChangeActionCount();
-        CombatGameManager.instance.gameState = GameState.PlayerAnimation;
+
     }
 }

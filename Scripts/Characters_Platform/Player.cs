@@ -4,49 +4,82 @@ using UnityEngine;
 
 public class Player : Fighter
 {
-    [SerializeField] LayerMask whatIsGround;
 
     private Rigidbody2D rb;
-    private Transform tr;
     [SerializeField] private Animator anim;
+
+
+    [Header("Ground Check")]
+    [SerializeField] LayerMask whatIsGround;
     [SerializeField] private Transform feet;
-
     [SerializeField] private float feetSize;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float variableJumpHeight;
-    private float xInput;
+    private bool isGrounded;
 
-    [SerializeField] private int baseJumpAmount;
+
+    [Header("Jumping")]
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float fallMultiplier;
+    [SerializeField] private float lowJumpMultiplier;
+
+    private bool canJump;
+
+    static public int baseJumpAmount = 1;
     private int amountOfJumpsLeft;
 
-    private bool isGrounded;
-    private bool didLetGoOfSpace;
+
+    [Header("Running")]
+    [SerializeField] private float moveSpeed;
+    private float xInput;
+
+
+    [Header("Dash")]
+    [SerializeField] private float dashDistance = 30f;
+    [SerializeField] private float dashDuration = 0.15f;
+    [SerializeField] private float dashCooldown = 0.5f;
+    private float lastDashTime = 0;
+
+    static public bool isDashUnlocked;
+    private bool canDash;
+    private bool isDashing;
+
+    [Header("SuperDash")]
+    [SerializeField] private float superDashSpeed; // how fast super dash moves
+    [SerializeField] private float startUpDuration; // how super dash button has to be held for it to activate
+    private bool isSuperDashing;
+    private bool canSuperDash;
+    static public bool isSuperDashUnlocked;
+
+    [Header("Grapple")]
+    static public bool isGrappleUnlocked;
+
+    [Header("WallJump")]
+    static public bool isWallJumpUnlocked;
+
+    [Header("Slide/Crouch/Crawl")]
+    static public bool isCrawlUnlocked;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        tr = GetComponent<Transform>();
         amountOfJumpsLeft = baseJumpAmount;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        xInput = Input.GetAxisRaw("Horizontal");
+        CheckInput();
+        CheckIfCanJump();
+        CheckIfCanDash();
 
-        if (Input.GetKeyDown("space"))
+        if (rb.velocity.y < 0)
         {
-            if (CheckIsGrounded() || amountOfJumpsLeft > 0)
-            {
-                Jump();
-            }
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        if (!didLetGoOfSpace && !Input.GetKey("space"))
+        else if (rb.velocity.y > 0 && !Input.GetKey("space"))
         {
-            didLetGoOfSpace = true;
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeight);
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
         if (xInput != 0)
@@ -59,45 +92,94 @@ public class Player : Fighter
             Flip();
         if (isFacingRight && xInput > 0)
             Flip();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isDashing)
+            rb.velocity = new Vector2(xInput * moveSpeed, rb.velocity.y);
+
+
+        CheckEnvironment();
+    }
+
+    private void CheckInput()
+    {
+        xInput = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetKeyDown("space"))
+        {
+            Jump();
+        }
+
+        if (Input.GetKeyDown("left shift"))
+        {
+            if (canDash)
+            {
+                StartCoroutine(Dash(facingDir));
+            }
+        }
 
         if (Input.GetKeyDown("f"))
         {
             anim.SetTrigger("attack");
         }
-
-
-        bool secondaryCheck = Physics2D.OverlapCircle(feet.position, feetSize + 0.5f, whatIsGround);
-
-        if (!isGrounded && secondaryCheck)
-        {
-            amountOfJumpsLeft--;
-        }
-
-        if (CheckIsGrounded())
-        {
-            amountOfJumpsLeft = baseJumpAmount;
-            didLetGoOfSpace = false; 
-        }
     }
 
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(xInput * moveSpeed, rb.velocity.y);
-    }
 
     private void Jump()
     {
-        // When player jumps he is still touching ground and amount of jjumpps is reset and that is why there is an extra jump!!!
-        amountOfJumpsLeft--;
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        didLetGoOfSpace = true;
+        if (canJump)
+        {
+            // When player jumps he is still touching ground and amount of jjumpps is reset and that is why there is an extra jump!!!
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            amountOfJumpsLeft--;
+        }
     }
 
-    private bool CheckIsGrounded()
+    private void CheckIfCanJump()
+    {
+        if (isGrounded && rb.velocity.y <= 3)
+        {
+            amountOfJumpsLeft = baseJumpAmount;
+        }
+        if (amountOfJumpsLeft <= 0)
+        {
+            canJump = false;
+        }
+        else
+            canJump = true;
+    }
+
+    IEnumerator Dash(int direction)
+    {
+        canDash = false;
+        isDashing = true;
+        rb.velocity = new Vector2(dashDistance * direction, 0f);
+        float gravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        yield return new WaitForSeconds(dashDuration);
+        isDashing = false;
+        rb.gravityScale = gravity;
+    }
+    
+    private void CheckIfCanDash()
+    {
+        if (isDashUnlocked)
+        {
+            if (isGrounded && Time.time - lastDashTime > dashCooldown)
+            {
+                lastDashTime = Time.time;
+                canDash = true;
+            }
+        }
+        else
+            canDash = false;
+    }
+
+    private void CheckEnvironment()
     {
         isGrounded = Physics2D.OverlapCircle(feet.position, feetSize, whatIsGround);
-        
-        return isGrounded;
     }
 
     private void OnDrawGizmos()

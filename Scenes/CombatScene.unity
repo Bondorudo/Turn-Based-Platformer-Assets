@@ -442,8 +442,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1631495403}
-  low: {r: 0.85882354, g: 0.07058822, b: 0.078466624, a: 1}
-  high: {r: 0.15836732, g: 0.7924528, b: 0.13830544, a: 1}
+  low: {r: 0.21720819, g: 0.048104316, b: 0.4433962, a: 1}
+  high: {r: 0.5955131, g: 0.3443396, b: 1, a: 1}
   offset: {x: 0, y: 1, z: 0}
 --- !u!114 &759431171
 MonoBehaviour:
@@ -564,7 +564,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4620,7 +4620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3962264, g: 0.35323957, b: 0.35323957, a: 1}
+  m_Color: {r: 0.5849056, g: 0.54903877, b: 0.54903877, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4628,7 +4628,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

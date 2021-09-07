@@ -8,5 +8,6 @@ public class PlayerGrappleHook : GrantAbilityManager
     {
         base.GrantAbility();
         Player.isGrappleUnlocked = true;
+        FloatingText.Create(transform.position, name, 8, 500);
     }
 }

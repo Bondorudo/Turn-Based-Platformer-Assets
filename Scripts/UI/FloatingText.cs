@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DamagePopup : MonoBehaviour
+public class FloatingText : MonoBehaviour
 {
     // Create new text object
-    public static DamagePopup Create(Vector3 position, int damageAmount, int fontSize)
+    public static FloatingText Create(Vector3 position, string message, int fontSize, float disappearTime)
     {
         Transform damagePopupTransform = Instantiate(GameAssets.i.prefabDamagePopup, position, Quaternion.identity);
 
-        DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        damagePopup.SetUp(damageAmount, fontSize);
+        FloatingText damagePopup = damagePopupTransform.GetComponent<FloatingText>();
+        damagePopup.SetUp(message, fontSize, disappearTime);
 
         return damagePopup;
     }
@@ -26,14 +26,14 @@ public class DamagePopup : MonoBehaviour
         textMesh = transform.GetComponent<TextMeshPro>();
     }
 
-    public void SetUp(int damage, int fontSize)
+    public void SetUp(string msg, int fontSize, float timeToDisappear)
     {
-        textMesh.SetText(damage.ToString());
+        textMesh.SetText(msg.ToString());
 
         textMesh.fontSize = fontSize;
 
         textColor = textMesh.color;
-        disappearTimer = 3;
+        disappearTimer = timeToDisappear;
 
         sortingOrder++;
         textMesh.sortingOrder = sortingOrder;

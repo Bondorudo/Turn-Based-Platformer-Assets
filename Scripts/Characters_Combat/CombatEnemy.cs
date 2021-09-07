@@ -24,7 +24,7 @@ public class CombatEnemy : CombatUnits
     public void DealDamage()
     {
         target.SendMessage("ChangeHealth", -damage);
-        DamagePopup.Create(target.transform.position, damage, 15);
+        FloatingText.Create(target.transform.position, damage.ToString(), 15, 3);
     }
 
     public void SelectAbilityToUse()

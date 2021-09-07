@@ -86,6 +86,8 @@ public class Player : Fighter
         CheckIfCanCrouch();
         CheckIfGrappleHookIsUnlocked();
 
+        //Input.GetKeyDown(KeyCode.Mouse0)
+
         SetAnimations();
 
         // Increment how fast player is falling as he falls
@@ -178,7 +180,7 @@ public class Player : Fighter
         }
 
         // Input for attack
-        if (Input.GetKeyDown("f"))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             anim.SetTrigger("attack");
         }

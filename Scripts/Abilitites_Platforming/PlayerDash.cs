@@ -8,5 +8,6 @@ public class PlayerDash : GrantAbilityManager
     {
         base.GrantAbility();
         Player.isDashUnlocked = true;
+        FloatingText.Create(transform.position, name, 8, 500);
     }
 }

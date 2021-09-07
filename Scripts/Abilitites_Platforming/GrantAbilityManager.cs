@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrantAbilityManager : MonoBehaviour
 {
     private bool canGrantAbility = false;
+    private bool hasGrantedAbility = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,8 +30,11 @@ public class GrantAbilityManager : MonoBehaviour
 
     private void CheckCanGrantAbility()
     {
-        if (canGrantAbility && Input.GetKeyDown("f"))
+        if (canGrantAbility && Input.GetKeyDown("f") && !hasGrantedAbility)
+        {
             GrantAbility();
+            hasGrantedAbility = true;
+        }
     }
 
     protected virtual void GrantAbility()

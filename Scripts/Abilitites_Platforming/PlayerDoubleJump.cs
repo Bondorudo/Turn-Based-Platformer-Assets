@@ -8,5 +8,6 @@ public class PlayerDoubleJump : GrantAbilityManager
     {
         base.GrantAbility();
         Player.baseJumpAmount = 2;
+        FloatingText.Create(transform.position, name, 8, 500);
     }
 }

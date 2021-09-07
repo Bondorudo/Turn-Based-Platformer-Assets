@@ -6,6 +6,7 @@ public class PlayerCrouch : GrantAbilityManager
 {
     protected override void GrantAbility()
     {
+        base.GrantAbility();
         Player.isCrouchUnlocked = true;
     }
 }

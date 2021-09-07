@@ -6,6 +6,7 @@ public class PlayerSuperDash : GrantAbilityManager
 {
     protected override void GrantAbility()
     {
+        base.GrantAbility();
         Player.isSuperDashUnlocked = true;
     }
 }

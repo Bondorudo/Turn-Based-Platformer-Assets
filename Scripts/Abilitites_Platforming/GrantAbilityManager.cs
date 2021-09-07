@@ -35,6 +35,6 @@ public class GrantAbilityManager : MonoBehaviour
 
     protected virtual void GrantAbility()
     {
-        Debug.Log("GRAnt ABility");
+        Debug.Log("Player got : " + gameObject.name);
     }
 }

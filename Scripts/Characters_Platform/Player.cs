@@ -86,6 +86,8 @@ public class Player : Fighter
         CheckIfCanCrouch();
         CheckIfGrappleHookIsUnlocked();
 
+        SetAnimations();
+
         // Increment how fast player is falling as he falls
         if (rb.velocity.y < 0)
         {
@@ -146,6 +148,7 @@ public class Player : Fighter
         if (Input.GetKeyDown("space"))
         {
             Jump();
+            anim.SetTrigger("jump");
         }
 
         // Input for dash
@@ -179,6 +182,28 @@ public class Player : Fighter
         {
             anim.SetTrigger("attack");
         }
+    }
+
+    private void SetAnimations()
+    {
+        if (Mathf.Abs(rb.velocity.x) >= 0.1f)
+        {
+            anim.SetBool("isRunning", true);
+        }
+        else
+            anim.SetBool("isRunning", false);
+
+        if (isDashing)
+        {
+            anim.SetBool("isDashing", true);
+        }
+        else
+            anim.SetBool("isDashing", false);
+
+        if (isCrouching)
+            anim.SetBool("isCrouching", true);
+        else
+            anim.SetBool("isCrouching", false);
     }
 
     // Logic for jumping

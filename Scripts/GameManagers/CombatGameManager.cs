@@ -61,6 +61,7 @@ public class CombatGameManager : MonoBehaviour
     private int enemyIndex;
 
     public bool enemyLargeAdvantage;
+    private bool enemyAvantageTurnOver;
 
     private void Awake()
     {
@@ -151,19 +152,18 @@ public class CombatGameManager : MonoBehaviour
             }
             listOfCurrentEnemies.Add(enemy);
         }
+
+        enemyAvantageTurnOver = true;
     }
 
     private void EnemyTurn()
     {
-        // TODO: Sometimes battle stops here due to an error
-
         /* Kun on EnemyTurn niin checkataan onko enemy advantage.
          *  - jos on niin enemyTrunin aikana kaikki viholliset hyˆkk‰‰v‰t kerran.
          *  
          *  - jos ei ole silloin vihollinen[0] hyˆkk‰‰
          *      -> player turn -> vihollinen[1] hyˆkk‰‰
          *              ja menn‰‰‰n kaikki viholliset l‰pi yksi kerrallaan 
-         * 
          */
 
         // If is not player turn and enemies dont have advantage
@@ -183,14 +183,20 @@ public class CombatGameManager : MonoBehaviour
         {
             // all enemies do some action
 
-            // Turn is given to player after first enemy finishes attack because the attack has an event to change to player turn
-
-            for (int i = 0; i < listOfCurrentEnemies.Count; i++)
-            {
-                actingEnemy = listOfCurrentEnemies[i].gameObject.GetComponent<CombatEnemy>();
-                actingEnemy.SelectAbilityToUse();
-            }
+            StartCoroutine(EnemyAdvantage());
         }
+    }
+
+    private IEnumerator EnemyAdvantage()
+    {
+        for (int i = 0; i < listOfCurrentEnemies.Count; i++)
+        {
+            actingEnemy = listOfCurrentEnemies[i].gameObject.GetComponent<CombatEnemy>();
+            actingEnemy.SelectAbilityToUse();
+            yield return new WaitForSeconds(1);
+        }
+
+        gameState = GameState.PlayerTurn;
     }
 
     public void EndAnimation()
@@ -212,6 +218,8 @@ public class CombatGameManager : MonoBehaviour
             case GameState.EnemyAnimation:
                 // Jos enemy advantage, silloin kaikki viholliset attackaavat ja sen j‰lkeen menn‰‰n pelaajaan
                 // Jos ei ole advantagea, silloin yksi vihollinen attackkaa ja sen j‰lkeen menn‰‰n pelaajaan;
+                if (enemyLargeAdvantage)
+                    break;
                 gameState = GameState.PlayerTurn;
                 break;
         }

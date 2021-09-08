@@ -43222,7 +43222,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!19719996 &285864563
 TilemapCollider2D:
@@ -43677,7 +43677,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7763158, y: 1}
+    m_SensorSize: {x: 1.7765363, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -45060,7 +45060,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 0a6d3a86f2d6a7f4da237cf139ccffc8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1237135718
 BoxCollider2D:
@@ -45694,12 +45694,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4511bae83fdc3d42a201179ee343933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  xpToGive: 0
+  moneyToGive: 0
   dmg: 0
   maxHealth: 30
   enemyTypes: 
-  enemyAmount: 00000000
+  enemyAmount: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64

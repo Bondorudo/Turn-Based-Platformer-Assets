@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: JumpAttackAbility
   m_EditorClassIdentifier: 
   abilityName: Jump Attack
-  attackDamage: 10
+  attackDamage: 5
   animLenght: 1.35
+  typeOfDamage: 1

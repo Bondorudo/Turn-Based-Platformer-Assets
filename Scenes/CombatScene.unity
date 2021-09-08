@@ -594,11 +594,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4225,6 +4225,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   anim: {fileID: 950188070}
+  fire: 0
+  water: 0
+  wind: 0
+  earth: 0
+  damageAtrributes: 01000000000000000200000005000000
   isPlayerDead: 0
   maxHealth: 30
   actionCount: 0

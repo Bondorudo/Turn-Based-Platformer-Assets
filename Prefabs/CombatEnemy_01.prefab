@@ -192,7 +192,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 727529631
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -5601785829698105500, guid: b27d51e5b38273e40acbd7cc7d12dcd1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -219,10 +219,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   anim: {fileID: 0}
+  fire: 1
+  water: 2
+  wind: 0
+  earth: 0
+  damageAtrributes: 010000000200000000000000
   isPlayerDead: 0
   maxHealth: 0
-  level: 1
-  xpToGive: 2
+  moneyToGive: 0
   baseDamage: 3
 --- !u!114 &8532792938374564966
 MonoBehaviour:

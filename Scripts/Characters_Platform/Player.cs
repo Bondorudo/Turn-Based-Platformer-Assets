@@ -101,12 +101,6 @@ public class Player : Fighter
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
-        // Set Animations
-        if (xInput != 0)
-        {
-            anim.SetTrigger("run");
-        }
-
         // Stop super dash if touching wall
         if (isTouchingWall) // or trying to jump to cancel it
         {
@@ -188,6 +182,9 @@ public class Player : Fighter
 
     private void SetAnimations()
     {
+        anim.SetFloat("yVelocity", rb.velocity.y);
+        anim.SetBool("isGrounded", isGrounded);
+
         if (Mathf.Abs(rb.velocity.x) >= 0.1f)
         {
             anim.SetBool("isRunning", true);

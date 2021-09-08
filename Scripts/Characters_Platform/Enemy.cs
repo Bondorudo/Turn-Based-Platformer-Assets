@@ -6,12 +6,11 @@ using UnityEngine.SceneManagement;
 public class Enemy : Fighter
 {
     [Header("Combat Stats")]
-    [SerializeField] private int level;
-    [SerializeField] private int xpToGive;
+    [SerializeField] private int moneyToGive;
     [SerializeField] private int dmg;
     [SerializeField] private int maxHealth;
     [SerializeField] private List<int> enemyTypes = new List<int>();
-    [SerializeField] private int[] enemyAmount = new int[2];
+    [SerializeField] private int enemyAmount;
 
     [Header("Platforming")]
     [SerializeField] private LayerMask whatIsGround;
@@ -31,8 +30,7 @@ public class Enemy : Fighter
     {
         startPosX = transform.position.x;
 
-        StaticGameData.enemyLevel = level;
-        StaticGameData.enemyXpToGive = xpToGive;
+        StaticGameData.enemyMoneyToGive = moneyToGive;
         StaticGameData.enemyBaseDmg = dmg;
         StaticGameData.enemyMaxHealth = maxHealth;
     }

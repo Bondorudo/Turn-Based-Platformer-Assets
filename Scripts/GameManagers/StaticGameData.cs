@@ -5,8 +5,7 @@ using UnityEngine;
 public static class StaticGameData
 {
     public static int combatAdvantage;
-    public static int enemyLevel;
-    public static int enemyXpToGive;
+    public static int enemyMoneyToGive;
     public static int enemyBaseDmg;
     public static int enemyAmount;
     public static int enemyMaxHealth;

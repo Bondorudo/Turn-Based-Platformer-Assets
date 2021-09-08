@@ -145,8 +145,7 @@ public class CombatGameManager : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, spawnPositions[i], transform.rotation);
             CombatEnemy cEnemy = enemy.GetComponent<CombatEnemy>();
             {
-                cEnemy.level = StaticGameData.enemyLevel;
-                cEnemy.xpToGive = StaticGameData.enemyXpToGive;
+                cEnemy.moneyToGive = StaticGameData.enemyMoneyToGive;
                 cEnemy.baseDamage = StaticGameData.enemyBaseDmg;
                 cEnemy.maxHealth = StaticGameData.enemyMaxHealth;
             }
@@ -156,6 +155,8 @@ public class CombatGameManager : MonoBehaviour
 
     private void EnemyTurn()
     {
+        // TODO: Sometimes battle stops here due to an error
+
         /* Kun on EnemyTurn niin checkataan onko enemy advantage.
          *  - jos on niin enemyTrunin aikana kaikki viholliset hyökkäävät kerran.
          *  
@@ -166,13 +167,15 @@ public class CombatGameManager : MonoBehaviour
          */
 
         // If is not player turn and enemies dont have advantage
+        if (enemyIndex >= listOfCurrentEnemies.Count)
+            enemyIndex = 0;
+
         if (!enemyLargeAdvantage)
         {
             actingEnemy = listOfCurrentEnemies[enemyIndex].gameObject.GetComponent<CombatEnemy>();
             actingEnemy.SelectAbilityToUse();
             enemyIndex++;
-            if (enemyIndex >= listOfCurrentEnemies.Count)
-                enemyIndex = 0;
+            
         }
 
         // If is not player turn and enemies do have advantage

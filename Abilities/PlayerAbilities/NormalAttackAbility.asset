@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: NormalAttackAbility
   m_EditorClassIdentifier: 
   abilityName: Normal Attack
-  attackDamage: 3
+  attackDamage: 5
   animLenght: 0.65
+  typeOfDamage: 2

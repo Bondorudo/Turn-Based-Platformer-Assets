@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CombatEnemy : CombatUnits
 {
-    public int level;
-    public int xpToGive;
+    public int moneyToGive;
     public int baseDamage;
 
     protected override void Start()
@@ -21,11 +20,6 @@ public class CombatEnemy : CombatUnits
         base.Update();
     }
 
-    public void DealDamage()
-    {
-        target.SendMessage("ChangeHealth", -damage);
-        FloatingText.Create(target.transform.position, damage.ToString(), 15, 3);
-    }
 
     public void SelectAbilityToUse()
     {
@@ -44,5 +38,6 @@ public class CombatEnemy : CombatUnits
     {
         abilityHolder.ability[abilityIndex].Activate();
         damage = abilityHolder.ability[abilityIndex].attackDamage;
+        damageType = abilityHolder.ability[abilityIndex].typeOfDamage;
     }
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DamageType { fire, water, wind, earth }
+
 public class Ability : ScriptableObject
 {
     public new string abilityName;
@@ -11,6 +13,7 @@ public class Ability : ScriptableObject
 
     public float animLenght; // lenght for each animation
 
+    public DamageType typeOfDamage;
 
     public virtual void Activate()
     {

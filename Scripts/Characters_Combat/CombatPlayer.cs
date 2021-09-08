@@ -44,17 +44,18 @@ public class CombatPlayer : CombatUnits
             {
                 abilityHolder.ability[abilityIndex].Activate();
                 damage = abilityHolder.ability[abilityIndex].attackDamage;
+                damageType = abilityHolder.ability[abilityIndex].typeOfDamage;
                 isAbilitySelected = false;
             }
         }
     }
 
-    public void DealDamage()
+    protected override void DealDamage()
     {
-        target.SendMessage("ChangeHealth", -damage);
-        FloatingText.Create(target.transform.position, damage.ToString(), 15, 3);
+        base.DealDamage();
         RemoveTarget();
     }
+
 
     public void ChangeActionCount()
     {

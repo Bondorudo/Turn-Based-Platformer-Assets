@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyLocation { TestArea, City, Depths, InnerCity, Forest }
+
 public class CombatEnemy : CombatUnits
 {
     public int moneyToGive;
     public int baseDamage;
+
+    public EnemyLocation enemyLocation;
 
     protected override void Start()
     {

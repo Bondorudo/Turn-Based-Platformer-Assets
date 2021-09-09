@@ -4162,6 +4162,7 @@ MonoBehaviour:
   damageAtrributes: 01000000000000000200000005000000
   isPlayerDead: 0
   maxHealth: 30
+  maxSP: 0
   actionCount: 0
   baseActionCount: 1
 --- !u!95 &950188070

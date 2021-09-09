@@ -8,6 +8,7 @@ public class Ability : ScriptableObject
 {
     public new string abilityName;
     public int attackDamage;
+    public int abilitySPCost;
 
     protected bool playingAnim;
 

@@ -22,6 +22,8 @@ public class CombatUnits : MonoBehaviour
 
     public int maxHealth;
     protected int currentHealth;
+    public int maxSP;
+    protected int currentSP;
     protected int damage;
     protected DamageType damageType;
 

@@ -49,12 +49,18 @@ public class CombatGameManager : MonoBehaviour
     private Vector3[] spawnPositions = new Vector3[4];
 
     public List<GameObject> listOfCurrentEnemies = new List<GameObject>();
-
-    private GameObject[][] arrayOfEnemies = new GameObject[10][];
-    // [0][0] = area 0, enemy 0
-    // [0][1] = area 0, enemy 1
-    // [1][3] = area 1, enemy 3
-
+    public List<GameObject> listOfAllEnemies = new List<GameObject>();
+    /*
+     * enemies have an enum type || location.
+     * 
+     * platform enemy has a public enum to select which type || location enemies we want in combat.
+     * 
+     * all enemies are in a single list
+     * 
+     * we spawn random enemies from this list as long as enemys type and type we want match.
+     * 
+     * 
+     */
 
     private int combatAdv;
     private int enemyIndex;

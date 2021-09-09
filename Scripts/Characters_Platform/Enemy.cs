@@ -9,7 +9,7 @@ public class Enemy : Fighter
     [SerializeField] private int moneyToGive;
     [SerializeField] private int dmg;
     [SerializeField] private int maxHealth;
-    [SerializeField] private List<int> enemyTypes = new List<int>();
+    [SerializeField] private EnemyLocation enemyLocation;
     [SerializeField] private int enemyAmount;
 
     [Header("Platforming")]
@@ -33,6 +33,7 @@ public class Enemy : Fighter
         StaticGameData.enemyMoneyToGive = moneyToGive;
         StaticGameData.enemyBaseDmg = dmg;
         StaticGameData.enemyMaxHealth = maxHealth;
+        StaticGameData.enemyLocation = enemyLocation;
     }
 
     // Update is called once per frame

@@ -173,6 +173,11 @@ MonoBehaviour:
   targetIndicator: {fileID: 3886479766308267875, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
   enemyPrefab: {fileID: 1814169735373646725, guid: 01290f5adcb44a74498d2cf4533d045b, type: 3}
   listOfCurrentEnemies: []
+  listOfAllEnemies:
+  - {fileID: 1814169735373646725, guid: 01290f5adcb44a74498d2cf4533d045b, type: 3}
+  - {fileID: 1385317280907814780, guid: ad685fc1e443976439388ed1d976387e, type: 3}
+  - {fileID: 700607061325012882, guid: c8aac4cdbac1f3f4bbbf5261cea63dff, type: 3}
+  - {fileID: 1884492965800769265, guid: 27d0f9b70a544364f998fb18f1220050, type: 3}
   enemyLargeAdvantage: 0
 --- !u!114 &42656829
 MonoBehaviour:

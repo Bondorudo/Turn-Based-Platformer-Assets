@@ -9,6 +9,7 @@ public static class StaticGameData
     public static int enemyBaseDmg;
     public static int enemyAmount;
     public static int enemyMaxHealth;
+    public static EnemyLocation enemyLocation;
 
     // TODO: other info about combat: enemy types, background, design
 

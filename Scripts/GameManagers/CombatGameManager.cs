@@ -146,15 +146,35 @@ public class CombatGameManager : MonoBehaviour
     {
         for (int i = 0; i < StaticGameData.enemyAmount; i++)
         {
-            GameObject enemy = Instantiate(enemyPrefab, spawnPositions[i], transform.rotation);
+            GameObject enemy = Instantiate(listOfAllEnemies[Random.Range(0, listOfAllEnemies.Count)], spawnPositions[i], transform.rotation);
             CombatEnemy cEnemy = enemy.GetComponent<CombatEnemy>();
             {
                 cEnemy.moneyToGive = StaticGameData.enemyMoneyToGive;
                 cEnemy.baseDamage = StaticGameData.enemyBaseDmg;
                 cEnemy.maxHealth = StaticGameData.enemyMaxHealth;
             }
-            listOfCurrentEnemies.Add(enemy);
+            if (cEnemy.enemyLocation == StaticGameData.enemyLocation)
+            {
+                listOfCurrentEnemies.Add(enemy);
+            }
+            else
+                i--;
         }
+        /*
+        while (listOfCurrentEnemies.Count <= StaticGameData.enemyAmount)
+        {
+            GameObject enemy = Instantiate(listOfAllEnemies[Random.Range(0, listOfAllEnemies.Count)], spawnPositions[i], transform.rotation);
+            CombatEnemy cEnemy = enemy.GetComponent<CombatEnemy>();
+            {
+                cEnemy.moneyToGive = StaticGameData.enemyMoneyToGive;
+                cEnemy.baseDamage = StaticGameData.enemyBaseDmg;
+                cEnemy.maxHealth = StaticGameData.enemyMaxHealth;
+            }
+            if (cEnemy.enemyLocation == StaticGameData.enemyLocation)
+            {
+                listOfCurrentEnemies.Add(enemy);
+            }
+        }*/
 
         enemyAvantageTurnOver = true;
     }

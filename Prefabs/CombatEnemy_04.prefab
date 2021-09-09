@@ -226,6 +226,7 @@ MonoBehaviour:
   maxSP: 0
   moneyToGive: 0
   baseDamage: 3
+  enemyLocation: 0
 --- !u!114 &8457962844648116498
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,10 +13,12 @@ public class Player : Fighter
 
     [Header("Ground/Wall Check")]
     [SerializeField] LayerMask whatIsGround;
+    [SerializeField] private Transform ceilingCheck;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private float groundCheckSize;
     [SerializeField] private float wallCheckDistance;
+    private bool isTouchingCeiling;
     private bool isGrounded;
     private bool isTouchingWall;
 
@@ -128,7 +130,14 @@ public class Player : Fighter
                 Crouch();
             }
         }
-        else
+        else if (isTouchingCeiling)
+        {
+            if (canCrouch)
+            {
+                Crouch();
+            }
+        }
+        else if (!isTouchingCeiling)
             isCrouching = false;
 
 
@@ -201,8 +210,10 @@ public class Player : Fighter
 
         if (isCrouching)
             anim.SetBool("isCrouching", true);
-        else
+        else if (!isCrouching && !isTouchingCeiling)
             anim.SetBool("isCrouching", false);
+
+        anim.SetBool("isTouchingCeiling", isTouchingCeiling);
     }
 
     // Logic for jumping
@@ -291,7 +302,6 @@ public class Player : Fighter
     {
         isCrouching = true;
         rb.velocity = new Vector2(xInput * moveSpeed * crouchMoveSpeedMultiplier * Time.deltaTime, rb.velocity.y);
-        // play crouch animation
     }
 
     // Checks if player can crouch
@@ -320,6 +330,7 @@ public class Player : Fighter
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, whatIsGround);
         isTouchingWall = Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance * facingDir, whatIsGround);
+        isTouchingCeiling = Physics2D.OverlapCircle(ceilingCheck.position, groundCheckSize, whatIsGround);
     }
 
     // Draw gizmos for environment checks, to make it easier to see in unity.
@@ -327,5 +338,6 @@ public class Player : Fighter
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckSize);
         Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance * facingDir, wallCheck.position.y));
+        Gizmos.DrawWireSphere(ceilingCheck.position, groundCheckSize);
     }
 }

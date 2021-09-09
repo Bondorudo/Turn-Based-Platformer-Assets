@@ -106,7 +106,7 @@ MonoBehaviour:
   damageAtrributes: 00000000020000000100000000000000
   isPlayerDead: 0
   maxHealth: 0
-  maxSP: 0
+  maxSP: 9999
   moneyToGive: 0
   baseDamage: 3
   enemyLocation: 0

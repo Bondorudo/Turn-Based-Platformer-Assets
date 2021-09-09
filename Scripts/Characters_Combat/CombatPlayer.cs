@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CombatPlayer : CombatUnits
 {
+    private SPBarBehaviour spBar;
+
     private List<GameObject> targetIndicators = new List<GameObject>();
 
     private bool isAbilitySelected;
@@ -16,6 +18,12 @@ public class CombatPlayer : CombatUnits
     protected override void Start()
     {
         base.Start();
+
+        spBar = GetComponentInChildren<SPBarBehaviour>();
+
+        spBar.SetSP(currentSP, maxSP);
+        spBar.SetSP(currentSP, maxSP);
+
         actionCount = baseActionCount;
         isAbilitySelected = false;
 
@@ -45,10 +53,19 @@ public class CombatPlayer : CombatUnits
         {
             if (Input.GetKeyDown("space"))
             {
-                abilityHolder.ability[abilityIndex].Activate();
-                damage = abilityHolder.ability[abilityIndex].attackDamage;
-                damageType = abilityHolder.ability[abilityIndex].typeOfDamage;
-                isAbilitySelected = false;
+                if (currentSP >= abilityHolder.ability[abilityIndex].abilitySPCost)
+                {
+                    abilityHolder.ability[abilityIndex].Activate();
+                    currentSP -= abilityHolder.ability[abilityIndex].abilitySPCost;
+                    damage = abilityHolder.ability[abilityIndex].attackDamage;
+                    damageType = abilityHolder.ability[abilityIndex].typeOfDamage;
+                    isAbilitySelected = false; 
+                    spBar.SetSP(currentSP, maxSP);
+                }
+                else
+                {
+                    FloatingText.Create(transform.position, "Not Enough SP", 10, 1000);
+                }
             }
         }
     }

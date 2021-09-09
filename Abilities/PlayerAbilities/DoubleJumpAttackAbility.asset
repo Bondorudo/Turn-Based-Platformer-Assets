@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Double Jump Attack
   attackDamage: 4
+  abilitySPCost: 15
   animLenght: 1.9
   typeOfDamage: 3
   isMultihit: 1

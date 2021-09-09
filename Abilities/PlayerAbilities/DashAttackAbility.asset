@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Dash Attack
   attackDamage: 7
+  abilitySPCost: 10
   animLenght: 1.25
   typeOfDamage: 1
+  isMultihit: 0

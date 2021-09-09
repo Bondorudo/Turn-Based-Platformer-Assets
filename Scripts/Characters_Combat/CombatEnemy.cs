@@ -37,6 +37,7 @@ public class CombatEnemy : CombatUnits
     private void UseAbility(int abilityIndex)
     {
         abilityHolder.ability[abilityIndex].Activate();
+        currentSP -= abilityHolder.ability[abilityIndex].abilitySPCost;
         damage = abilityHolder.ability[abilityIndex].attackDamage;
         damageType = abilityHolder.ability[abilityIndex].typeOfDamage;
     }

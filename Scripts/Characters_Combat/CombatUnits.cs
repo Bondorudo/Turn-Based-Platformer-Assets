@@ -33,7 +33,11 @@ public class CombatUnits : MonoBehaviour
         healthBar = GetComponentInChildren<HealthBarBehaviour>();
         isPlayerDead = false;
         currentHealth = maxHealth;
+        currentSP = maxSP;
+
         healthBar.SetHealth(currentHealth, maxHealth);
+        healthBar.SetHealth(currentHealth, maxHealth);
+
         anim = GetComponent<Animator>();
     }
 
@@ -110,7 +114,6 @@ public class CombatUnits : MonoBehaviour
     {
         int i = (int)dmg.damageType;
 
-        Debug.Log("Damage Type = " + dmg.damageType + " | Target Damage Attribute = " + damageAtrributes[i]);
         FloatingText.Create(new Vector2(transform.position.x, transform.position.y + 2), damageAtrributes[i].ToString(), 15, 300);
 
         // now receives damage amount and damage type

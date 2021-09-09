@@ -37,8 +37,6 @@ public class Ability : ScriptableObject
         // Trigger animation stop event here;
         CombatGameManager.instance.EndAnimation();
 
-        Debug.Log("END ANIM");
-
         playingAnim = false;
     }
 }

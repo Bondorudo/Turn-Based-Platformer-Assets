@@ -43,7 +43,6 @@ public class CombatGameManager : MonoBehaviour
     public CombatPlayer player;
     public CombatEnemy actingEnemy;
 
-    public GameObject targetedEnemy;
     public GameObject targetIndicator;
     [SerializeField] private GameObject enemyPrefab;
 
@@ -108,8 +107,6 @@ public class CombatGameManager : MonoBehaviour
             EnemyTurn();
             player.actionCount = player.baseActionCount;
         }
-
-        targetedEnemy = player.target;
     }
 
     private void DetermineAdvantage()

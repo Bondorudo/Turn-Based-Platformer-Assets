@@ -20,15 +20,11 @@ public class CombatEnemy : CombatUnits
         base.Update();
     }
 
-
     public void SelectAbilityToUse()
     {
         // TODO: Make enemy A.I more complex and more diverse
 
-        // Select random ability to use
-
-        // Then call useAbility
-
+        // Select random ability to use, Then call useAbility
         int count = abilityHolder.ability.Count;
         int randomAbilityId = Random.Range(0, count);
         UseAbility(randomAbilityId);

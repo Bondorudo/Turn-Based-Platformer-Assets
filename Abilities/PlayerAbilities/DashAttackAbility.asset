@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DashAttackAbility
   m_EditorClassIdentifier: 
   abilityName: Dash Attack
-  attackDamage: 5
+  attackDamage: 7
   animLenght: 1.25
+  typeOfDamage: 1

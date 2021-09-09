@@ -170,8 +170,7 @@ MonoBehaviour:
   gameState: 0
   player: {fileID: 0}
   actingEnemy: {fileID: 0}
-  targetedEnemy: {fileID: 0}
-  targetIndicator: {fileID: 844751447}
+  targetIndicator: {fileID: 3886479766308267875, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
   enemyPrefab: {fileID: 1814169735373646725, guid: 01290f5adcb44a74498d2cf4533d045b, type: 3}
   listOfCurrentEnemies: []
   enemyLargeAdvantage: 0
@@ -203,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2683111803926316699, guid: 1b5859dc2f296954f86f10b719b46b29, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2683111803926316699, guid: 1b5859dc2f296954f86f10b719b46b29, type: 3}
       propertyPath: m_LocalPosition.x
@@ -581,72 +580,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828123636}
   m_CullTransparentMesh: 1
---- !u!1001 &844751446
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267873, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267875, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_Name
-      value: TargetingUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886479766308267875, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
---- !u!1 &844751447 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3886479766308267875, guid: 65f672bdfafb3694696dd344d1e95792, type: 3}
-  m_PrefabInstance: {fileID: 844751446}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &899954595
 GameObject:
   m_ObjectHideFlags: 0
@@ -4223,12 +4156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a8d489687efc6419283c7ba1d5c02a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targets: []
   target: {fileID: 0}
   anim: {fileID: 950188070}
-  fire: 0
-  water: 0
-  wind: 0
-  earth: 0
   damageAtrributes: 01000000000000000200000005000000
   isPlayerDead: 0
   maxHealth: 30
@@ -4269,6 +4199,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9a0674d3345e3dc4ba29ffabf5a15a8d, type: 2}
   - {fileID: 11400000, guid: 7e8c0552173823d4aab67b8f69ad37c6, type: 2}
   - {fileID: 11400000, guid: a25ca9279b1fa9240b3b51101b18d178, type: 2}
+  - {fileID: 11400000, guid: 5f1e12717d7c0914d82b914ddbe9ea72, type: 2}
 --- !u!1 &1284007265
 GameObject:
   m_ObjectHideFlags: 0

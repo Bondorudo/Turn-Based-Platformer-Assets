@@ -6,6 +6,7 @@ public enum Stats { neutral, strong, weak, absorb, reflect, nullify }
 
 public class CombatUnits : MonoBehaviour
 {
+    public List<GameObject> targets = new List<GameObject>();
     public GameObject target;
     public Animator anim;
     protected AbilityHolder abilityHolder;
@@ -13,10 +14,11 @@ public class CombatUnits : MonoBehaviour
 
     protected GameState gameState;
 
-    // List order is = (Fire, Water, Wind, Earth)
+    // List order is = (Normal, Fire, Water, Wind, Earth)
     public List<Stats> damageAtrributes = new List<Stats>();
 
     public bool isPlayerDead;
+    protected bool isMultihit;
 
     public int maxHealth;
     protected int currentHealth;
@@ -70,7 +72,18 @@ public class CombatUnits : MonoBehaviour
             damageType = damageType,
         };
 
-        target.SendMessage("CheckStats", dmg);
+        
+        if (targets.Count >= 1)
+        {
+            foreach (GameObject trg in targets)
+            {
+                trg.SendMessage("CheckStats", dmg);
+            }
+            targets.Clear();
+        }
+
+        if (target != null)
+            target.SendMessage("CheckStats", dmg);
     }
 
     protected virtual void Death()
@@ -90,8 +103,6 @@ public class CombatUnits : MonoBehaviour
     {
         CombatGameManager.instance.EndAnimation();
     }
-
-
 
     public void CheckStats(Damage dmg)
     {

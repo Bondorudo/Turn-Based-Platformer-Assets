@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e783f81cd6a1db4d9beea3dc1cc28bc, type: 3}
-  m_Name: JumpAttackAbility
+  m_Script: {fileID: 11500000, guid: 599b0ec6e800b1d42877333d08cac444, type: 3}
+  m_Name: DoubleJumpAttackAbility
   m_EditorClassIdentifier: 
-  abilityName: Jump Attack
-  attackDamage: 7
-  animLenght: 1.35
+  abilityName: Double Jump Attack
+  attackDamage: 4
+  animLenght: 1.9
   typeOfDamage: 3
+  isMultihit: 1

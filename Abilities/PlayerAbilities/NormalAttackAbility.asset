@@ -15,4 +15,4 @@ MonoBehaviour:
   abilityName: Normal Attack
   attackDamage: 5
   animLenght: 0.65
-  typeOfDamage: 2
+  typeOfDamage: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CombatPlayer : CombatUnits
 {
-    private GameObject targetIndicator;
+    private List<GameObject> targetIndicators = new List<GameObject>();
 
     private bool isAbilitySelected;
 
@@ -18,6 +18,9 @@ public class CombatPlayer : CombatUnits
         base.Start();
         actionCount = baseActionCount;
         isAbilitySelected = false;
+
+        TargetIndicatorPool();
+        RemoveTarget();
     }
 
     protected override void Update()
@@ -28,17 +31,17 @@ public class CombatPlayer : CombatUnits
         UseAbility();
     }
 
-    // use abilites -> target -> use abilities -> space bar
-
     public void SelectAbility(int id)
     {
         isAbilitySelected = true;
         abilityIndex = id;
+        isMultihit = abilityHolder.ability[abilityIndex].isMultihit;
+        RemoveTarget();
     }
 
     public void UseAbility()
     {
-        if (target != null)
+        if (targets.Count >= 1 || target != null)
         {
             if (Input.GetKeyDown("space"))
             {
@@ -68,7 +71,21 @@ public class CombatPlayer : CombatUnits
 
         if (CombatGameManager.instance.gameState == GameState.PlayerTurn && isAbilitySelected)
         {
-            if (Input.GetMouseButton(0))
+            
+            if (isMultihit)
+            {
+                // Select all enemies
+                for (int i = 0; i < CombatGameManager.instance.listOfCurrentEnemies.Count; i++)
+                {
+                    int id = i;
+                    if (!targets.Contains(CombatGameManager.instance.listOfCurrentEnemies[id]))
+                            targets.Add(CombatGameManager.instance.listOfCurrentEnemies[id]);
+                    targetIndicators[id].transform.position = targets[id].transform.position;
+                    targetIndicators[id].SetActive(true);
+                }
+            }
+ 
+            else if (!isMultihit && Input.GetMouseButton(0))
             {
                 if (!hit)
                     return;
@@ -76,9 +93,8 @@ public class CombatPlayer : CombatUnits
                 if (hit.transform.tag == "Enemy")
                 {
                     target = hit.transform.gameObject;
-                    targetIndicator = CombatGameManager.instance.targetIndicator;
-                    targetIndicator.transform.position = hit.transform.position;
-                    targetIndicator.SetActive(true);
+                    targetIndicators[0].transform.position = hit.transform.position;
+                    targetIndicators[0].SetActive(true);
                 }
             }
         }
@@ -89,9 +105,21 @@ public class CombatPlayer : CombatUnits
         }
     }
 
+    private void TargetIndicatorPool()
+    {
+        while (targetIndicators.Count <= 5)
+        {
+            targetIndicators.Add(Instantiate(CombatGameManager.instance.targetIndicator));
+        }
+    }
+
     public void RemoveTarget()
     {
-        targetIndicator.SetActive(false);
         target = null;
+
+        foreach (GameObject indicator in targetIndicators)
+        {
+            indicator.SetActive(false);
+        }
     }
 }

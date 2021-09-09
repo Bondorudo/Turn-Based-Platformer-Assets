@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DamageType { fire, water, wind, earth }
+public enum DamageType { normal, fire, water, wind, earth }
 
 public class Ability : ScriptableObject
 {
@@ -15,6 +15,8 @@ public class Ability : ScriptableObject
 
     public DamageType typeOfDamage;
 
+    public bool isMultihit;
+
     public virtual void Activate()
     {
 
@@ -22,10 +24,8 @@ public class Ability : ScriptableObject
 
     protected virtual void Animation()
     {
-        playingAnim = true;
-
         // Trigger animation here;
-
+        playingAnim = true;
         CombatGameManager.instance.StartCoroutine(AnimDuration());
     }
 
@@ -35,6 +35,8 @@ public class Ability : ScriptableObject
 
         // Trigger animation stop event here;
         CombatGameManager.instance.EndAnimation();
+
+        Debug.Log("END ANIM");
 
         playingAnim = false;
     }

@@ -219,11 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   anim: {fileID: 0}
-  fire: 1
-  water: 2
-  wind: 0
-  earth: 0
-  damageAtrributes: 010000000200000000000000
+  damageAtrributes: 00000000010000000200000000000000
   isPlayerDead: 0
   maxHealth: 0
   moneyToGive: 0
@@ -242,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability:
   - {fileID: 11400000, guid: 27d02cd0ff8b94c40b9ad797f48fe47b, type: 2}
+  - {fileID: 11400000, guid: b0818659e27360e4991726f505d87591, type: 2}
 --- !u!95 &-4762909846362838215
 Animator:
   serializedVersion: 3

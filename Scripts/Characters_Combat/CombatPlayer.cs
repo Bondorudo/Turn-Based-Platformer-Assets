@@ -17,6 +17,7 @@ public class CombatPlayer : CombatUnits
 
     protected override void Start()
     {
+
         base.Start();
 
         spBar = GetComponentInChildren<SPBarBehaviour>();
@@ -29,6 +30,10 @@ public class CombatPlayer : CombatUnits
 
         TargetIndicatorPool();
         RemoveTarget();
+
+        SetCharms();
+
+        currentHealth = maxHealth;
     }
 
     protected override void Update()
@@ -37,6 +42,12 @@ public class CombatPlayer : CombatUnits
 
         TargetEnemy();
         UseAbility();
+    }
+
+    private void SetCharms()
+    {
+        damageAtrributes = StaticGameData.playerDamageAttributes;
+        maxHealth = StaticGameData.playerMaxHealth;
     }
 
     public void SelectAbility(int id)

@@ -11,6 +11,9 @@ public class Player : Fighter
 
     private float gravity;
 
+    [Header("Charms")]
+    public List<Charm> equippedCharms = new List<Charm>();
+
     [Header("Ground/Wall Check")]
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] private Transform ceilingCheck;
@@ -75,6 +78,7 @@ public class Player : Fighter
         amountOfJumpsLeft = baseJumpAmount;
         gravity = rb.gravityScale;
         grappleHook.SetActive(false);
+        SetCharms();
     }
 
     // Update is called once per frame
@@ -142,6 +146,12 @@ public class Player : Fighter
 
 
         CheckEnvironment();
+    }
+
+    private void SetCharms()
+    {
+        StaticGameData.playerDamageAttributes = equippedCharms[0].damageAtrributes;
+        equippedCharms[0].SecondaryUse();
     }
 
     private void CheckInput()

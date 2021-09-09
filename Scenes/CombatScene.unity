@@ -4332,7 +4332,7 @@ MonoBehaviour:
   targets: []
   target: {fileID: 0}
   anim: {fileID: 950188070}
-  damageAtrributes: 01000000000000000200000005000000
+  damageAtrributes: 00000000000000000000000000000000
   isPlayerDead: 0
   maxHealth: 30
   maxSP: 200

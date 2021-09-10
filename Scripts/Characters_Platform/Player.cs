@@ -11,6 +11,10 @@ public class Player : Fighter
 
     private float gravity;
 
+    [Header("Inventory")]
+    [SerializeField] private UI_Inventory ui_Inventory;
+    private Inventory inventory;
+
     [Header("Charms")]
     public List<Charm> equippedCharms = new List<Charm>();
 
@@ -71,6 +75,13 @@ public class Player : Fighter
     static public bool isCrouchUnlocked;
 
 
+    private void Awake()
+    {
+        ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.Key, amount = 1 }, new Vector3(-20, -8));
+        ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 }, new Vector3(-8, 0));
+        ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.SP_Potion, amount = 1 }, new Vector3(-13, 1));
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +90,9 @@ public class Player : Fighter
         gravity = rb.gravityScale;
         grappleHook.SetActive(false);
         SetCharms();
+
+        inventory = new Inventory();
+        ui_Inventory.SetInventory(inventory);
     }
 
     // Update is called once per frame
@@ -341,6 +355,16 @@ public class Player : Fighter
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckSize, whatIsGround);
         isTouchingWall = Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance * facingDir, whatIsGround);
         isTouchingCeiling = Physics2D.OverlapCircle(ceilingCheck.position, groundCheckSize, whatIsGround);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
+        if (itemWorld != null)
+        {
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+        }
     }
 
     // Draw gizmos for environment checks, to make it easier to see in unity.

@@ -737,6 +737,15 @@ TextureImporter:
   - first:
       213: -5359666241724609647
     second: Atlas_245
+  - first:
+      213: -4786724563431889287
+    second: KeySprite
+  - first:
+      213: -158506040304676211
+    second: FireCharm
+  - first:
+      213: 357527138345207361
+    second: DoubleJump
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -3013,27 +3022,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_104
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 144
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf2ed82d25104d620800000000000000
-      internalID: 2797862723735380732
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Atlas_105
       rect:
         serializedVersion: 2
@@ -4042,27 +4030,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_153
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 96
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7913bccc646b87860800000000000000
-      internalID: 7527967192349618583
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Atlas_154
       rect:
         serializedVersion: 2
@@ -4352,27 +4319,6 @@ TextureImporter:
       bones: []
       spriteID: 1f487975de3b44940800000000000000
       internalID: 5279542495143232753
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Atlas_168
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e25ce58f2a749e810800000000000000
-      internalID: 1795044691761087790
       vertices: []
       indices: 
       edges: []
@@ -4898,27 +4844,6 @@ TextureImporter:
       bones: []
       spriteID: f8b00cea24e205d60800000000000000
       internalID: 7876846612205538191
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Atlas_194
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 706f9515f61f15080800000000000000
-      internalID: -9200307103332698617
       vertices: []
       indices: 
       edges: []
@@ -5990,6 +5915,69 @@ TextureImporter:
       bones: []
       spriteID: 19b0a5b23f3ae95b0800000000000000
       internalID: -5359666241724609647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KeySprite
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 145
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9766107ee53229db0800000000000000
+      internalID: -4786724563431889287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireCharm
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 92
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d82d2ec989fdccdf0800000000000000
+      internalID: -158506040304676211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DoubleJump
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 48
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 146c0aeb90136f400800000000000000
+      internalID: 357527138345207361
       vertices: []
       indices: 
       edges: []

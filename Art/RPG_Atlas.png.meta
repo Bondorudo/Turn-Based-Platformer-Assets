@@ -403,10 +403,10 @@ TextureImporter:
     second: Atlas_133
   - first:
       213: -8316470683659449790
-    second: Atlas_134
+    second: Empty_Skill
   - first:
       213: -8564573002868041743
-    second: Atlas_135
+    second: Empty_Charm
   - first:
       213: -5489804780428467980
     second: Atlas_136
@@ -562,7 +562,7 @@ TextureImporter:
     second: Atlas_186
   - first:
       213: -5975647418825409250
-    second: Atlas_187
+    second: HealthPotion
   - first:
       213: -3163791429358168881
     second: Atlas_188
@@ -655,7 +655,7 @@ TextureImporter:
     second: Atlas_217
   - first:
       213: -4635852911317387512
-    second: Atlas_218
+    second: SP_Potion
   - first:
       213: 2900082034609347329
     second: Atlas_219
@@ -3610,34 +3610,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_133
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 845951d44daadb600800000000000000
-      internalID: 485732163628930376
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Atlas_134
+      name: Empty_Skill
       rect:
         serializedVersion: 2
         x: 96
-        y: 112
-        width: 16
-        height: 16
+        y: 123
+        width: 4
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3652,13 +3631,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_135
+      name: Empty_Charm
       rect:
         serializedVersion: 2
-        x: 112
-        y: 112
-        width: 16
-        height: 16
+        x: 121
+        y: 123
+        width: 4
+        height: 4
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4702,7 +4681,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_187
+      name: HealthPotion
       rect:
         serializedVersion: 2
         x: 192
@@ -5332,7 +5311,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_218
+      name: SP_Potion
       rect:
         serializedVersion: 2
         x: 192
@@ -5970,7 +5949,7 @@ TextureImporter:
         width: 12
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

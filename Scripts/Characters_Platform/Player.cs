@@ -78,13 +78,6 @@ public class Player : Fighter
     static public bool isCrouchUnlocked;
 
 
-    private void Awake()
-    {
-        //ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.Key, amount = 1 }, new Vector3(-20, -8));
-        //ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 }, new Vector3(-8, 0));
-        //ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.SP_Potion, amount = 1 }, new Vector3(-13, 1));
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -94,7 +87,8 @@ public class Player : Fighter
         grappleHook.SetActive(false);
         SetCharms();
 
-        inventory = new Inventory();
+        inventory = new Inventory(UseItem);
+        ui_Inventory.SetPlayer(this);
         ui_Inventory.SetInventory(inventory);
 
         StaticGameData.playerMaxHealth = maxHealth;
@@ -165,6 +159,28 @@ public class Player : Fighter
 
 
         CheckEnvironment();
+    }
+
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.HealthPotion:
+                // Gain Health;
+                Debug.Log("GAINED HP");
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+                break;
+            case Item.ItemType.SP_Potion:
+                // Gain SP;
+                Debug.Log("GAINED SP");
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.SP_Potion, amount = 1 });
+                break;
+        }
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 
     private void SetCharms()

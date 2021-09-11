@@ -40,7 +40,7 @@ public class CombatPlayer : CombatUnits
     {
         base.Update();
 
-        TargetEnemy();
+        Targeting();
         UseAbility();
     }
 
@@ -55,6 +55,7 @@ public class CombatPlayer : CombatUnits
         isAbilitySelected = true;
         abilityIndex = id;
         isMultihit = abilityHolder.ability[abilityIndex].isMultihit;
+        isDefensiveSkill = abilityHolder.ability[abilityIndex].isDefensiveSkill;
         RemoveTarget();
     }
 
@@ -70,6 +71,8 @@ public class CombatPlayer : CombatUnits
                     currentSP -= abilityHolder.ability[abilityIndex].abilitySPCost;
                     damage = abilityHolder.ability[abilityIndex].attackDamage;
                     damageType = abilityHolder.ability[abilityIndex].typeOfDamage;
+                    healAmount = abilityHolder.ability[abilityIndex].healAmount;
+                    damageReductionMultiplier = abilityHolder.ability[abilityIndex].damageReductionMultiplier;
                     isAbilitySelected = false; 
                     spBar.SetSP(currentSP, maxSP);
                 }
@@ -93,36 +96,59 @@ public class CombatPlayer : CombatUnits
         actionCount--;
     }
 
-    private void TargetEnemy()
+    private void Targeting()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
         if (CombatGameManager.instance.gameState == GameState.PlayerTurn && isAbilitySelected)
         {
-            
-            if (isMultihit)
-            {
-                // Select all enemies
-                for (int i = 0; i < CombatGameManager.instance.listOfCurrentEnemies.Count; i++)
-                {
-                    int id = i;
-                    if (!targets.Contains(CombatGameManager.instance.listOfCurrentEnemies[id]))
-                            targets.Add(CombatGameManager.instance.listOfCurrentEnemies[id]);
-                    targetIndicators[id].transform.position = targets[id].transform.position;
-                    targetIndicators[id].SetActive(true);
-                }
-            }
- 
-            else if (!isMultihit && Input.GetMouseButton(0))
-            {
-                if (!hit)
-                    return;
+        }
 
-                if (hit.transform.tag == "Enemy")
+        if (gameState == GameState.PlayerTurn)
+        {
+            if (isAbilitySelected)
+            {
+                if (!isDefensiveSkill)
                 {
-                    target = hit.transform.gameObject;
-                    targetIndicators[0].transform.position = hit.transform.position;
-                    targetIndicators[0].SetActive(true);
+                    // Skill is made for attacking enemies | Target an enemy
+                    if (isMultihit)
+                    {
+                        // Select all enemies
+                        for (int i = 0; i < CombatGameManager.instance.listOfCurrentEnemies.Count; i++)
+                        {
+                            int id = i;
+                            if (!targets.Contains(CombatGameManager.instance.listOfCurrentEnemies[id]))
+                                targets.Add(CombatGameManager.instance.listOfCurrentEnemies[id]);
+                            targetIndicators[id].transform.position = targets[id].transform.position;
+                            targetIndicators[id].SetActive(true);
+                        }
+                    }
+
+                    else if (!isMultihit && Input.GetMouseButton(0))
+                    {
+                        if (!hit)
+                            return;
+
+                        if (hit.transform.tag == "Enemy")
+                        {
+                            target = hit.transform.gameObject;
+                            targetIndicators[0].transform.position = hit.transform.position;
+                            targetIndicators[0].SetActive(true);
+                        }
+                    }
+                }
+                else
+                {
+                    // Skill is made for defending | Target self
+                    if (!hit)
+                        return;
+
+                    if (hit.transform.tag == "Player")
+                    {
+                        target = hit.transform.gameObject;
+                        targetIndicators[0].transform.position = hit.transform.position;
+                        targetIndicators[0].SetActive(true);
+                    }
                 }
             }
         }

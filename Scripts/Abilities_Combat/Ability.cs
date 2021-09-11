@@ -9,20 +9,24 @@ public class Ability : ScriptableObject
     // TODO: Defensive ability branch.
     // These values dont work for a defensive ability!
 
-
+    [Header("Generic Info")]
     public new string abilityName;
-    public int attackDamage;
     public int abilitySPCost;
-
-    protected bool playingAnim;
-
     public float animLenght; // lenght for each animation
-
-    public DamageType typeOfDamage;
-
+    protected bool playingAnim;
+    public bool isDefensiveSkill;
     public Sprite affinitySprite;
 
+    [Header("Attack Info")]
+    public int attackDamage;
+    public DamageType typeOfDamage;
     public bool isMultihit;
+
+    [Header("Defensive Info")]
+    public int healAmount;
+    public float damageReductionMultiplier;
+
+
 
     public virtual void Activate()
     {

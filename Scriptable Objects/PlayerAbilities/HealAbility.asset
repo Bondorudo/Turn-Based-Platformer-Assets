@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: HealAbility
   m_EditorClassIdentifier: 
   abilityName: PlayerHeal
-  attackDamage: 0
-  abilitySPCost: 0
+  abilitySPCost: 10
   animLenght: 0
-  typeOfDamage: 0
+  isDefensiveSkill: 1
   affinitySprite: {fileID: 0}
+  attackDamage: 0
+  typeOfDamage: 0
   isMultihit: 0
+  healAmount: 15
+  damageReductionMultiplier: 0

@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02bfb769c37180e4babfb4776c203925, type: 3}
   m_Name: DefendAbility
   m_EditorClassIdentifier: 
-  abilityName: 
-  attackDamage: 0
+  abilityName: Defend
   abilitySPCost: 0
   animLenght: 0
-  typeOfDamage: 0
+  isDefensiveSkill: 1
   affinitySprite: {fileID: 0}
+  attackDamage: 0
+  typeOfDamage: 0
   isMultihit: 0
+  healAmount: 0
+  damageReductionMultiplier: 0.7

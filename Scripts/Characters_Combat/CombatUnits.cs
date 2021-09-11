@@ -19,12 +19,16 @@ public class CombatUnits : MonoBehaviour
 
     public bool isPlayerDead;
     protected bool isMultihit;
+    protected bool isDefensiveSkill;
+    protected bool defendFromAttacks;
 
     public int maxHealth;
     protected int currentHealth;
     public int maxSP;
     protected int currentSP;
     protected int damage;
+    protected int healAmount;
+    protected float damageReductionMultiplier;
     protected DamageType damageType;
 
 
@@ -78,6 +82,11 @@ public class CombatUnits : MonoBehaviour
             damageType = damageType,
         };
 
+        if (defendFromAttacks)
+        {
+            dmg.damageAmount *= (int)damageReductionMultiplier;
+        }
+
         
         if (targets.Count >= 1)
         {
@@ -90,6 +99,18 @@ public class CombatUnits : MonoBehaviour
 
         if (target != null)
             target.SendMessage("CheckStats", dmg);
+    }
+
+    protected virtual void HealFromDamage()
+    {
+        if (target != null)
+            target.SendMessage("ChangeHealth", healAmount);
+    }
+
+    protected virtual void DefendFromDamage()
+    {
+        // Take less damage From the NEXT attack and only that so reset after taking damage
+        defendFromAttacks = true;
     }
 
     protected virtual void Death()

@@ -93,17 +93,13 @@ public class CombatGameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("CURRENT STATE: " + gameState);
-
         if (listOfCurrentEnemies.Count <= 0)
         {
-            Debug.Log("Player WIN");
             // TODO: Go to platform scene, reward player with money, remove platform enemy.
             SceneManager.LoadScene("PlatformScene");
         }
         if (player.isPlayerDead)
         {
-            Debug.Log("Player Died");
             // TODO: Fade to black and then, Load last save.
             SceneManager.LoadScene("PlatformScene");
         }
@@ -165,21 +161,6 @@ public class CombatGameManager : MonoBehaviour
             else
                 i--;
         }
-        /*
-        while (listOfCurrentEnemies.Count <= StaticGameData.enemyAmount)
-        {
-            GameObject enemy = Instantiate(listOfAllEnemies[Random.Range(0, listOfAllEnemies.Count)], spawnPositions[i], transform.rotation);
-            CombatEnemy cEnemy = enemy.GetComponent<CombatEnemy>();
-            {
-                cEnemy.moneyToGive = StaticGameData.enemyMoneyToGive;
-                cEnemy.baseDamage = StaticGameData.enemyBaseDmg;
-                cEnemy.maxHealth = StaticGameData.enemyMaxHealth;
-            }
-            if (cEnemy.enemyLocation == StaticGameData.enemyLocation)
-            {
-                listOfCurrentEnemies.Add(enemy);
-            }
-        }*/
 
         enemyAvantageTurnOver = true;
     }

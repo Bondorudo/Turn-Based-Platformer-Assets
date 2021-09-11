@@ -40,6 +40,9 @@ public class CombatPlayer : CombatUnits
     {
         base.Update();
 
+        anim.SetBool("IsDefending", defendFromAttacks);
+
+
         Targeting();
         UseAbility();
     }
@@ -72,7 +75,7 @@ public class CombatPlayer : CombatUnits
                     damage = abilityHolder.ability[abilityIndex].attackDamage;
                     damageType = abilityHolder.ability[abilityIndex].typeOfDamage;
                     healAmount = abilityHolder.ability[abilityIndex].healAmount;
-                    damageReductionMultiplier = abilityHolder.ability[abilityIndex].damageReductionMultiplier;
+                    defenceValue = abilityHolder.ability[abilityIndex].defenceValue;
                     isAbilitySelected = false; 
                     spBar.SetSP(currentSP, maxSP);
                 }
@@ -90,6 +93,18 @@ public class CombatPlayer : CombatUnits
         RemoveTarget();
     }
 
+    protected override void HealFromDamage()
+    {
+        base.HealFromDamage();
+        RemoveTarget();
+    }
+
+    protected override void DefendFromDamage()
+    {
+        base.DefendFromDamage();
+        RemoveTarget();
+    }
+
 
     public void ChangeActionCount()
     {
@@ -99,10 +114,6 @@ public class CombatPlayer : CombatUnits
     private void Targeting()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-        if (CombatGameManager.instance.gameState == GameState.PlayerTurn && isAbilitySelected)
-        {
-        }
 
         if (gameState == GameState.PlayerTurn)
         {
@@ -140,22 +151,11 @@ public class CombatPlayer : CombatUnits
                 else
                 {
                     // Skill is made for defending | Target self
-                    if (!hit)
-                        return;
-
-                    if (hit.transform.tag == "Player")
-                    {
-                        target = hit.transform.gameObject;
-                        targetIndicators[0].transform.position = hit.transform.position;
-                        targetIndicators[0].SetActive(true);
-                    }
+                    target = transform.gameObject;
+                    targetIndicators[0].transform.position = transform.position;
+                    targetIndicators[0].SetActive(true);
                 }
             }
-        }
-
-        if (CombatGameManager.instance.gameState == GameState.EnemyTurn)
-        {
-            RemoveTarget();
         }
     }
 

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: NormalAttackAbility
   m_EditorClassIdentifier: 
   abilityName: Normal Attack
-  attackDamage: 3
   abilitySPCost: 10
   animLenght: 0.75
-  typeOfDamage: 0
+  isDefensiveSkill: 0
   affinitySprite: {fileID: 21300000, guid: 5ce4ba4ab09786e4ba4d95205cc54927, type: 3}
+  attackDamage: 3
+  typeOfDamage: 0
   isMultihit: 0
+  healAmount: 0
+  defenceValue: 1

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: DashAttackAbility
   m_EditorClassIdentifier: 
   abilityName: Dash Attack
-  attackDamage: 14
   abilitySPCost: 10
   animLenght: 1.25
-  typeOfDamage: 1
+  isDefensiveSkill: 0
   affinitySprite: {fileID: 5936963274885767727, guid: 3a5e785fed3aab147a6fb4cb51142b40, type: 3}
+  attackDamage: 14
+  typeOfDamage: 1
   isMultihit: 0
+  healAmount: 0
+  defenceValue: 1

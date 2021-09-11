@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: PlayerHeal
   abilitySPCost: 10
-  animLenght: 0
+  animLenght: 0.667
   isDefensiveSkill: 1
   affinitySprite: {fileID: 0}
   attackDamage: 0
   typeOfDamage: 0
   isMultihit: 0
-  healAmount: 15
-  damageReductionMultiplier: 0
+  healAmount: 7
+  defenceValue: 1

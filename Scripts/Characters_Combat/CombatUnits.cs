@@ -20,15 +20,15 @@ public class CombatUnits : MonoBehaviour
     public bool isPlayerDead;
     protected bool isMultihit;
     protected bool isDefensiveSkill;
-    protected bool defendFromAttacks;
+    public bool defendFromAttacks;
 
     public int maxHealth;
     protected int currentHealth;
+    public float defenceValue = 1;
     public int maxSP;
     protected int currentSP;
     protected int damage;
     protected int healAmount;
-    protected float damageReductionMultiplier;
     protected DamageType damageType;
 
 
@@ -78,14 +78,9 @@ public class CombatUnits : MonoBehaviour
 
         Damage dmg = new Damage
         {
-            damageAmount = -damage,
+            damageAmount = -damage * (int)defenceValue,
             damageType = damageType,
         };
-
-        if (defendFromAttacks)
-        {
-            dmg.damageAmount *= (int)damageReductionMultiplier;
-        }
 
         
         if (targets.Count >= 1)
@@ -110,8 +105,11 @@ public class CombatUnits : MonoBehaviour
     protected virtual void DefendFromDamage()
     {
         // Take less damage From the NEXT attack and only that so reset after taking damage
-        defendFromAttacks = true;
+        // Create defence values for units
+
+        
     }
+
 
     protected virtual void Death()
     {

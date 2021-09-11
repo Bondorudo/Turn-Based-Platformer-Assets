@@ -24,8 +24,7 @@ public class Ability : ScriptableObject
 
     [Header("Defensive Info")]
     public int healAmount;
-    public float damageReductionMultiplier;
-
+    public float defenceValue;
 
 
     public virtual void Activate()

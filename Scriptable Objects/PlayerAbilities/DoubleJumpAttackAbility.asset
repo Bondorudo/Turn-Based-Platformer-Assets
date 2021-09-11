@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: DoubleJumpAttackAbility
   m_EditorClassIdentifier: 
   abilityName: Double Jump Attack
-  attackDamage: 4
+  attackDamage: 8
   abilitySPCost: 15
   animLenght: 1.9
   typeOfDamage: 3
+  affinitySprite: {fileID: 5746156984659908382, guid: 3a5e785fed3aab147a6fb4cb51142b40, type: 3}
   isMultihit: 1

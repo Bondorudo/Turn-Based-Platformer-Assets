@@ -6,6 +6,10 @@ public enum DamageType { normal, fire, water, wind, earth }
 
 public class Ability : ScriptableObject
 {
+    // TODO: Defensive ability branch.
+    // These values dont work for a defensive ability!
+
+
     public new string abilityName;
     public int attackDamage;
     public int abilitySPCost;
@@ -15,6 +19,8 @@ public class Ability : ScriptableObject
     public float animLenght; // lenght for each animation
 
     public DamageType typeOfDamage;
+
+    public Sprite affinitySprite;
 
     public bool isMultihit;
 

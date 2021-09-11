@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31588dd589c47a24c9109b8d2a7c2ed0, type: 3}
-  m_Name: NormalAttackAbility
+  m_Script: {fileID: 11500000, guid: 02bfb769c37180e4babfb4776c203925, type: 3}
+  m_Name: DefendAbility
   m_EditorClassIdentifier: 
-  abilityName: Normal Attack
-  attackDamage: 10
-  abilitySPCost: 5
-  animLenght: 0.65
+  abilityName: 
+  attackDamage: 0
+  abilitySPCost: 0
+  animLenght: 0
   typeOfDamage: 0
-  affinitySprite: {fileID: 21300000, guid: 5ce4ba4ab09786e4ba4d95205cc54927, type: 3}
+  affinitySprite: {fileID: 0}
   isMultihit: 0

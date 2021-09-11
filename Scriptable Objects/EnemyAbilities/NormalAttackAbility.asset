@@ -17,4 +17,5 @@ MonoBehaviour:
   abilitySPCost: 10
   animLenght: 0.75
   typeOfDamage: 0
+  affinitySprite: {fileID: 21300000, guid: 5ce4ba4ab09786e4ba4d95205cc54927, type: 3}
   isMultihit: 0

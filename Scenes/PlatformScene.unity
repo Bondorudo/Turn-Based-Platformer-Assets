@@ -43901,7 +43901,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7762864, y: 1}
+    m_SensorSize: {x: 1.7797928, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -45510,6 +45510,7 @@ MonoBehaviour:
   ui_Inventory: {fileID: 1825079159}
   equippedCharms:
   - {fileID: 11400000, guid: 9c09c9cb241c2594aab77a4bc938a895, type: 2}
+  maxHealth: 30
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -47311,12 +47312,12 @@ GameObject:
   - component: {fileID: 2114724042}
   - component: {fileID: 2114724041}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: InventoryCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2114724041
 MonoBehaviour:
   m_ObjectHideFlags: 0

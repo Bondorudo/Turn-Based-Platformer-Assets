@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: FireCharm
   m_EditorClassIdentifier: 
   damageAtrributes: 00000000010000000200000000000000
+  extraHealth: 15
+  extraSP: 0
+  extraBaseDamage: 0

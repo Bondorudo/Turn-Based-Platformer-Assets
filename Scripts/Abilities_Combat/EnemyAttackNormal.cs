@@ -11,5 +11,7 @@ public class EnemyAttackNormal : AbilityEnemy
 
         Animation();
         CombatGameManager.instance.actingEnemy.anim.SetTrigger("EnemyAttackNormal");
+
+        FloatingText.Create(actingEnemyTrans.position, "Normal Attack", 10, 800);
     }
 }

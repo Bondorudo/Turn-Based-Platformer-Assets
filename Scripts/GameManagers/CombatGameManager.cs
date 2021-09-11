@@ -115,6 +115,11 @@ public class CombatGameManager : MonoBehaviour
         }
     }
 
+    public Transform GetActingEnemy()
+    {
+        return actingEnemy.transform;
+    }
+
     private void DetermineAdvantage()
     {
         switch (combatAdv)

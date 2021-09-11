@@ -18,6 +18,9 @@ public class Player : Fighter
     [Header("Charms")]
     public List<Charm> equippedCharms = new List<Charm>();
 
+    [Header("Combat Stats")]
+    [SerializeField] private int maxHealth;
+
     [Header("Ground/Wall Check")]
     [SerializeField] LayerMask whatIsGround;
     [SerializeField] private Transform ceilingCheck;
@@ -77,9 +80,9 @@ public class Player : Fighter
 
     private void Awake()
     {
-        ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.Key, amount = 1 }, new Vector3(-20, -8));
-        ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 }, new Vector3(-8, 0));
-        ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.SP_Potion, amount = 1 }, new Vector3(-13, 1));
+        //ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.Key, amount = 1 }, new Vector3(-20, -8));
+        //ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 }, new Vector3(-8, 0));
+        //ItemWorld.SpawnItemWorld(new Item { itemType = Item.ItemType.SP_Potion, amount = 1 }, new Vector3(-13, 1));
     }
 
     // Start is called before the first frame update
@@ -93,6 +96,8 @@ public class Player : Fighter
 
         inventory = new Inventory();
         ui_Inventory.SetInventory(inventory);
+
+        StaticGameData.playerMaxHealth = maxHealth;
     }
 
     // Update is called once per frame

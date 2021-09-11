@@ -11,6 +11,8 @@ public class PlayerCombatUI : MonoBehaviour
     [SerializeField] private GameObject button;
     [SerializeField] private GameObject playerMoveListContainer;
 
+    [SerializeField] private GameObject affinitySprite;
+
 
     void Awake()
     {
@@ -19,12 +21,21 @@ public class PlayerCombatUI : MonoBehaviour
         for (int i = 0; i < abilityHolder.ability.Count; i++)
         {
             int id = i;
-            GameObject btn = Instantiate(button);
-            btn.transform.SetParent(GameObject.Find("PlayerCommands").transform);
-            btn.transform.localPosition = new Vector2(0, -40 * i);
+
+            Transform parent = GameObject.Find("PlayerCommands").transform;
+
+            Button btn = Instantiate(button).GetComponent<Button>();
+            btn.transform.SetParent(parent);
+            btn.transform.localPosition = new Vector3(100, 70 + (-50 * i));
             btn.GetComponentInChildren<TextMeshProUGUI>().text = abilityHolder.ability[id].abilityName;
-            btn.GetComponent<Button>().onClick.AddListener(() => player.GetComponent<CombatPlayer>().SelectAbility(id));
-            btn.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 30);
+            btn.onClick.AddListener(() => player.GetComponent<CombatPlayer>().SelectAbility(id));
+            btn.GetComponent<RectTransform>().sizeDelta = new Vector2(160, 40);
+
+            GameObject affSprite = Instantiate(affinitySprite);
+            affSprite.transform.SetParent(parent);
+            affSprite.transform.localPosition = new Vector3(-100, 70 + (-50 * i));
+            affSprite.GetComponent<Image>().sprite = abilityHolder.ability[id].affinitySprite;
+
         }
     }
 

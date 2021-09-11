@@ -11,5 +11,7 @@ public class EnemyAttackFire : AbilityEnemy
 
         Animation();
         CombatGameManager.instance.actingEnemy.anim.SetTrigger("EnemyAttackFire");
+        
+        FloatingText.Create(actingEnemyTrans.position, "Fire Attack", 10, 800);
     }
 }

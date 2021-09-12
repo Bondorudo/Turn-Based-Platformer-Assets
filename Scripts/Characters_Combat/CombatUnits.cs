@@ -50,13 +50,32 @@ public class CombatUnits : MonoBehaviour
         abilityHolder = transform.GetComponent<AbilityHolder>();
     }
 
-    protected virtual void ChangeHealth(float change)
+    protected virtual void HealDamage(float change)
     {
         currentHealth += (int)change; 
         healthBar.SetHealth(currentHealth, maxHealth);
 
-
         FloatingText.Create(transform.position, change.ToString(), 15, 30);
+
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            Death();
+        }
+    }
+
+    protected virtual void TakeDamage(float damage)
+    {
+        int damageToTake = (int)(damage * -defenceValue);
+        currentHealth -= damageToTake;
+
+        healthBar.SetHealth(currentHealth, maxHealth);
+
+        FloatingText.Create(transform.position, damageToTake.ToString(), 15, 30);
 
         if (currentHealth >= maxHealth)
         {
@@ -78,7 +97,7 @@ public class CombatUnits : MonoBehaviour
 
         Damage dmg = new Damage
         {
-            damageAmount = -damage * (int)defenceValue,
+            damageAmount = -damage,
             damageType = damageType,
         };
 
@@ -99,7 +118,7 @@ public class CombatUnits : MonoBehaviour
     protected virtual void HealFromDamage()
     {
         if (target != null)
-            target.SendMessage("ChangeHealth", healAmount);
+            target.SendMessage("HealDamage", healAmount);
     }
 
     protected virtual void DefendFromDamage()
@@ -162,27 +181,27 @@ public class CombatUnits : MonoBehaviour
     // What to do when you are Neutral to incoming damage
     private void Neutral(int damage)
     {
-        ChangeHealth(damage);
+        TakeDamage(damage);
     }
 
     // What to do when you are Strong to incoming damage
     private void Strong(int damage)
     {
         float newDamage = damage * 0.6f;
-        ChangeHealth(newDamage);
+        TakeDamage(newDamage);
     }
 
     // What to do when you are Weak to incoming damage
     private void Weak(int damage)
     {
         float newDamage = damage * 1.4f;
-        ChangeHealth(newDamage);
+        TakeDamage(newDamage);
     }
 
     // What to do when you Absorb incoming damage
     private void Absorb(int damage)
     {
-        ChangeHealth(-damage);
+        TakeDamage(-damage);
     }
 
     // What to do when you Reflect incoming damage

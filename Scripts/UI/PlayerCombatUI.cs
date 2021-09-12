@@ -26,14 +26,14 @@ public class PlayerCombatUI : MonoBehaviour
 
             Button btn = Instantiate(button).GetComponent<Button>();
             btn.transform.SetParent(parent);
-            btn.transform.localPosition = new Vector3(100, 70 + (-50 * i));
+            btn.transform.localPosition = new Vector3(100, 80 + (-40 * i));
             btn.GetComponentInChildren<TextMeshProUGUI>().text = abilityHolder.ability[id].abilityName;
             btn.onClick.AddListener(() => player.GetComponent<CombatPlayer>().SelectAbility(id));
-            btn.GetComponent<RectTransform>().sizeDelta = new Vector2(160, 40);
+            btn.GetComponent<RectTransform>().sizeDelta = new Vector2(160, 30);
 
             GameObject affSprite = Instantiate(affinitySprite);
             affSprite.transform.SetParent(parent);
-            affSprite.transform.localPosition = new Vector3(-100, 70 + (-50 * i));
+            affSprite.transform.localPosition = new Vector3(-100, 80 + (-40 * i));
             affSprite.GetComponent<Image>().sprite = abilityHolder.ability[id].affinitySprite;
 
         }

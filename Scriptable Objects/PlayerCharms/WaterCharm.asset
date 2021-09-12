@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8890fd816a4adc444be316e87b587c26, type: 3}
-  m_Name: FireCharm
+  m_Name: WaterCharm
   m_EditorClassIdentifier: 
-  damageAtrributes: 00000000010000000200000002000000
-  extraHealth: 0
-  extraSP: 0
-  extraBaseDamage: 15
-  charmSprite: {fileID: -158506040304676211, guid: b27d51e5b38273e40acbd7cc7d12dcd1, type: 3}
-  charmState: 1
+  damageAtrributes: 00000000020000000100000000000000
+  extraHealth: 5
+  extraSP: 15
+  extraBaseDamage: 0
+  charmSprite: {fileID: -5117136653733109442, guid: 3a5e785fed3aab147a6fb4cb51142b40, type: 3}
+  charmState: 0

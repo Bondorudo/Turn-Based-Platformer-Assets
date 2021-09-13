@@ -37,7 +37,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
                 EquipCharm();
                 break;
             case CharmState.Equipped:
-                DequipCharm();
+                UnequipCharm();
                 break;
             case CharmState.Locked:
                 CharmIsLocked();
@@ -51,21 +51,32 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
          * 
          */
 
-        Debug.Log("Equip Charm");
+        charmState = CharmState.Equipped;
+
+
+        InventoryManager.instance.EquipCharm();
     }
 
-    private void DequipCharm()
+    private void UnequipCharm()
     {
         /* Remove charm from list of equipped charms, load inventory again to add it back in
          * 
          */
 
-        Debug.Log("Dequip Charm");
+        charmState = CharmState.Available;
+
+
+        InventoryManager.instance.UnEquipCharm();
     }
 
     // Play a small animation and some sound to tell the player charm isnt unlocked, or something else
     private void CharmIsLocked()
     {
-        Debug.Log("Charm hasnt been unlocked yet");
+
+    }
+
+    private void UnlockCharm()
+    {
+        charmState = CharmState.Available;
     }
 }

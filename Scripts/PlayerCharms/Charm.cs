@@ -22,10 +22,25 @@ public class Charm : ScriptableObject
     public CharmState charmState;
     // TODO: Set Charm State to unlocked when picking it up
 
-    public virtual void SecondaryUse()
+    public void SecondaryUse()
     {
         StaticGameData.playerMaxHealth += extraHealth;
         StaticGameData.playerMaxSP += extraSP;
         StaticGameData.playerBaseDamage += extraBaseDamage;
+    }
+
+    public void UnlockCharm()
+    {
+        charmState = CharmState.Available;
+    }
+
+    public void EquipCharm()
+    {
+        charmState = CharmState.Equipped;
+    }
+
+    public void AvailableCharm()
+    {
+        charmState = CharmState.Available;
     }
 }

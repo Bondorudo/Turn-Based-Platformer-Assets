@@ -185,8 +185,11 @@ public class Player : Fighter
 
     private void SetCharms()
     {
-        StaticGameData.playerDamageAttributes = equippedCharms[0].damageAtrributes;
-        equippedCharms[0].SecondaryUse();
+        for (int i = 1; i < equippedCharms.Count; i++)
+        {
+            StaticGameData.playerDamageAttributes = equippedCharms[0].damageAtrributes;
+            equippedCharms[i].SecondaryUse();
+        }
     }
 
     private void CheckInput()

@@ -6,7 +6,6 @@ public class PlatformGameManager : MonoBehaviour
 {
     public static PlatformGameManager instance;
 
-    public Player player;
 
     private void Awake()
     {
@@ -15,7 +14,7 @@ public class PlatformGameManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Player>();
+
     }
 
     public void CreateText()

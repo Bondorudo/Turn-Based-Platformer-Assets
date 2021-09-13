@@ -9,7 +9,8 @@ public class InventoryManager : MonoBehaviour
 
     // Add all charms to this list
     public List<Charm> listOfCharms = new List<Charm>();
-    private List<InventoryCharm> listOfEquippedCharms = new List<InventoryCharm>();
+
+    private List<GameObject> listOfEquippedCharms = new List<GameObject>();
 
     private List<RectTransform> charmRectTransformList = new List<RectTransform>();
     private List<InventoryCharm> inventortCharmList = new List<InventoryCharm>();
@@ -31,19 +32,27 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         CreateEmptyCharms();
-        UnEquipCharm();
     }
 
     #region EquippedCharms
 
     // Charm is not not equipped, so then equip it.
-    public void EquipCharm()
+    public void EquipCharm(GameObject charmToEquip)
     {
         int x = 0;
         int y = 0;
         float charmSlotCellSize = 90f;
 
+        listOfEquippedCharms.Add(charmToEquip);
 
+        for (int i = 0; i < listOfEquippedCharms.Count; i++)
+        {
+            charmToEquip.transform.SetParent(parentOfEquippedCharms);
+            charmToEquip.GetComponent<RectTransform>().anchoredPosition = new Vector2(15 + x * charmSlotCellSize, -15 + y * charmSlotCellSize);
+            x++;
+        }
+
+        /*
         for (int i = 0; i < listOfCharms.Count; i++)
         {
             if (inventortCharmList[i].charmState == CharmState.Equipped)
@@ -55,25 +64,31 @@ public class InventoryManager : MonoBehaviour
                 x++;
             }
         }
+        */
     }
     #endregion
 
     #region AvailableCharms
 
     // When charm is equipped and we want to Unequip charm it;
-    public void UnEquipCharm()
+    public void RemoveCharm(GameObject charmToRemove)
     {
         int x = 0;
         int y = 0;
         float charmSlotCellSize = 90f;
 
+        listOfEquippedCharms.Remove(charmToRemove);
 
+        
         for (int i = 0; i < listOfCharms.Count; i++)
         {
             if (inventortCharmList[i].charmState == CharmState.Available)
             {
                 charmRectTransformList[i].transform.SetParent(parentOfAllCharms);
             }
+
+            //charmToRemove.transform.SetParent(parentOfAllCharms);
+            //charmToRemove.GetComponent<RectTransform>().anchoredPosition = new Vector2(15 + x * charmSlotCellSize, -15 + y * charmSlotCellSize);
 
             // Assign correct values for each charm;
             inventortCharmList[i].charmSprite = listOfCharms[i].charmSprite;
@@ -93,6 +108,7 @@ public class InventoryManager : MonoBehaviour
                 y--;
             }
         }
+        
     }
     #endregion
 

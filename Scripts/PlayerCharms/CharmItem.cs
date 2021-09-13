@@ -45,7 +45,7 @@ public class CharmItem : MonoBehaviour
 
         charmToGive.charmState = CharmState.Available;
 
-        InventoryManager.instance.UnEquipCharm();
+        //InventoryManager.instance.UpdateCharms();
 
         Destroy(gameObject);
     }

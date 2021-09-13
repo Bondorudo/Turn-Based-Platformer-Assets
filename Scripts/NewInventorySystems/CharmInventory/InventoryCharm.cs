@@ -54,7 +54,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
         charmState = CharmState.Equipped;
 
 
-        InventoryManager.instance.EquipCharm();
+        InventoryManager.instance.EquipCharm(gameObject);
     }
 
     private void UnequipCharm()
@@ -66,7 +66,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
         charmState = CharmState.Available;
 
 
-        InventoryManager.instance.UnEquipCharm();
+        InventoryManager.instance.RemoveCharm(gameObject);
     }
 
     // Play a small animation and some sound to tell the player charm isnt unlocked, or something else

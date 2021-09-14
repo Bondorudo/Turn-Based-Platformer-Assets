@@ -17,4 +17,4 @@ MonoBehaviour:
   extraSP: 15
   extraBaseDamage: 0
   charmSprite: {fileID: -5117136653733109442, guid: 3a5e785fed3aab147a6fb4cb51142b40, type: 3}
-  charmState: 1
+  charmState: 0

@@ -6,6 +6,12 @@ public class PlatformGameManager : MonoBehaviour
 {
     public static PlatformGameManager instance;
 
+    public List<GameObject> listOfEnemies = new List<GameObject>();
+    public Transform enemyHolder;
+
+    public GameObject inventoryCanvas;
+
+    public bool isInventoryOpen;
 
     private void Awake()
     {
@@ -17,9 +23,24 @@ public class PlatformGameManager : MonoBehaviour
 
     }
 
-    public void CreateText()
+    private void Update()
     {
-        bool isCritical = Random.Range(0, 100) < 30;
-        FloatingText.Create(Vector3.zero, 252.ToString(), 30, 3);
+        
+    }
+
+    // Call when player saves the game / when player dies / when player quits and starts again
+    public void RespawnEnemies()
+    {
+        for (int i = 0; i < listOfEnemies.Count; i++)
+        {
+            Instantiate(listOfEnemies[i], enemyHolder);
+        }
+    }
+
+    public void SetInventory(bool boolean)
+    {
+        Debug.Log("SET INVENTORT : " + boolean);
+        isInventoryOpen = boolean;
+        inventoryCanvas.SetActive(boolean);
     }
 }

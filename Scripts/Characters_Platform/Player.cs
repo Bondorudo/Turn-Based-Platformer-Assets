@@ -12,8 +12,7 @@ public class Player : Fighter
     private float gravity;
 
     [Header("Inventory")]
-    [SerializeField] private UI_Inventory ui_Inventory;
-    private Inventory inventory;
+    [SerializeField] private InventoryManager inventoryManager;
 
     [Header("Charms")]
     public List<Charm> equippedCharms = new List<Charm>();
@@ -87,9 +86,6 @@ public class Player : Fighter
         grappleHook.SetActive(false);
         SetCharms();
 
-        inventory = new Inventory(UseItem);
-        ui_Inventory.SetPlayer(this);
-        ui_Inventory.SetInventory(inventory);
 
         StaticGameData.playerMaxHealth = maxHealth;
     }
@@ -104,6 +100,9 @@ public class Player : Fighter
         CheckIfCanSuperDash();
         CheckIfCanCrouch();
         CheckIfGrappleHookIsUnlocked();
+
+
+        PopulateCharmList();
 
         //Input.GetKeyDown(KeyCode.Mouse0)
 
@@ -161,26 +160,26 @@ public class Player : Fighter
         CheckEnvironment();
     }
 
-    private void UseItem(Item item)
-    {
-        switch (item.itemType)
-        {
-            case Item.ItemType.HealthPotion:
-                // Gain Health;
-                Debug.Log("GAINED HP");
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-                break;
-            case Item.ItemType.SP_Potion:
-                // Gain SP;
-                Debug.Log("GAINED SP");
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.SP_Potion, amount = 1 });
-                break;
-        }
-    }
+
 
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    private void PopulateCharmList()
+    {
+        if (Input.GetKeyDown("q"))
+        {
+            Debug.Log("Input : q : Update Player Charms");
+
+            equippedCharms.Clear();
+
+            for (int i = 0; i < inventoryManager.listOfEquippedCharms.Count; i++)
+            {
+                equippedCharms.Add(inventoryManager.listOfEquippedCharms[i].GetComponent<InventoryCharm>().realCharm);
+            }
+        }
     }
 
     private void SetCharms()
@@ -381,16 +380,7 @@ public class Player : Fighter
         isTouchingCeiling = Physics2D.OverlapCircle(ceilingCheck.position, groundCheckSize, whatIsGround);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
-        if (itemWorld != null)
-        {
-            inventory.AddItem(itemWorld.GetItem());
-            itemWorld.DestroySelf();
-        }
-    }
-
+    
     // Draw gizmos for environment checks, to make it easier to see in unity.
     private void OnDrawGizmos()
     {

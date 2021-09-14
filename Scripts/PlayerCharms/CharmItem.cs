@@ -39,13 +39,13 @@ public class CharmItem : MonoBehaviour
         }
     }
 
-    protected void GrantCharm()
+    private void GrantCharm()
     {
         Debug.Log("Player got : " + gameObject.name);
 
         charmToGive.charmState = CharmState.Available;
 
-        //InventoryManager.instance.UpdateCharms();
+        InventoryManager.instance.UpdateUnlockedCharms();
 
         Destroy(gameObject);
     }

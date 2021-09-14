@@ -9,8 +9,10 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
 {
     public CharmState charmState;
 
-    public Sprite charmSprite;
+    public Charm realCharm;
 
+    public int xSpot;
+    public int ySpot;
 
     // Check If player clicked a charm, then do something based on charm clicked
     public void OnPointerClick(PointerEventData eventData)
@@ -50,9 +52,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
         /* Add charm to list of equipped charms, reload inventory to see the change.
          * 
          */
-
-        charmState = CharmState.Equipped;
-
+        
 
         InventoryManager.instance.EquipCharm(gameObject);
     }
@@ -65,7 +65,6 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
 
         charmState = CharmState.Available;
 
-
         InventoryManager.instance.RemoveCharm(gameObject);
     }
 
@@ -75,7 +74,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
 
     }
 
-    private void UnlockCharm()
+    public void UnlockCharm()
     {
         charmState = CharmState.Available;
     }

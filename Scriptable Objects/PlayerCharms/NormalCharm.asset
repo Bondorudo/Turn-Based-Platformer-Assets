@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8890fd816a4adc444be316e87b587c26, type: 3}
-  m_Name: WaterCharm
+  m_Name: NormalCharm
   m_EditorClassIdentifier: 
-  damageAtrributes: 00000000020000000100000000000000
-  extraHealth: 5
-  extraSP: 15
+  damageAtrributes: 01000000000000000000000000000000
+  extraHealth: 0
+  extraSP: 0
   extraBaseDamage: 0
-  charmSprite: {fileID: -5117136653733109442, guid: 3a5e785fed3aab147a6fb4cb51142b40, type: 3}
+  charmSprite: {fileID: 21300000, guid: 5ce4ba4ab09786e4ba4d95205cc54927, type: 3}
   charmState: 1

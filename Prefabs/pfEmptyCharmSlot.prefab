@@ -276,5 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a5dfa4e4597834aa8af1ecd4c501fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charmState: 1
+  charmState: 0
   charmSprite: {fileID: 0}
+  xSpot: 0
+  ySpot: 0

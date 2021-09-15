@@ -7,11 +7,12 @@ public class Collidable : MonoBehaviour
     [SerializeField] private ContactFilter2D filter;
     private BoxCollider2D bc;
     private Collider2D[] hits = new Collider2D[10];
-
+    protected PlatformGameManager gameManager;
 
     protected virtual void Start()
     {
         bc = GetComponent<BoxCollider2D>();
+        gameManager = GameObject.Find("GameManager").GetComponent<PlatformGameManager>();
     }
 
     protected virtual void Update()

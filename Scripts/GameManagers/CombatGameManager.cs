@@ -96,11 +96,13 @@ public class CombatGameManager : MonoBehaviour
         if (listOfCurrentEnemies.Count <= 0)
         {
             // TODO: Go to platform scene, reward player with money, remove platform enemy.
+            StaticGameData.playerWin = true;
             SceneManager.LoadScene("PlatformScene");
         }
         if (player.isPlayerDead)
         {
             // TODO: Fade to black and then, Load last save.
+            StaticGameData.playerWin = false;
             SceneManager.LoadScene("PlatformScene");
         }
 

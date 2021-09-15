@@ -23,11 +23,16 @@ public class Enemy : Fighter
     private float startPosX;
 
     private bool ledgeCheck;
+    public bool isDead;
+
+    private PlatformGameManager gameManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<PlatformGameManager>();
+
         startPosX = transform.position.x;
 
         StaticGameData.enemyMoneyToGive = moneyToGive;
@@ -67,11 +72,7 @@ public class Enemy : Fighter
     {
         if (collision.gameObject.tag == "Player")
         {
-            // 1 = neutral adv
-            StaticGameData.combatAdvantage = 1;
-            StaticGameData.enemyAmount = 3;
-
-            SceneManager.LoadScene("CombatScene");
+            gameManager.GoIntoCombat(3, 1);
         }
     }
 

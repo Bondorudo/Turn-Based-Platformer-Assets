@@ -11,20 +11,13 @@ public class Sword : Collidable
         {
             // if hits enemy go to battle scene
 
-            // 0 = player adv
-            StaticGameData.combatAdvantage = 0;
-            StaticGameData.enemyAmount = 2;
-
-            SceneManager.LoadScene("CombatScene");
+            gameManager.GoIntoCombat(2, 0);
+            PlayerPrefs.SetString("InCombatEnemy", coll.gameObject.name);
         }
 
         if (coll.tag == "Player" && gameObject.tag != "Player")
         {
-            // 2 = enemy adv
-            StaticGameData.combatAdvantage = 2;
-            StaticGameData.enemyAmount = 4;
-
-            SceneManager.LoadScene("CombatScene");
+            gameManager.GoIntoCombat(4, 2);
         }
     }
 }

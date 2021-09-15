@@ -40,6 +40,7 @@ public class SaveStationManager : MonoBehaviour
         if (canInteract && !gameManager.isInventoryOpen && Input.GetKeyDown("f"))
         {
             gameManager.SetInventory(true);
+            gameManager.GameSaveState();
             // Save Game and show inventory, player can close this with pressing f again or moving out of it.
         }
         else if (canInteract && gameManager.isInventoryOpen && Input.GetKeyDown("f"))

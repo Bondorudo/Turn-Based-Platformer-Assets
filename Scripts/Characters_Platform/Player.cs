@@ -11,13 +11,15 @@ public class Player : Fighter
 
     private float gravity;
 
+    GameData gameData;
+    public PlayerData playerData;
+
     [Header("Inventory")]
     [SerializeField] private InventoryManager inventoryManager;
     public int moneyAmount;
 
     [Header("Charms")]
     public List<Charm> equippedCharms = new List<Charm>();
-    private string equippedCharmString;
 
     [Header("Combat Stats")]
     [SerializeField] private int maxHealth;
@@ -41,7 +43,7 @@ public class Player : Fighter
 
     private bool canJump;
 
-    static public int baseJumpAmount = 1;
+    public int maxJumpAmount;
     private int amountOfJumpsLeft;
 
 
@@ -56,7 +58,6 @@ public class Player : Fighter
     [SerializeField] private float dashCooldown = 0.5f;
     private float lastDashTime = 0;
 
-    static public bool isDashUnlocked;
     private bool canDash;
     private bool isDashing;
 
@@ -66,30 +67,41 @@ public class Player : Fighter
     [SerializeField] private float holdDuration; // how super dash button has to be held for it to activate
     private bool isSuperDashing;
     private bool canSuperDash;
-    static public bool isSuperDashUnlocked;
 
     [Header("Grapple")]
     [SerializeField] private GameObject grappleHook;
-    static public bool isGrappleUnlocked;
 
     [Header("Crouch")]
     [SerializeField] private float crouchMoveSpeedMultiplier;
     private bool canCrouch;
     private bool isCrouching;
-    static public bool isCrouchUnlocked;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        amountOfJumpsLeft = baseJumpAmount;
+        amountOfJumpsLeft = playerData.maxJumps;
         gravity = rb.gravityScale;
         grappleHook.SetActive(false);
         SetCharms();
 
 
         StaticGameData.playerMaxHealth = maxHealth;
+
+        LoadPlayer();
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        maxJumpAmount = data.maxJumps;
     }
 
     // Update is called once per frame
@@ -106,6 +118,7 @@ public class Player : Fighter
         PopulateCharmList();
 
         //Input.GetKeyDown(KeyCode.Mouse0)
+
 
         SetAnimations();
 
@@ -265,6 +278,8 @@ public class Player : Fighter
     // Logic for jumping
     private void Jump()
     {
+        Debug.Log(playerData.maxJumps);
+
         if (canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -284,7 +299,7 @@ public class Player : Fighter
         // Reset jump amount if player is touching ground and not going up
         if (isGrounded && rb.velocity.y <= 3)
         {
-            amountOfJumpsLeft = baseJumpAmount;
+            amountOfJumpsLeft = playerData.maxJumps;
         }
         if (amountOfJumpsLeft <= 0)
         {
@@ -309,7 +324,7 @@ public class Player : Fighter
     // Checks if player can dash
     private void CheckIfCanDash()
     {
-        if (isDashUnlocked)
+        if (gameData.isDashUnlocked)
         {
             // Can dash is reset if player is grounded and dash cooldown has passed.
             if (isGrounded && Time.time - lastDashTime > dashCooldown)
@@ -334,7 +349,7 @@ public class Player : Fighter
     // Checks if player can super dash.
     private void CheckIfCanSuperDash()
     {
-        if (isSuperDashUnlocked)
+        if (gameData.isSuperDashUnlocked)
         {
             // TODO: add more checks, ex: groundcheck, wallcheck
             canSuperDash = true;
@@ -353,7 +368,7 @@ public class Player : Fighter
     // Checks if player can crouch
     private void CheckIfCanCrouch()
     {
-        if (bool.Parse(PlayerPrefs.GetString("unlockCrouch")))
+        if (gameData.isCrouchUnlocked)
         //if (isCrouchUnlocked)
         {
             if (isGrounded && !isDashing && !isSuperDashing)
@@ -366,7 +381,7 @@ public class Player : Fighter
     // Checks if grapple hook has been unlocked and then sets it active if yes
     private void CheckIfGrappleHookIsUnlocked()
     {
-        if (isGrappleUnlocked)
+        if (gameData.isGrappleHookUnlocked)
         {
             grappleHook.SetActive(true);
         }

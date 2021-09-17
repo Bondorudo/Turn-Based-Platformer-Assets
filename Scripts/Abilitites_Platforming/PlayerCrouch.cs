@@ -6,9 +6,16 @@ public class PlayerCrouch : GrantAbilityManager
 {
     protected override void GrantAbility()
     {
-        base.GrantAbility();
-        Player.isCrouchUnlocked = true;
-        PlayerPrefs.SetString("unlockCrouch", "true");
-        FloatingText.Create(transform.position, name, 8, 500);
+        if (!gameData.hasGrantedCrouch)
+        {
+            base.GrantAbility();
+
+            gameData.isCrouchUnlocked = true;
+            gameData.hasGrantedCrouch = true;
+
+            GameDataManager.instance.WriteFile();
+
+            FloatingText.Create(transform.position, name, 8, 500);
+        }
     }
 }

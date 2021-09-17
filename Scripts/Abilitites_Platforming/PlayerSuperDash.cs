@@ -6,8 +6,16 @@ public class PlayerSuperDash : GrantAbilityManager
 {
     protected override void GrantAbility()
     {
-        base.GrantAbility();
-        Player.isSuperDashUnlocked = true;
-        FloatingText.Create(transform.position, name, 8, 500);
+        if (!gameData.hasGrantedSuperDash)
+        {
+            base.GrantAbility();
+
+            gameData.isSuperDashUnlocked = true;
+            gameData.hasGrantedSuperDash = true;
+
+            GameDataManager.instance.WriteFile();
+
+            FloatingText.Create(transform.position, name, 8, 500);
+        }
     }
 }

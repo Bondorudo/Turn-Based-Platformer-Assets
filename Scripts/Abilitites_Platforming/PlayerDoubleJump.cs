@@ -7,7 +7,10 @@ public class PlayerDoubleJump : GrantAbilityManager
     protected override void GrantAbility()
     {
         base.GrantAbility();
-        Player.baseJumpAmount = 2;
+
+        player.maxJumpAmount = 2;
+        player.SavePlayer();
+
         FloatingText.Create(transform.position, name, 8, 500);
     }
 }

@@ -45272,7 +45272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732076824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.65, y: -1.5, z: 0}
+  m_LocalPosition: {x: -22.900002, y: -9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 820427418}
@@ -46397,7 +46397,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1237135720}
+  playerData:
+    maxJumps: 1
   inventoryManager: {fileID: 1899182956}
+  moneyAmount: 0
   equippedCharms:
   - {fileID: 11400000, guid: 1247fd8732ba20149bbe3b30feb50616, type: 2}
   - {fileID: 11400000, guid: ffcfe636c64fb354fa3908e824c35bbf, type: 2}
@@ -46413,6 +46416,7 @@ MonoBehaviour:
   jumpForce: 15
   fallMultiplier: 2.5
   lowJumpMultiplier: 10
+  maxJumpAmount: 0
   moveSpeed: 10
   dashDistance: 30
   dashDuration: 0.15
@@ -48001,6 +48005,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5381f1492cdab745b18fe6cee75937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData:
+    moneyHeld: 0
+    isCrouchUnlocked: 0
+    hasGrantedCrouch: 0
+    maxJumps: 1
+    isDoubleJumpUnlocked: 0
+    hasGrantedDoubleJump: 0
+    isDashUnlocked: 0
+    hasGrantedDash: 0
+    isSuperDashUnlocked: 0
+    hasGrantedSuperDash: 0
+    isGrappleHookUnlocked: 0
+    hasGrantedGrappleHook: 0
   inventoryCanvas: {fileID: 2114724040}
   isInventoryOpen: 0
 --- !u!1 &1950055729

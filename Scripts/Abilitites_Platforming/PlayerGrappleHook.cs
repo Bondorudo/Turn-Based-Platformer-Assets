@@ -6,8 +6,16 @@ public class PlayerGrappleHook : GrantAbilityManager
 {
     protected override void GrantAbility()
     {
-        base.GrantAbility();
-        Player.isGrappleUnlocked = true;
-        FloatingText.Create(transform.position, name, 8, 500);
+        if (!gameData.hasGrantedGrappleHook)
+        {
+            base.GrantAbility();
+
+            gameData.isGrappleHookUnlocked = true;
+            gameData.hasGrantedGrappleHook = true;
+
+            GameDataManager.instance.WriteFile();
+
+            FloatingText.Create(transform.position, name, 8, 500);
+        }
     }
 }

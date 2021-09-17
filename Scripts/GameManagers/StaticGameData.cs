@@ -19,9 +19,8 @@ public static class StaticGameData
     public static List<Stats> playerDamageAttributes;
 
     // Battle Info
-    public static bool playerWin = false;
-    public static List<GameObject> deadEnemies = new List<GameObject>();
-
+    public static bool playerWin;
+    public static GameObject inCombatEnemy;
 
     // TODO: other info about combat: enemy types, background, design
 }

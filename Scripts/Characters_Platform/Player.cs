@@ -13,9 +13,11 @@ public class Player : Fighter
 
     [Header("Inventory")]
     [SerializeField] private InventoryManager inventoryManager;
+    public int moneyAmount;
 
     [Header("Charms")]
     public List<Charm> equippedCharms = new List<Charm>();
+    private string equippedCharmString;
 
     [Header("Combat Stats")]
     [SerializeField] private int maxHealth;
@@ -101,7 +103,6 @@ public class Player : Fighter
         CheckIfCanCrouch();
         CheckIfGrappleHookIsUnlocked();
 
-
         PopulateCharmList();
 
         //Input.GetKeyDown(KeyCode.Mouse0)
@@ -160,25 +161,23 @@ public class Player : Fighter
         CheckEnvironment();
     }
 
-
+    public void ChangeMoneyAmount(int change)
+    {
+        moneyAmount += change;
+    }
 
     public Vector3 GetPosition()
     {
         return transform.position;
     }
 
-    private void PopulateCharmList()
+    public void PopulateCharmList()
     {
-        if (Input.GetKeyDown("q"))
+        equippedCharms.Clear();
+
+        for (int i = 0; i < inventoryManager.listOfEquippedCharms.Count; i++)
         {
-            Debug.Log("Input : q : Update Player Charms");
-
-            equippedCharms.Clear();
-
-            for (int i = 0; i < inventoryManager.listOfEquippedCharms.Count; i++)
-            {
-                equippedCharms.Add(inventoryManager.listOfEquippedCharms[i].GetComponent<InventoryCharm>().realCharm);
-            }
+            equippedCharms.Add(inventoryManager.listOfEquippedCharms[i].GetComponent<InventoryCharm>().realCharm);
         }
     }
 
@@ -354,7 +353,8 @@ public class Player : Fighter
     // Checks if player can crouch
     private void CheckIfCanCrouch()
     {
-        if (isCrouchUnlocked)
+        if (bool.Parse(PlayerPrefs.GetString("unlockCrouch")))
+        //if (isCrouchUnlocked)
         {
             if (isGrounded && !isDashing && !isSuperDashing)
                 canCrouch = true;

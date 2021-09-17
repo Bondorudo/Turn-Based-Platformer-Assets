@@ -17,7 +17,7 @@ MonoBehaviour:
   animLenght: 1.9
   isDefensiveSkill: 0
   affinitySprite: {fileID: 5746156984659908382, guid: 3a5e785fed3aab147a6fb4cb51142b40, type: 3}
-  attackDamage: 8
+  attackDamage: 80
   typeOfDamage: 3
   isMultihit: 1
   healAmount: 0

@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4511bae83fdc3d42a201179ee343933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyToGive: 0
   dmg: 0
   maxHealth: 30
   enemyLocation: 0
@@ -182,7 +181,8 @@ MonoBehaviour:
   ledgeCheckDistance: 1.2
   moveSpeed: 0.003
   maxDistanceToTravel: 1
-  isDead: 0
+  minMoneyToGive: 8
+  maxMoneyToGive: 22
 --- !u!61 &21167302
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -46153,7 +46153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4511bae83fdc3d42a201179ee343933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyToGive: 0
   dmg: 0
   maxHealth: 30
   enemyLocation: 0
@@ -46165,7 +46164,8 @@ MonoBehaviour:
   ledgeCheckDistance: 1.2
   moveSpeed: 0.003
   maxDistanceToTravel: 1
-  isDead: 0
+  minMoneyToGive: 5
+  maxMoneyToGive: 5
 --- !u!61 &1173183526
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -47029,7 +47029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4511bae83fdc3d42a201179ee343933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyToGive: 0
   dmg: 0
   maxHealth: 30
   enemyLocation: 0
@@ -47041,7 +47040,8 @@ MonoBehaviour:
   ledgeCheckDistance: 1.2
   moveSpeed: 0.003
   maxDistanceToTravel: 1
-  isDead: 0
+  minMoneyToGive: 1
+  maxMoneyToGive: 8
 --- !u!61 &1647644026
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -48001,7 +48001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5381f1492cdab745b18fe6cee75937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHolder: {fileID: 1393631938}
   inventoryCanvas: {fileID: 2114724040}
   isInventoryOpen: 0
 --- !u!1 &1950055729

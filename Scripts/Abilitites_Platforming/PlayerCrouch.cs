@@ -8,6 +8,7 @@ public class PlayerCrouch : GrantAbilityManager
     {
         base.GrantAbility();
         Player.isCrouchUnlocked = true;
+        PlayerPrefs.SetString("unlockCrouch", "true");
         FloatingText.Create(transform.position, name, 8, 500);
     }
 }

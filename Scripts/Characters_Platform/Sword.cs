@@ -18,6 +18,8 @@ public class Sword : Collidable
         if (coll.tag == "Player" && gameObject.tag != "Player")
         {
             gameManager.GoIntoCombat(4, 2);
+            Debug.Log(gameObject.transform.parent.name);
+            PlayerPrefs.SetString("InCombatEnemy", gameObject.transform.parent.name);
         }
     }
 }

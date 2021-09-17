@@ -26,7 +26,7 @@ public class SaveStationManager : MonoBehaviour
         if (collision.tag == "Player")
         {
             canInteract = false;
-            gameManager.SetInventory(false);
+            gameManager.CloseInventory();
         }
     }
 
@@ -40,12 +40,12 @@ public class SaveStationManager : MonoBehaviour
         if (canInteract && !gameManager.isInventoryOpen && Input.GetKeyDown("f"))
         {
             gameManager.SetInventory(true);
-            gameManager.GameSaveState();
+            gameManager.GameSaveState(transform.position);
             // Save Game and show inventory, player can close this with pressing f again or moving out of it.
         }
         else if (canInteract && gameManager.isInventoryOpen && Input.GetKeyDown("f"))
         {
-            gameManager.SetInventory(false);
+            gameManager.CloseInventory();
         }
     }
 }

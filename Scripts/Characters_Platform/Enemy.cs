@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class Enemy : Fighter
 {
     [Header("Combat Stats")]
-    [SerializeField] private int moneyToGive;
     [SerializeField] private int dmg;
     [SerializeField] private int maxHealth;
     [SerializeField] private EnemyLocation enemyLocation;
@@ -22,8 +21,13 @@ public class Enemy : Fighter
     [SerializeField] private float maxDistanceToTravel;
     private float startPosX;
 
+    [Range(1,30)]
+    public int minMoneyToGive;
+    [Range(1, 30)]
+    public int maxMoneyToGive;
+
+
     private bool ledgeCheck;
-    public bool isDead;
 
     private PlatformGameManager gameManager;
 
@@ -35,7 +39,7 @@ public class Enemy : Fighter
 
         startPosX = transform.position.x;
 
-        StaticGameData.enemyMoneyToGive = moneyToGive;
+        //StaticGameData.enemyMoneyToGive = moneyToGive;
         StaticGameData.enemyBaseDmg = dmg;
         StaticGameData.enemyMaxHealth = maxHealth;
         StaticGameData.enemyLocation = enemyLocation;
@@ -48,6 +52,12 @@ public class Enemy : Fighter
         Movement();
 
         ledgeCheck = Physics2D.Raycast(ledgeCheckPos.position, Vector2.down, ledgeCheckDistance, whatIsGround);
+    }
+
+    public int GiveMoney()
+    {
+        int money = Random.Range(minMoneyToGive, maxMoneyToGive);
+        return money;
     }
 
     private void Movement()
@@ -73,6 +83,7 @@ public class Enemy : Fighter
         if (collision.gameObject.tag == "Player")
         {
             gameManager.GoIntoCombat(3, 1);
+            PlayerPrefs.SetString("InCombatEnemy", gameObject.name);
         }
     }
 

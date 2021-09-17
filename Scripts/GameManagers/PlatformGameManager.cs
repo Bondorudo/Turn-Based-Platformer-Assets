@@ -8,69 +8,84 @@ public class PlatformGameManager : MonoBehaviour
     public static PlatformGameManager instance;
 
     private GameObject[] arrOfEnemies;
-    public Transform enemyHolder;
 
-    private GameObject player;
-    private GameObject inCombatEnemy;
+    private GameObject playerObject;
+    private Player playerScript;
     public GameObject inventoryCanvas;
 
     public bool isInventoryOpen;
 
+    string enemyDeadString = "";
+
+
     private void Awake()
     {
         instance = this;
+        arrOfEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // Get this string at start of game
+        enemyDeadString = PlayerPrefs.GetString("enemyDeadString");
+
+        // Find game objects
+        playerObject = GameObject.Find("Player");
+        playerScript = playerObject.GetComponent<Player>();
+        StaticGameData.inCombatEnemy = GameObject.Find(PlayerPrefs.GetString("InCombatEnemy"));
     }
 
     private void Start()
     {
-        arrOfEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        player = GameObject.Find("Player");
-        inCombatEnemy = GameObject.Find(PlayerPrefs.GetString("InCombatEnemy"));
+        CombatOutcome();
+    }
 
-
-        Debug.Log("Player Win ? : " + StaticGameData.playerWin);
-
+    public void CombatOutcome()
+    {
         if (StaticGameData.playerWin)
         {
-            // Enemy dies
-            StaticGameData.deadEnemies.Add(inCombatEnemy);
-            Debug.Log(inCombatEnemy.name);
             BattleLoadState();
+
+            ThrowMoney();
+
+            KillEnemies();
         }
         else
         {
             GameLoadState();
         }
-
-        // DOESNT NOT WORK
-        for (int i = 0; i < StaticGameData.deadEnemies.Count; i++)
-        {
-            StaticGameData.deadEnemies[i].GetComponent<Enemy>().isDead = true;
-        }
-
-        // TODO: Set enemies isDead to true when they are dead and keep it that way until we want to respawn the enemy.
-
-        for (int i = 0; i < arrOfEnemies.Length; i++)
-        {
-            if (arrOfEnemies[i].GetComponent<Enemy>().isDead)
-                arrOfEnemies[i].SetActive(false);
-            else
-                arrOfEnemies[i].SetActive(true);
-        }
+        StaticGameData.playerWin = false;
     }
 
+    private void ThrowMoney()
+    {
+        // This works for testing, but
+        // TODO: Instantiate coins and throw them around the dead enemy, player can then pick those up to gain money.
+        playerScript.ChangeMoneyAmount(StaticGameData.inCombatEnemy.GetComponent<Enemy>().GiveMoney());
+    }
+
+    public void KillEnemies()
+    {
+        // Add to enemyDeadString combat enemys name and set string
+        enemyDeadString += StaticGameData.inCombatEnemy.name + "|";
+        PlayerPrefs.SetString("enemyDeadString", enemyDeadString);
+
+        // Split all enemy names, then go trough all of them and find their game objects and get their Enemy component. then set active to false
+        string[] data = PlayerPrefs.GetString("enemyDeadString").Split('|');
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            GameObject.Find(data[i]).SetActive(false);
+        }
+    }
 
     // Call when player saves the game / when player dies / when player quits and starts again
     public void RespawnEnemies()
     {
-        Debug.Log("RESPAWN ENEMIES");
-        for (int i = 0; i < arrOfEnemies.Length; i++)
+        // Go trough array of enemies and for each set active to true
+        foreach (var enemy in arrOfEnemies)
         {
-            arrOfEnemies[i].GetComponent<Enemy>().isDead = false;
-            arrOfEnemies[i].SetActive(true);
+            enemy.SetActive(true);
         }
 
-        StaticGameData.deadEnemies.Clear();
+        PlayerPrefs.SetString("enemyDeadString", "");
     }
 
     public void SetInventory(bool boolean)
@@ -92,14 +107,21 @@ public class PlatformGameManager : MonoBehaviour
 
     // TODO: Also save powerups 
 
+    public void CloseInventory()
+    {
+        SetInventory(false);
+        PlayerPrefs.SetString("EquippedCharms", "");
+    }
+
     #region Save Game
-    public void GameSaveState()
+    public void GameSaveState(Vector2 pos)
     {
         RespawnEnemies();
 
         string s = "";
-        s += player.transform.position.x.ToString() + "|";
-        s += player.transform.position.y.ToString() + "|";
+        s += pos.x.ToString() + "|";
+        s += pos.y.ToString() + "|";
+        s += playerScript.moneyAmount.ToString();
 
         PlayerPrefs.SetString("GameSaveState", s);
     }
@@ -109,7 +131,8 @@ public class PlatformGameManager : MonoBehaviour
         RespawnEnemies();
         string[] data = PlayerPrefs.GetString("GameSaveState").Split('|');
 
-        player.transform.position = new Vector3(float.Parse(data[0]), float.Parse(data[1]));
+        playerObject.transform.position = new Vector3(float.Parse(data[0]), float.Parse(data[1]));
+        playerScript.ChangeMoneyAmount(int.Parse(data[2]));
     }
     #endregion
 
@@ -117,8 +140,9 @@ public class PlatformGameManager : MonoBehaviour
     public void BattleSaveState()
     {
         string s = "";
-        s += player.transform.position.x.ToString() + "|";
-        s += player.transform.position.y.ToString() + "|";
+        s += playerObject.transform.position.x.ToString() + "|";
+        s += playerObject.transform.position.y.ToString() + "|";
+        s += playerScript.moneyAmount.ToString();
 
         PlayerPrefs.SetString("BattleSaveState", s);
     }
@@ -127,7 +151,8 @@ public class PlatformGameManager : MonoBehaviour
     {
         string[] data = PlayerPrefs.GetString("BattleSaveState").Split('|');
 
-        player.transform.position = new Vector3(float.Parse(data[0]), float.Parse(data[1]));
+        playerObject.transform.position = new Vector3(float.Parse(data[0]), float.Parse(data[1]));
+        playerScript.ChangeMoneyAmount(int.Parse(data[2]));
     }
     #endregion
 }

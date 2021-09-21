@@ -4,8 +4,19 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
+    public static bool doesSaveExist;
+
+    public static void ClearSave()
+    {
+        string path = Application.persistentDataPath + "/gameSaveFiles.data";
+        File.Delete(path);
+        Debug.Log("Delete Save Data");
+    }
+
     public static void SavePlayer(Player player)
     {
+        doesSaveExist = true;
+
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/gameSaveFiles.data";
         FileStream stream = new FileStream(path, FileMode.Create);

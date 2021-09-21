@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerDash : GrantAbilityManager
 {
+    protected override void Start()
+    {
+        base.Start();
+        if (player.hasGainedDash)
+            ChangeColor();
+    }
+
     protected override void GrantAbility()
     {
-        if (!gameData.hasGrantedDash)
+        if (!player.hasGainedDash)
         {
             base.GrantAbility();
 
-            gameData.isDashUnlocked = true;
-            gameData.hasGrantedDash = true;
+            player.hasGainedDash = true;
 
-            GameDataManager.instance.WriteFile();
+            SaveSystem.SavePlayer(player);
 
             FloatingText.Create(transform.position, name, 8, 500);
         }

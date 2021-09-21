@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerGrappleHook : GrantAbilityManager
 {
+    protected override void Start()
+    {
+        base.Start();
+        if (player.hasGainedGrappleHook)
+            ChangeColor();
+    }
+
     protected override void GrantAbility()
     {
-        if (!gameData.hasGrantedGrappleHook)
+        if (!player.hasGainedGrappleHook)
         {
             base.GrantAbility();
 
-            gameData.isGrappleHookUnlocked = true;
-            gameData.hasGrantedGrappleHook = true;
+            player.hasGainedGrappleHook = true;
 
-            GameDataManager.instance.WriteFile();
+            SaveSystem.SavePlayer(player);
 
             FloatingText.Create(transform.position, name, 8, 500);
         }

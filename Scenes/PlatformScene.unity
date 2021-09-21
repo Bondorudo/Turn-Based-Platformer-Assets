@@ -46399,6 +46399,12 @@ MonoBehaviour:
   anim: {fileID: 1237135720}
   playerData:
     maxJumps: 1
+    charm: 0
+    hasGainedDoubleJump: 0
+    hasGainedCrouch: 0
+    hasGainedDash: 0
+    hasGainedSuperDash: 0
+    hasGainedGrappleHook: 0
   inventoryManager: {fileID: 1899182956}
   moneyAmount: 0
   equippedCharms:
@@ -46416,15 +46422,20 @@ MonoBehaviour:
   jumpForce: 15
   fallMultiplier: 2.5
   lowJumpMultiplier: 10
+  hasGainedDoubleJump: 0
   maxJumpAmount: 0
   moveSpeed: 10
   dashDistance: 30
   dashDuration: 0.15
   dashCooldown: 0.5
+  hasGainedDash: 0
   superDashSpeed: 20
   holdDuration: 0.8
+  hasGainedSuperDash: 0
   grappleHook: {fileID: 167591657}
+  hasGainedGrappleHook: 0
   crouchMoveSpeedMultiplier: 13
+  hasGainedCrouch: 0
 --- !u!95 &1237135720
 Animator:
   serializedVersion: 3
@@ -48005,19 +48016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5381f1492cdab745b18fe6cee75937a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameData:
-    moneyHeld: 0
-    isCrouchUnlocked: 0
-    hasGrantedCrouch: 0
-    maxJumps: 1
-    isDoubleJumpUnlocked: 0
-    hasGrantedDoubleJump: 0
-    isDashUnlocked: 0
-    hasGrantedDash: 0
-    isSuperDashUnlocked: 0
-    hasGrantedSuperDash: 0
-    isGrappleHookUnlocked: 0
-    hasGrantedGrappleHook: 0
   inventoryCanvas: {fileID: 2114724040}
   isInventoryOpen: 0
 --- !u!1 &1950055729

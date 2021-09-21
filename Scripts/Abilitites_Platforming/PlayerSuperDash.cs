@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerSuperDash : GrantAbilityManager
 {
+    protected override void Start()
+    {
+        base.Start();
+        if (player.hasGainedSuperDash)
+            ChangeColor();
+    }
+
     protected override void GrantAbility()
     {
-        if (!gameData.hasGrantedSuperDash)
+        if (!player.hasGainedSuperDash)
         {
             base.GrantAbility();
 
-            gameData.isSuperDashUnlocked = true;
-            gameData.hasGrantedSuperDash = true;
+            player.hasGainedSuperDash = true;
 
-            GameDataManager.instance.WriteFile();
+            SaveSystem.SavePlayer(player);
 
             FloatingText.Create(transform.position, name, 8, 500);
         }

@@ -6,9 +6,23 @@ using UnityEngine;
 public class PlayerData
 {
     public int maxJumps;
+    public int charm;
+
+
+
+    public bool hasGainedDoubleJump;
+    public bool hasGainedCrouch;
+    public bool hasGainedDash;
+    public bool hasGainedSuperDash;
+    public bool hasGainedGrappleHook;
+
+
 
     public PlayerData (Player player)
     {
+        /*
         maxJumps = player.maxJumpAmount;
+        hasGainedDoubleJump = player.hasGainedDoubleJump;
+        */
     }
 }

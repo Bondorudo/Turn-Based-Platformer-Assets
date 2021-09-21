@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerCrouch : GrantAbilityManager
 {
+    protected override void Start()
+    {
+        base.Start();
+        if (player.hasGainedCrouch)
+            ChangeColor();
+    }
+
     protected override void GrantAbility()
     {
-        if (!gameData.hasGrantedCrouch)
+        if (!player.hasGainedCrouch)
         {
             base.GrantAbility();
 
-            gameData.isCrouchUnlocked = true;
-            gameData.hasGrantedCrouch = true;
+            player.hasGainedCrouch = true;
 
-            GameDataManager.instance.WriteFile();
+            SaveSystem.SavePlayer(player);
 
             FloatingText.Create(transform.position, name, 8, 500);
         }

@@ -7,8 +7,6 @@ public class PlatformGameManager : MonoBehaviour
 {
     public static PlatformGameManager instance;
 
-    public GameData gameData;
-
     private GameObject[] arrOfEnemies;
 
     private GameObject playerObject;
@@ -32,8 +30,6 @@ public class PlatformGameManager : MonoBehaviour
         playerObject = GameObject.Find("Player");
         playerScript = playerObject.GetComponent<Player>();
         StaticGameData.inCombatEnemy = GameObject.Find(PlayerPrefs.GetString("InCombatEnemy"));
-
-        SaveGame();
     }
 
     private void Start()
@@ -160,19 +156,4 @@ public class PlatformGameManager : MonoBehaviour
     }
     #endregion
 
-    public void SaveGame()
-    {
-        gameData.moneyHeld += playerScript.moneyAmount;/*
-        for (int i = 0; i < playerScript.equippedCharms.Count; i++)
-        {
-            gameData.charmsEquipped.Add(playerScript.equippedCharms[i]);
-        }
-        for (int i = 0; i < InventoryManager.instance.listOfCharms.Count; i++)
-        {
-            if (InventoryManager.instance.listOfCharms[i].charmState == CharmState.Available || InventoryManager.instance.listOfCharms[i].charmState == CharmState.Equipped)
-            {
-                gameData.charmsHeld.Add(InventoryManager.instance.listOfCharms[i]);
-            }
-        }*/
-    }
 }

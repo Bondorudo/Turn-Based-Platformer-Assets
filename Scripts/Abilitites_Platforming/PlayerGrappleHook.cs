@@ -7,17 +7,17 @@ public class PlayerGrappleHook : GrantAbilityManager
     protected override void Start()
     {
         base.Start();
-        if (player.hasGainedGrappleHook)
+        if (player.playerData.hasGainedGrappleHook)
             ChangeColor();
     }
 
     protected override void GrantAbility()
     {
-        if (!player.hasGainedGrappleHook)
+        if (!player.playerData.hasGainedGrappleHook)
         {
             base.GrantAbility();
 
-            player.hasGainedGrappleHook = true;
+            player.playerData.hasGainedGrappleHook = true;
 
             SaveSystem.SavePlayer(player);
 

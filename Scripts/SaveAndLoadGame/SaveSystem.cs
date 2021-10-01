@@ -1,49 +1,46 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 
+//[CreateAssetMenu(fileName = "New SaveSystem Object", menuName = "Scriptable Objects/Save System")]
 public static class SaveSystem
 {
-    public static bool doesSaveExist;
+    private static string path = Application.persistentDataPath + "/Player.Data";
+
 
     public static void ClearSave()
     {
-        string path = Application.persistentDataPath + "/gameSaveFiles.data";
         File.Delete(path);
         Debug.Log("Delete Save Data");
     }
 
     public static void SavePlayer(Player player)
     {
-        doesSaveExist = true;
-
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/gameSaveFiles.data";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        PlayerData data = new PlayerData(player);
-
-        formatter.Serialize(stream, data);
+        Debug.Log("Save");
+        
+        IFormatter formatter = new BinaryFormatter();
+        Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
+        formatter.Serialize(stream, player.playerData);
+        Debug.Log("Max Jumps : " + player.playerData.maxJumps);
         stream.Close();
     }
 
-    public static PlayerData LoadPlayer()
+    public static void LoadPlayer(Player player)
     {
-        string path = Application.persistentDataPath + "/gameSaveFiles.data";
+        Debug.Log("Load");
+
         if (File.Exists(path))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            player.playerData = (PlayerData)formatter.Deserialize(stream);
+            Debug.Log("Max Jumps : " + player.playerData.maxJumps);
             stream.Close();
-
-            return data;
         }
         else
         {
             Debug.LogError("Save file not found in " + path);
-            return null;
         }
     }
 }

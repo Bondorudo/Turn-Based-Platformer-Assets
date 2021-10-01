@@ -7,17 +7,17 @@ public class PlayerCrouch : GrantAbilityManager
     protected override void Start()
     {
         base.Start();
-        if (player.hasGainedCrouch)
+        if (player.playerData.hasGainedCrouch)
             ChangeColor();
     }
 
     protected override void GrantAbility()
     {
-        if (!player.hasGainedCrouch)
+        if (!player.playerData.hasGainedCrouch)
         {
             base.GrantAbility();
 
-            player.hasGainedCrouch = true;
+            player.playerData.hasGainedCrouch = true;
 
             SaveSystem.SavePlayer(player);
 

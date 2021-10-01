@@ -7,17 +7,17 @@ public class PlayerDash : GrantAbilityManager
     protected override void Start()
     {
         base.Start();
-        if (player.hasGainedDash)
+        if (player.playerData.hasGainedDash)
             ChangeColor();
     }
 
     protected override void GrantAbility()
     {
-        if (!player.hasGainedDash)
+        if (!player.playerData.hasGainedDash)
         {
             base.GrantAbility();
 
-            player.hasGainedDash = true;
+            player.playerData.hasGainedDash = true;
 
             SaveSystem.SavePlayer(player);
 

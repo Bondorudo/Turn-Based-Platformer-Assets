@@ -7,22 +7,22 @@ public class PlayerDoubleJump : GrantAbilityManager
     protected override void Start()
     {
         base.Start();
-        if (player.hasGainedDoubleJump)
+        if (player.playerData.hasGainedDoubleJump)
             ChangeColor();
     }
 
     protected override void GrantAbility()
     {
         base.GrantAbility();
-        if (!player.hasGainedDoubleJump)
+        if (!player.playerData.hasGainedDoubleJump)
         {
-            player.hasGainedDoubleJump = true;
-            player.maxJumpAmount = 2;
+            player.playerData.hasGainedDoubleJump = true;
+            player.playerData.maxJumps = 2;
+
             SaveSystem.SavePlayer(player);
 
             FloatingText.Create(transform.position, name, 8, 500);
-        }
-        else
             ChangeColor();
+        }
     }
 }

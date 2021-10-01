@@ -12,6 +12,7 @@ public class Player : Fighter
     private float gravity;
 
     public PlayerData playerData;
+    public InventoryObject inventory;
 
     [Header("Inventory")]
     [SerializeField] private InventoryManager inventoryManager;
@@ -41,16 +42,12 @@ public class Player : Fighter
     [SerializeField] private float lowJumpMultiplier;
 
     private bool canJump;
-    public bool hasGainedDoubleJump;
 
-    public int maxJumpAmount = 1;
     private int amountOfJumpsLeft;
-
 
     [Header("Running")]
     [SerializeField] private float moveSpeed;
     private float xInput;
-
 
     [Header("Dash")]
     [SerializeField] private float dashDistance = 30f;
@@ -60,7 +57,6 @@ public class Player : Fighter
 
     private bool canDash;
     private bool isDashing;
-    public bool hasGainedDash;
 
     [Header("SuperDash")]
     [SerializeField] private float superDashSpeed; // how fast super dash moves
@@ -68,26 +64,15 @@ public class Player : Fighter
     [SerializeField] private float holdDuration; // how super dash button has to be held for it to activate
     private bool isSuperDashing;
     private bool canSuperDash;
-    public bool hasGainedSuperDash;
 
     [Header("Grapple")]
     [SerializeField] private GameObject grappleHook;
-    public bool hasGainedGrappleHook;
 
     [Header("Crouch")]
     [SerializeField] private float crouchMoveSpeedMultiplier;
     private bool canCrouch;
     private bool isCrouching;
-    public bool hasGainedCrouch;
 
-    private void Awake()
-    {
-        // TODO: Game breaks if Load data doesnt exist at start of game.
-
-        LoadPlayer();
-
-        SavePlayer();
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -97,40 +82,17 @@ public class Player : Fighter
         grappleHook.SetActive(false);
         SetCharms();
 
-        
-
         StaticGameData.playerMaxHealth = maxHealth;
 
         amountOfJumpsLeft = playerData.maxJumps;
     }
 
-    public void SavePlayer()
-    {
-        playerData.maxJumps = maxJumpAmount;
-        playerData.hasGainedDoubleJump = hasGainedDoubleJump;
-        playerData.hasGainedCrouch = hasGainedCrouch;
-        playerData.hasGainedDash = hasGainedDash;
-        playerData.hasGainedSuperDash = hasGainedSuperDash;
-        playerData.hasGainedGrappleHook = hasGainedGrappleHook;
-        SaveSystem.SavePlayer(this);
-    }
-
-    public void LoadPlayer()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-
-        maxJumpAmount = data.maxJumps;
-        hasGainedDoubleJump = data.hasGainedDoubleJump;
-        hasGainedCrouch = data.hasGainedCrouch;
-        hasGainedDash = data.hasGainedDash;
-        hasGainedSuperDash = data.hasGainedSuperDash;
-        hasGainedGrappleHook = data.hasGainedGrappleHook;
-    }
 
     // Update is called once per frame
     protected virtual void Update()
     {
         // Call checks!
+        // TODO: Move ability checks to after input so that they arent being done constantly -> increased performance.
         CheckInput();
         CheckIfCanJump();
         CheckIfCanDash();
@@ -145,6 +107,11 @@ public class Player : Fighter
         if (Input.GetKeyDown("o"))
         {
             SaveSystem.ClearSave();
+        }
+
+        if (Input.GetKeyDown("p"))
+        {
+            SaveSystem.LoadPlayer(this);
         }
 
 
@@ -231,10 +198,7 @@ public class Player : Fighter
 
     private void CheckInput()
     {
-        if (Input.anyKey)
-        {
-            LoadPlayer();
-        }
+        
 
         // Input for running
         xInput = Input.GetAxisRaw("Horizontal");
@@ -309,8 +273,6 @@ public class Player : Fighter
     // Logic for jumping
     private void Jump()
     {
-        Debug.Log(playerData.maxJumps);
-
         if (canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -331,7 +293,6 @@ public class Player : Fighter
         if (isGrounded && rb.velocity.y <= 3)
         {
             amountOfJumpsLeft = playerData.maxJumps;
-            Debug.Log("Jump amount left : " + amountOfJumpsLeft + ". Playerdata maxjumps : " + playerData.maxJumps + ". Player max amount of Jumps : " + maxJumpAmount);
         }
         if (amountOfJumpsLeft <= 0)
         {
@@ -400,7 +361,7 @@ public class Player : Fighter
     // Checks if player can crouch
     private void CheckIfCanCrouch()
     {
-        if (hasGainedCrouch)
+        if (playerData.hasGainedCrouch)
         {
             if (isGrounded && !isDashing && !isSuperDashing)
                 canCrouch = true;

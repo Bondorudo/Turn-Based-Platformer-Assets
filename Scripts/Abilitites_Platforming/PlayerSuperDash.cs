@@ -7,17 +7,17 @@ public class PlayerSuperDash : GrantAbilityManager
     protected override void Start()
     {
         base.Start();
-        if (player.hasGainedSuperDash)
+        if (player.playerData.hasGainedSuperDash)
             ChangeColor();
     }
 
     protected override void GrantAbility()
     {
-        if (!player.hasGainedSuperDash)
+        if (!player.playerData.hasGainedSuperDash)
         {
             base.GrantAbility();
 
-            player.hasGainedSuperDash = true;
+            player.playerData.hasGainedSuperDash = true;
 
             SaveSystem.SavePlayer(player);
 

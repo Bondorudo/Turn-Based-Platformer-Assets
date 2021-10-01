@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrantAbilityManager : MonoBehaviour
+public class GrantAbilityManager : Interactable
 {
-    private bool canGrantAbility = false;
-
-    protected PlayerData playerData;
-
     protected Player player;
+
 
     protected SpriteRenderer sprite;
 
@@ -18,22 +15,6 @@ public class GrantAbilityManager : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            canGrantAbility = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            canGrantAbility = false;
-        }
-    }
-
     private void Update()
     {
         CheckCanGrantAbility();
@@ -41,7 +22,7 @@ public class GrantAbilityManager : MonoBehaviour
 
     private void CheckCanGrantAbility()
     {
-        if (canGrantAbility && Input.GetKeyDown("f"))
+        if (canInteract && Input.GetKeyDown("f"))
         {
             GrantAbility();
         }

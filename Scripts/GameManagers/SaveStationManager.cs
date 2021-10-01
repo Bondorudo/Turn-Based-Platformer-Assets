@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveStationManager : MonoBehaviour
+public class SaveStationManager : Interactable
 {
-    private bool canInteract = false;
-
     private PlatformGameManager gameManager;
 
     private void Start()
@@ -13,21 +11,11 @@ public class SaveStationManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<PlatformGameManager>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void PlayerExitTrigger()
     {
-        if (collision.tag == "Player")
-        {
-            canInteract = true;
-        }
-    }
+        base.PlayerExitTrigger();
+        gameManager.CloseInventory();
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            canInteract = false;
-            gameManager.CloseInventory();
-        }
     }
 
     private void Update()

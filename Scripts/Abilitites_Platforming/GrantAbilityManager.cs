@@ -15,18 +15,17 @@ public class GrantAbilityManager : Interactable
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
-    {
-        CheckCanGrantAbility();
-    }
 
-    private void CheckCanGrantAbility()
+    protected override void Interact()
     {
-        if (canInteract && Input.GetKeyDown("f"))
+        if (canInteract)
         {
+            base.Interact();
             GrantAbility();
+            SetHasInteracted();
         }
     }
+
 
     protected virtual void GrantAbility()
     {

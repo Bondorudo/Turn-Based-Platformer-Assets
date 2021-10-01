@@ -9,17 +9,16 @@ public class CharmItem : Interactable
     public Charm charmToGive;
 
 
-    private void Update()
+    protected override void Interact()
     {
-        CheckCanGrantCharm();
-    }
-
-    private void CheckCanGrantCharm()
-    {
-        if (canInteract && Input.GetKeyDown("f") && !hasGrantedCharm)
+        if (canInteract)
         {
-            GrantCharm();
-            hasGrantedCharm = true;
+            if (!hasGrantedCharm)
+            {
+                base.Interact();
+                GrantCharm();
+                hasGrantedCharm = true;
+            }
         }
     }
 

@@ -5,35 +5,55 @@ using UnityEngine;
 public class SaveStationManager : Interactable
 {
     private PlatformGameManager gameManager;
+    private InventoryManager inventoryManager;
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<PlatformGameManager>();
+        inventoryManager = GameObject.Find("GameManager").GetComponent<InventoryManager>();
     }
 
     protected override void PlayerExitTrigger()
     {
         base.PlayerExitTrigger();
-        gameManager.CloseInventory();
+        inventoryManager.CloseInventory();
 
     }
 
-    private void Update()
-    {
-        CheckcanSave();
-    }
 
-    private void CheckcanSave()
+    protected override void Interact()
     {
-        if (canInteract && !gameManager.isInventoryOpen && Input.GetKeyDown("f"))
+        if (canInteract)
         {
-            // Save Game and show inventory, player can close this with pressing f again or moving out of it.
-            gameManager.SetInventory(true);
-            gameManager.GameSaveState(transform.position);
-        }
-        else if (canInteract && gameManager.isInventoryOpen && Input.GetKeyDown("f"))
-        {
-            gameManager.CloseInventory();
+            if (canInteract)
+            {
+                base.Interact();
+                if (!inventoryManager.isInventoryOpen)
+                {
+                    // Save Game and show inventory, player can close this with pressing f again or moving out of it.
+                    inventoryManager.OpenInventory(0);
+                    Debug.Log("Save Station Open Inventory");
+                    gameManager.GameSaveState(transform.position);
+                }
+                else
+                {
+                    inventoryManager.CloseInventory();
+                    Debug.Log("Save Station Close Inventory");
+                }
+            }
+            else
+            {
+                if (!inventoryManager.isInventoryOpen)
+                {
+                    inventoryManager.OpenInventory(1);
+                    Debug.Log("Gameplay Open Inventory");
+                }
+                else
+                {
+                    inventoryManager.CloseInventory();
+                    Debug.Log("Gameplay Close Inventory");
+                }
+            }
         }
     }
 }

@@ -13,7 +13,6 @@ public class PlatformGameManager : MonoBehaviour
     private Player playerScript;
     public GameObject inventoryCanvas;
 
-    public bool isInventoryOpen;
 
     string enemyDeadString = "";
 
@@ -88,12 +87,6 @@ public class PlatformGameManager : MonoBehaviour
         PlayerPrefs.SetString("enemyDeadString", "");
     }
 
-    public void SetInventory(bool boolean)
-    {
-        isInventoryOpen = boolean;
-        inventoryCanvas.SetActive(boolean);
-    }
-
     public void GoIntoCombat(int enemyAmount, int advantage)
     {
         // 0 = player adv | 1 = neutral adv | 2 = enemy adv
@@ -106,12 +99,6 @@ public class PlatformGameManager : MonoBehaviour
     }
 
     // TODO: Also save powerups 
-
-    public void CloseInventory()
-    {
-        SetInventory(false);
-        PlayerPrefs.SetString("EquippedCharms", "");
-    }
 
     #region Save Game
     public void GameSaveState(Vector2 pos)

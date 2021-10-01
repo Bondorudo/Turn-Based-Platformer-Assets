@@ -9,11 +9,13 @@ public class InventoryManager : MonoBehaviour
 
     // Add all charms to this list
     public List<Charm> listOfCharms = new List<Charm>();
-
     public List<GameObject> listOfEquippedCharms = new List<GameObject>();
 
     private List<RectTransform> charmRectTransformList = new List<RectTransform>();
     public List<InventoryCharm> inventortCharmList = new List<InventoryCharm>();
+
+
+    public List<GameObject> inventoryPages = new List<GameObject>();
 
     public Transform pfCharmSlot;
     public Transform parentOfEquippedCharms;
@@ -25,6 +27,8 @@ public class InventoryManager : MonoBehaviour
     float charmSlotCellSize = 90f;
 
     int charmSpotX = 0;
+
+    public bool isInventoryOpen;
 
 
     private void Awake()
@@ -38,6 +42,48 @@ public class InventoryManager : MonoBehaviour
         CreateEmptyCharms();
     }
 
+    #region ---GENERAL---
+
+    int pageIndex = 0;
+    public void InventoryScrollButton(int i)
+    {
+        for (int y = 0; y < inventoryPages.Count; y++)
+        {
+            inventoryPages[y].SetActive(false);
+        }
+
+        pageIndex += i;
+        if (pageIndex >= inventoryPages.Count)
+        {
+            pageIndex = 0;
+        }
+        else if (pageIndex < 0)
+        {
+            pageIndex = inventoryPages.Count -1;
+        }
+
+        inventoryPages[pageIndex].SetActive(true);
+    }
+
+    public void OpenInventory(int pageIndex)
+    {
+        isInventoryOpen = true;
+        this.pageIndex = pageIndex;
+        inventoryPages[pageIndex].SetActive(true);
+    }
+
+    public void CloseInventory()
+    {
+        for (int i = 0; i < inventoryPages.Count; i++)
+        {
+            inventoryPages[i].SetActive(false);
+        }
+        isInventoryOpen = false;
+    }
+
+    #endregion
+
+    #region ---CHARMS---
     #region EquippedCharms
 
     // Charm is not not equipped, so then equip it.
@@ -163,6 +209,11 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    #endregion
+    #endregion
+
+    #region ---ITEMS/SKILLS---
+
     #endregion
 }
 

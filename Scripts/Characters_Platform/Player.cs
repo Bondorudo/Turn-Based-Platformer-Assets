@@ -19,7 +19,6 @@ public class Player : Fighter
     public int moneyAmount;
 
     [Header("Charms")]
-    public List<Charm> equippedCharms = new List<Charm>();
 
     [Header("Combat Stats")]
     [SerializeField] private int maxHealth;
@@ -186,20 +185,20 @@ public class Player : Fighter
 
     public void PopulateCharmList()
     {
-        equippedCharms.Clear();
+        inventory.container.EquippedCharms.Clear();
 
         for (int i = 0; i < inventoryManager.listOfEquippedCharms.Count; i++)
         {
-            equippedCharms.Add(inventoryManager.listOfEquippedCharms[i].GetComponent<InventoryCharm>().realCharm);
+            inventory.container.EquippedCharms.Add(inventoryManager.listOfEquippedCharms[i].GetComponent<InventoryCharm>().realCharm);
         }
     }
 
     private void SetCharms()
     {
-        for (int i = 1; i < equippedCharms.Count; i++)
+        for (int i = 1; i < inventory.container.EquippedCharms.Count; i++)
         {
-            StaticGameData.playerDamageAttributes = equippedCharms[0].damageAtrributes;
-            equippedCharms[i].SecondaryUse();
+            StaticGameData.playerDamageAttributes = inventory.container.EquippedCharms[0].damageAtrributes;
+            inventory.container.EquippedCharms[i].SecondaryUse();
         }
     }
 

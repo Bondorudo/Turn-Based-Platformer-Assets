@@ -15,7 +15,7 @@ public class GroundItem : Interactable
 
             base.Interact();
             // Add item to inventory.
-            inventory.AddToInventory(new Item(item), 1);
+            inventory.AddItemToInventory(new Item(item), 1);
             Destroy(this.gameObject);
         }
     }

@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Charm", menuName = "PlayerAbilities/Charm")]
 
+public enum CharmState { Locked, Available, Equipped }
+
+
+[CreateAssetMenu(fileName = "Charm", menuName = "PlayerAbilities/Charm")]
 public class Charm : ScriptableObject
 {
     // Main use

@@ -7,7 +7,7 @@ public class CharmItem : Interactable
     private bool hasGrantedCharm = false;
 
     public Charm charmToGive;
-
+    public InventoryObject inventory;
 
     protected override void Interact()
     {
@@ -27,6 +27,7 @@ public class CharmItem : Interactable
         Debug.Log("Player got : " + gameObject.name);
 
         charmToGive.charmState = CharmState.Available;
+        inventory.container.UnlockedCharms.Add(charmToGive);
 
         InventoryManager.instance.UpdateUnlockedCharms();
 

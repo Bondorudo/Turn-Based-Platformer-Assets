@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public enum CharmState { Locked, Available, Equipped }
 
 public class InventoryCharm : MonoBehaviour, IPointerClickHandler
 {
@@ -49,19 +48,14 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
 
     private void EquipCharm()
     {
-        /* Add charm to list of equipped charms, reload inventory to see the change.
-         * 
-         */
-        
+        // Add charm to list of equipped charms, reload inventory to see the change.
 
         InventoryManager.instance.EquipCharm(gameObject);
     }
 
     private void UnequipCharm()
     {
-        /* Remove charm from list of equipped charms, load inventory again to add it back in
-         * 
-         */
+        // Remove charm from list of equipped charms, load inventory again to add it back in
 
         charmState = CharmState.Available;
 

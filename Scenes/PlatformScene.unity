@@ -50831,6 +50831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3381c32d953473d4e91cc22e6981a2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: e39504bc0df76a141bbb5e3a2edbffff, type: 2}
   listOfCharms:
   - {fileID: 11400000, guid: d33964c89087c9a4395f479668dd31f1, type: 2}
   - {fileID: 11400000, guid: 1247fd8732ba20149bbe3b30feb50616, type: 2}
@@ -51421,6 +51422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charmToGive: {fileID: 11400000, guid: 301ff27207cc1b44abf4f417421e8503, type: 2}
+  inventory: {fileID: 11400000, guid: e39504bc0df76a141bbb5e3a2edbffff, type: 2}
 --- !u!4 &1975206273
 Transform:
   m_ObjectHideFlags: 0
@@ -51568,9 +51570,6 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: e39504bc0df76a141bbb5e3a2edbffff, type: 2}
   inventoryManager: {fileID: 1899182956}
   moneyAmount: 0
-  equippedCharms:
-  - {fileID: 11400000, guid: 1247fd8732ba20149bbe3b30feb50616, type: 2}
-  - {fileID: 11400000, guid: ffcfe636c64fb354fa3908e824c35bbf, type: 2}
   maxHealth: 30
   whatIsGround:
     serializedVersion: 2

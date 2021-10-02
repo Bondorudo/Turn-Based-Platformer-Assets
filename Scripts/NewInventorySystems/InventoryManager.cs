@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
+    public InventoryObject inventory;
 
     // Add all charms to this list
     public List<Charm> listOfCharms = new List<Charm>();
@@ -41,6 +42,8 @@ public class InventoryManager : MonoBehaviour
     {
         CreateEmptyCharms();
         CloseInventory();
+
+        AddUnlockedCharmsToList();
     }
     private void Update()
     {
@@ -100,6 +103,18 @@ public class InventoryManager : MonoBehaviour
     #endregion
 
     #region ---CHARMS---
+
+    private void AddUnlockedCharmsToList()
+    {
+        for (int i = 0; i < listOfCharms.Count; i++)
+        {
+            if (listOfCharms[i].charmState != CharmState.Locked)
+            {
+                inventory.AddCharmToInventory(listOfCharms[i]);
+            }
+        }
+    }
+
     #region EquippedCharms
 
     // Charm is not not equipped, so then equip it.

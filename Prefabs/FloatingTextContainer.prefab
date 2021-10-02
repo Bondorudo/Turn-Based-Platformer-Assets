@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2055567673127886470}
   - component: {fileID: -4849691565320818}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FloatingTextContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

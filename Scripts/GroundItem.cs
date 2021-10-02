@@ -5,13 +5,18 @@ using UnityEngine;
 public class GroundItem : Interactable
 {
     public ItemObject item;
+    public InventoryObject inventory;
 
     protected override void Interact()
     {
         if (canInteract)
         {
+            Debug.Log("INTERACT GROUUUND ITEM");
+
             base.Interact();
-            // TODO: Add item to inventory.
+            // Add item to inventory.
+            inventory.AddToInventory(new Item(item), 1);
+            Destroy(this.gameObject);
         }
     }
     //TODO: Create coins, that the player can just pick up by walking over them, no interraction with 'f' needed.

@@ -7,6 +7,8 @@ public class PlayerData
 {
     public int maxJumps;
     public int charmCount;
+    public int moneyAmount;
+
 
     public bool hasGainedDoubleJump;
     public bool hasGainedCrouch;

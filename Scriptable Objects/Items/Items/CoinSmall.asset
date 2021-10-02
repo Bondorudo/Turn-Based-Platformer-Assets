@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a73b26ade4c3124883cb78fd744b6a3, type: 3}
-  m_Name: KeyObject
+  m_Script: {fileID: 11500000, guid: 08da2a8bd62b91240aa2bc48bc11bf78, type: 3}
+  m_Name: CoinSmall
   m_EditorClassIdentifier: 
   Id: 0
-  uiDisplay: {fileID: -4786724563431889287, guid: b27d51e5b38273e40acbd7cc7d12dcd1, type: 3}
-  itemType: 0
-  desctiption: A simple key...
+  uiDisplay: {fileID: -8398684906983256152, guid: c50dbde916f6e9c4b9623fa10e19b551, type: 3}
+  itemType: 1
+  desctiption: Small coin...
+  coinValue: 5

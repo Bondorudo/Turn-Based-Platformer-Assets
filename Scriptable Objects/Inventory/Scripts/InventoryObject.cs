@@ -55,6 +55,7 @@ public class InventoryObject : ScriptableObject
 public class Inventory
 {
     public List<InventorySlot> Items = new List<InventorySlot>();
+    // public List<InventoryCharm> Charms = new List<InventoryCharm>(); TODO : Move a list of charms here so that it can be saved
 }
 
 [System.Serializable]

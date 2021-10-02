@@ -13,6 +13,7 @@ public class PlatformGameManager : MonoBehaviour
     private Player playerScript;
     public GameObject inventoryCanvas;
 
+    public GameObject pfCoin;
 
     string enemyDeadString = "";
 
@@ -55,9 +56,13 @@ public class PlatformGameManager : MonoBehaviour
 
     private void ThrowMoney()
     {
-        // This works for testing, but
-        // TODO: Instantiate coins and throw them around the dead enemy, player can then pick those up to gain money.
-        playerScript.ChangeMoneyAmount(StaticGameData.inCombatEnemy.GetComponent<Enemy>().GiveMoney());
+        int randomCoinAmount = Random.Range(1, 5);
+
+        for (int i = 0; i < randomCoinAmount; i++)
+        {
+            Vector3 randomOffset = new Vector3(Random.Range(0, 2), Random.Range(0, 2), 0f);
+            Instantiate(pfCoin, transform.position + randomOffset, Quaternion.identity);
+        }
     }
 
     public void KillEnemies()

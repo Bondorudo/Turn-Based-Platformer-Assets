@@ -25,34 +25,16 @@ public class SaveStationManager : Interactable
     {
         if (canInteract)
         {
-            if (canInteract)
+            base.Interact();
+            if (!inventoryManager.isInventoryOpen)
             {
-                base.Interact();
-                if (!inventoryManager.isInventoryOpen)
-                {
-                    // Save Game and show inventory, player can close this with pressing f again or moving out of it.
-                    inventoryManager.OpenInventory(0);
-                    Debug.Log("Save Station Open Inventory");
-                    gameManager.GameSaveState(transform.position);
-                }
-                else
-                {
-                    inventoryManager.CloseInventory();
-                    Debug.Log("Save Station Close Inventory");
-                }
+                // Save Game and show inventory, player can close this with pressing f again or moving out of it.
+                inventoryManager.OpenInventory(0);
+                gameManager.GameSaveState(transform.position);
             }
             else
             {
-                if (!inventoryManager.isInventoryOpen)
-                {
-                    inventoryManager.OpenInventory(1);
-                    Debug.Log("Gameplay Open Inventory");
-                }
-                else
-                {
-                    inventoryManager.CloseInventory();
-                    Debug.Log("Gameplay Close Inventory");
-                }
+                inventoryManager.CloseInventory();
             }
         }
     }

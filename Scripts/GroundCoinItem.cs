@@ -4,26 +4,48 @@ using UnityEngine;
 
 public class GroundCoinItem : MonoBehaviour
 {
+    public CoinObject[] coins;
+    public Vector2 randomThrowDir; // TODO: at start (when instantiated) throw coin in a random direction a little bit
+    public int throwSpeed;
     private SpriteRenderer sr;
-    public Vector2 randomThroDir;
-    public int coinValue;
-    public List<Sprite> sprites = new List<Sprite>();
+    private Rigidbody2D rb;
+    private Player player;
 
-    // TODO: REWORK : List of coin item scriptable objects, those objects have a value and a sprite, then select random 1 from that list and get its sprite and value
+    private CoinObject coin;
+
+
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     private void Start()
     {
-        sr.sprite = SelectRandomSprite();
+        var xRandomDir = Random.Range(0, randomThrowDir.x);
+        var yRandomDir = Random.Range(0, randomThrowDir.y);
+        rb.velocity = new Vector2(xRandomDir * throwSpeed, yRandomDir * throwSpeed);
+        coin = SelectRandomCoin();
+        sr.sprite = coin.uiDisplay;
     }
 
-    public Sprite SelectRandomSprite()
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Sprite randomSprite = sprites[Random.Range(0, sprites.Count)];
-        return randomSprite;
+        if (collision.collider.tag == "Player")
+        {
+            // Grant player random coin value
+            player.playerData.moneyAmount += coin.coinValue;
+            Destroy(this.gameObject);
+        }
+    }
+
+
+    public CoinObject SelectRandomCoin()
+    {
+        var randomCoin = coins[Random.Range(0, coins.Length)];
+        return randomCoin;
     }
 }

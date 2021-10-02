@@ -40,6 +40,22 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         CreateEmptyCharms();
+        CloseInventory();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown("e"))
+        {
+            // If 'e' open inventory
+            if (!isInventoryOpen)
+            {
+                OpenInventory(1);
+            }
+            else
+            {
+                CloseInventory();
+            }
+        }
     }
 
     #region ---GENERAL---

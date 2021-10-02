@@ -109,9 +109,16 @@ public class Player : Fighter
             SaveSystem.ClearSave();
         }
 
-        if (Input.GetKeyDown("p"))
+        if (Input.GetKeyDown("l"))
         {
             SaveSystem.LoadPlayer(this);
+            inventory.Load();
+        }
+
+        if (Input.GetKeyDown("p"))
+        {
+            SaveSystem.SavePlayer(this);
+            inventory.Save();
         }
 
 

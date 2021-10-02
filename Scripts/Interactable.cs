@@ -6,6 +6,7 @@ public class Interactable : MonoBehaviour
 {
     protected bool canInteract;
     protected bool hasInteracted;
+    protected Collider2D coll;
     private GameObject showInteractivityUI;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class Interactable : MonoBehaviour
                 canInteract = true;
                 showInteractivityUI.SetActive(true);
                 showInteractivityUI.transform.position = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
+                coll = collision;
             }
         }
     }

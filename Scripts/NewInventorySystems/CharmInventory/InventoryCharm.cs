@@ -8,7 +8,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
 {
     public CharmState charmState;
 
-    public Charm realCharm;
+    public CharmObject realCharm;
 
     public int xSpot;
     public int ySpot;
@@ -18,7 +18,6 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
     {
         if (gameObject.tag == "Charm")
             CheckCharmState();
-        Debug.Log(charmState);
     }
 
     private void CheckCharmState()

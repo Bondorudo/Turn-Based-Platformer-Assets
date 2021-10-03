@@ -16,7 +16,7 @@ public static class StaticGameData
     public static int playerMaxHealth;
     public static int playerMaxSP;
     public static int playerBaseDamage;
-    public static List<Stats> playerDamageAttributes;
+    public static List<SkillStats> playerDamageAttributes;
 
     // Battle Info
     public static bool playerWin;

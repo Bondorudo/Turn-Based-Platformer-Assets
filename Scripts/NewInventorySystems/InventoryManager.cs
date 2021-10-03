@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
     public InventoryObject inventory;
 
     // Add all charms to this list
-    public List<Charm> listOfCharms = new List<Charm>();
+    public List<CharmObject> listOfCharms = new List<CharmObject>();
     public List<GameObject> listOfEquippedCharms = new List<GameObject>();
 
     private List<RectTransform> charmRectTransformList = new List<RectTransform>();
@@ -40,6 +40,8 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        inventory.container.UnlockedCharms.Clear();
+
         CreateEmptyCharms();
         CloseInventory();
 
@@ -110,7 +112,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (listOfCharms[i].charmState != CharmState.Locked)
             {
-                inventory.AddCharmToInventory(listOfCharms[i]);
+                inventory.AddUnlockedCharmToInventory(new Charm(listOfCharms[i]));
             }
         }
     }
@@ -134,6 +136,19 @@ public class InventoryManager : MonoBehaviour
         }
         else
             Debug.Log("MAX CHARMS");
+
+
+        PopulateCharmList();
+    }
+
+    public void PopulateCharmList()
+    {
+        inventory.container.EquippedCharms.Clear();
+
+        for (int i = 0; i < listOfEquippedCharms.Count; i++)
+        {
+            inventory.AddEquippedCharmToInventory(new Charm(listOfEquippedCharms[i].GetComponent<InventoryCharm>().realCharm));
+        }
     }
     #endregion
 
@@ -148,6 +163,8 @@ public class InventoryManager : MonoBehaviour
             listOfEquippedCharms[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(15 + x * charmSlotCellSize, -15 + y * charmSlotCellSize);
             x++;
         }
+
+        PopulateCharmList();
     }
 
     #region AvailableCharms

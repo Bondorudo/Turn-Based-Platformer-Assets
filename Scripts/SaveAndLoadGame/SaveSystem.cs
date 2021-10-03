@@ -9,7 +9,6 @@ public static class SaveSystem
     private static string path = Application.persistentDataPath + "/Player.Data";
 
 
-
     public static void ClearSave()
     {
         File.Delete(path);
@@ -36,7 +35,6 @@ public static class SaveSystem
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
             player.playerData = (PlayerData)formatter.Deserialize(stream);
-            Debug.Log("Max Jumps : " + player.playerData.maxJumps);
             stream.Close();
         }
         else

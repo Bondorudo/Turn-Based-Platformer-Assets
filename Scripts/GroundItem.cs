@@ -11,8 +11,6 @@ public class GroundItem : Interactable
     {
         if (canInteract)
         {
-            Debug.Log("INTERACT GROUUUND ITEM");
-
             base.Interact();
             // Add item to inventory.
             inventory.AddItemToInventory(new Item(item), 1);

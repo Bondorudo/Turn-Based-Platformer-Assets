@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8890fd816a4adc444be316e87b587c26, type: 3}
   m_Name: WindCharm
   m_EditorClassIdentifier: 
-  damageAtrributes: 02000000010000000000000001000000
+  damageAtrributes:
+  - damageType: 0
+    damageAttribute: 0
+  - damageType: 1
+    damageAttribute: 1
+  - damageType: 2
+    damageAttribute: 0
+  - damageType: 3
+    damageAttribute: 1
+  - damageType: 4
+    damageAttribute: 2
   extraHealth: 15
   extraSP: 0
   extraBaseDamage: 0

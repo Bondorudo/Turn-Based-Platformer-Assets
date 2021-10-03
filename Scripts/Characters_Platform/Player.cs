@@ -99,9 +99,8 @@ public class Player : Fighter
         CheckIfCanCrouch();
         CheckIfGrappleHookIsUnlocked();
 
-        PopulateCharmList();
-
         SetAnimations();
+
 
         if (Input.GetKeyDown("o"))
         {
@@ -183,22 +182,13 @@ public class Player : Fighter
         return transform.position;
     }
 
-    public void PopulateCharmList()
-    {
-        inventory.container.EquippedCharms.Clear();
-
-        for (int i = 0; i < inventoryManager.listOfEquippedCharms.Count; i++)
-        {
-            inventory.container.EquippedCharms.Add(inventoryManager.listOfEquippedCharms[i].GetComponent<InventoryCharm>().realCharm);
-        }
-    }
 
     private void SetCharms()
     {
         for (int i = 1; i < inventory.container.EquippedCharms.Count; i++)
         {
-            StaticGameData.playerDamageAttributes = inventory.container.EquippedCharms[0].damageAtrributes;
-            inventory.container.EquippedCharms[i].SecondaryUse();
+            StaticGameData.playerDamageAttributes = inventory.container.EquippedCharms[0].charm.damageAtrributes;
+            inventory.container.EquippedCharms[i].charm.SecondaryUse();
         }
     }
 

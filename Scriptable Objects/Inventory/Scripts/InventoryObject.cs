@@ -26,9 +26,14 @@ public class InventoryObject : ScriptableObject
         container.Items.Add(new InventorySlot(_item.Id, _item, _amount));
     }
 
-    public void AddCharmToInventory(Charm charm)
+    public void AddUnlockedCharmToInventory(Charm charm)
     {
-        container.UnlockedCharms.Add(charm);
+        container.UnlockedCharms.Add(new CharmSlot(charm));
+    }
+
+    public void AddEquippedCharmToInventory(Charm charm)
+    {
+        container.EquippedCharms.Add(new CharmSlot(charm));
     }
 
     [ContextMenu("Save")]
@@ -60,9 +65,8 @@ public class InventoryObject : ScriptableObject
 public class Inventory
 {
     public List<InventorySlot> Items = new List<InventorySlot>();
-    // TODO: Charm is not serializable -> need to do a workaround
-    public List<Charm> UnlockedCharms = new List<Charm>();
-    public List<Charm> EquippedCharms = new List<Charm>();
+    public List<CharmSlot> UnlockedCharms = new List<CharmSlot>();
+    public List<CharmSlot> EquippedCharms = new List<CharmSlot>();
 }
 
 [System.Serializable]
@@ -88,5 +92,10 @@ public class InventorySlot
 [System.Serializable]
 public class CharmSlot
 {
+    public Charm charm;
 
+    public CharmSlot(Charm _charm)
+    {
+        charm = _charm;
+    }
 }

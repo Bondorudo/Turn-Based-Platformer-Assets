@@ -20,4 +20,84 @@ MonoBehaviour:
       item:
         Name: KeyObject
         Id: 3
-      amount: 5
+      amount: 6
+    UnlockedCharms:
+    - charm:
+        extraHealth: 0
+        extraSP: 0
+        extraBaseDamage: 0
+        damageAtrributes:
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+    - charm:
+        extraHealth: 0
+        extraSP: 0
+        extraBaseDamage: 15
+        damageAtrributes:
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+    - charm:
+        extraHealth: 5
+        extraSP: 15
+        extraBaseDamage: 0
+        damageAtrributes:
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+    - charm:
+        extraHealth: 15
+        extraSP: 0
+        extraBaseDamage: 0
+        damageAtrributes:
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+    EquippedCharms:
+    - charm:
+        extraHealth: 0
+        extraSP: 0
+        extraBaseDamage: 0
+        damageAtrributes:
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+    - charm:
+        extraHealth: 0
+        extraSP: 0
+        extraBaseDamage: 15
+        damageAtrributes:
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0
+        - damageType: 0
+          damageAttribute: 0

@@ -15,7 +15,7 @@ public class CombatUnits : MonoBehaviour
     protected GameState gameState;
 
     // List order is = (Normal, Fire, Water, Wind, Earth)
-    public List<Stats> damageAtrributes = new List<Stats>();
+    public List<SkillStats> damageAtrributes = new List<SkillStats>();
 
     public bool isPlayerDead;
     protected bool isMultihit;
@@ -155,7 +155,7 @@ public class CombatUnits : MonoBehaviour
         FloatingText.Create(new Vector2(transform.position.x, transform.position.y + 2), damageAtrributes[i].ToString(), 15, 300);
 
         // now receives damage amount and damage type
-        switch (damageAtrributes[i])
+        switch (damageAtrributes[i].damageAttribute)
         {
             case Stats.neutral:
                 Neutral(dmg.damageAmount);

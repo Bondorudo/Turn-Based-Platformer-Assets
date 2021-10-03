@@ -8,7 +8,6 @@ public static class SaveSystem
 {
     private static string path = Application.persistentDataPath + "/Player.Data";
 
-
     public static void ClearSave()
     {
         File.Delete(path);

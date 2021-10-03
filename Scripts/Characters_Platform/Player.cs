@@ -111,12 +111,14 @@ public class Player : Fighter
         {
             SaveSystem.LoadPlayer(this);
             inventory.Load();
+            inventoryManager.UpdateEquippedCharms();
         }
 
         if (Input.GetKeyDown("p"))
         {
             SaveSystem.SavePlayer(this);
             inventory.Save();
+            inventoryManager.UpdateEquippedCharms();
         }
 
 
@@ -171,6 +173,7 @@ public class Player : Fighter
 
         CheckEnvironment();
     }
+
 
     public void ChangeMoneyAmount(int change)
     {

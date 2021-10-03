@@ -20,7 +20,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
             CheckCharmState();
     }
 
-    private void CheckCharmState()
+    public void CheckCharmState()
     {
         /* If charm is unlocked and not equipped and click, and player can still equip more, then equip charm.
              * 

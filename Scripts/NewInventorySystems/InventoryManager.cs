@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
     public List<GameObject> listOfEquippedCharms = new List<GameObject>();
 
     private List<RectTransform> charmRectTransformList = new List<RectTransform>();
-    public List<InventoryCharm> inventortCharmList = new List<InventoryCharm>();
+    public List<InventoryCharm> inventoryCharmList = new List<InventoryCharm>();
 
 
     public List<GameObject> inventoryPages = new List<GameObject>();
@@ -119,6 +119,14 @@ public class InventoryManager : MonoBehaviour
 
     #region EquippedCharms
 
+    public void UpdateEquippedCharms()
+    {
+        for (int i = 0; i < inventoryCharmList.Count; i++)
+        {
+            inventoryCharmList[i].CheckCharmState();
+        }
+    }
+
     // Charm is not not equipped, so then equip it.
     public void EquipCharm(GameObject charmToEquip)
     {
@@ -182,12 +190,12 @@ public class InventoryManager : MonoBehaviour
         // Throw removed charm back into all charms area, to its correct spot, by going trough all charms.
         for (int i = 0; i < listOfCharms.Count; i++)
         {
-            if (inventortCharmList[i].charmState == CharmState.Available)
+            if (inventoryCharmList[i].charmState == CharmState.Available)
             {
                 charmRectTransformList[i].transform.SetParent(parentOfAllCharms);
 
                 // Set correct positions for the charm objects
-                charmRectTransformList[i].anchoredPosition = new Vector2(15 + inventortCharmList[i].xSpot * charmSlotCellSize, -15 + inventortCharmList[i].ySpot * charmSlotCellSize);
+                charmRectTransformList[i].anchoredPosition = new Vector2(15 + inventoryCharmList[i].xSpot * charmSlotCellSize, -15 + inventoryCharmList[i].ySpot * charmSlotCellSize);
                 
             }
         }
@@ -221,7 +229,7 @@ public class InventoryManager : MonoBehaviour
             charmRectTransform.anchoredPosition = new Vector2(15 + x * charmSlotCellSize, -15 + y * charmSlotCellSize);
             
             charmRectTransformList.Add(charmRectTransform);
-            inventortCharmList.Add(inventoryCharm);
+            inventoryCharmList.Add(inventoryCharm);
 
             x++;
             if (x >= 6)
@@ -235,7 +243,7 @@ public class InventoryManager : MonoBehaviour
                 // Find Image and change sprite if charm is unlocked. if charm is locked it should have default locked Sprite.
                 charmRectTransformList[i].Find("Image").GetComponent<Image>().sprite = listOfCharms[i].charmSprite;
 
-                inventortCharmList[i].UnlockCharm();
+                inventoryCharmList[i].UnlockCharm();
             }
         }
     }
@@ -253,7 +261,7 @@ public class InventoryManager : MonoBehaviour
                 // Find Image and change sprite if charm is unlocked. if charm is locked it should have default locked Sprite.
                 charmRectTransformList[i].Find("Image").GetComponent<Image>().sprite = listOfCharms[i].charmSprite;
 
-                inventortCharmList[i].UnlockCharm();
+                inventoryCharmList[i].UnlockCharm();
             }
         }
     }

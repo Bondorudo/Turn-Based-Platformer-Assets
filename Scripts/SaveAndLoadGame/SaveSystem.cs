@@ -21,7 +21,6 @@ public static class SaveSystem
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write);
         formatter.Serialize(stream, player.playerData);
-        Debug.Log("Max Jumps : " + player.playerData.maxJumps);
         stream.Close();
     }
 

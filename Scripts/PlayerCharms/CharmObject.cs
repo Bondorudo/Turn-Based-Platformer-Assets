@@ -32,20 +32,6 @@ public class CharmObject : ScriptableObject
         StaticGameData.playerBaseDamage += extraBaseDamage;
     }
 
-    public void UnlockCharm()
-    {
-        charmState = CharmState.Available;
-    }
-
-    public void EquipCharm()
-    {
-        charmState = CharmState.Equipped;
-    }
-
-    public void AvailableCharm()
-    {
-        charmState = CharmState.Available;
-    }
 }
 
 [System.Serializable]
@@ -56,6 +42,7 @@ public class Charm
     public int extraSP;
     public int extraBaseDamage;
 
+    public CharmState state;
     public List<SkillStats> damageAtrributes = new List<SkillStats>();
 
     public Charm(CharmObject charm)
@@ -69,6 +56,7 @@ public class Charm
         extraHealth = charm.extraHealth;
         extraSP = charm.extraSP;
         extraBaseDamage = charm.extraBaseDamage;
+        state = charm.charmState;
     }
     public void SecondaryUse()
     {

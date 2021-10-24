@@ -10,6 +10,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
 
     public CharmObject realCharm;
 
+
     public int xSpot;
     public int ySpot;
 
@@ -18,6 +19,14 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
     {
         if (gameObject.tag == "Charm")
             CheckCharmState();
+    }
+
+    private void Update()
+    {
+        if (realCharm != null)
+        {
+            charmState = realCharm.charmState;
+        }
     }
 
     public void CheckCharmState()
@@ -31,7 +40,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
 
 
         // Check charm state and do something according to it
-        switch (charmState)
+        switch (realCharm.charmState)
         {
             case CharmState.Available:
                 EquipCharm();
@@ -45,9 +54,17 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void LoadInventoryCharmsToInventory()
+    {
+        InventoryManager.instance.EquipCharm(gameObject);
+    }
+
     private void EquipCharm()
     {
         // Add charm to list of equipped charms, reload inventory to see the change.
+
+        charmState = CharmState.Equipped;
+        realCharm.charmState = CharmState.Equipped;
 
         InventoryManager.instance.EquipCharm(gameObject);
     }
@@ -57,6 +74,7 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
         // Remove charm from list of equipped charms, load inventory again to add it back in
 
         charmState = CharmState.Available;
+        realCharm.charmState = CharmState.Available;
 
         InventoryManager.instance.RemoveCharm(gameObject);
     }
@@ -70,5 +88,6 @@ public class InventoryCharm : MonoBehaviour, IPointerClickHandler
     public void UnlockCharm()
     {
         charmState = CharmState.Available;
+        realCharm.charmState = CharmState.Available;
     }
 }

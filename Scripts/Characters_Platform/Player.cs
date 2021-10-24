@@ -109,16 +109,16 @@ public class Player : Fighter
 
         if (Input.GetKeyDown("l"))
         {
-            SaveSystem.LoadPlayer(this);
             inventory.Load();
+            SaveSystem.LoadPlayer(this);
             inventoryManager.UpdateEquippedCharms();
         }
 
         if (Input.GetKeyDown("p"))
         {
-            SaveSystem.SavePlayer(this);
             inventory.Save();
-            inventoryManager.UpdateEquippedCharms();
+            SaveSystem.SavePlayer(this);
+            //inventoryManager.UpdateEquippedCharms();
         }
 
 

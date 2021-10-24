@@ -41,11 +41,18 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         inventory.container.UnlockedCharms.Clear();
+        inventory.container.AllCharms.Clear();
 
+        AddUnlockedCharmsToList();
         CreateEmptyCharms();
         CloseInventory();
 
-        AddUnlockedCharmsToList();
+
+        for (int i = 0; i < listOfCharms.Count; i++)
+        {
+            inventory.AddAllCharmsToList(new Charm(listOfCharms[i]));
+        }
+
     }
     private void Update()
     {
@@ -121,9 +128,14 @@ public class InventoryManager : MonoBehaviour
 
     public void UpdateEquippedCharms()
     {
-        for (int i = 0; i < inventoryCharmList.Count; i++)
+        // Go trough all charms and set charm states 
+
+        Debug.Log("List of charms : " + listOfCharms.Count + ". All charms count : " + inventory.container.AllCharms.Count);
+
+        for (int i = 0; i < listOfCharms.Count; i++)
         {
-            inventoryCharmList[i].CheckCharmState();
+            listOfCharms[i].charmState = inventory.container.AllCharms[i].charm.state;
+            //inventoryCharmList[i].LoadInventoryCharmsToInventory();
         }
     }
 
@@ -135,7 +147,6 @@ public class InventoryManager : MonoBehaviour
         {
             // Set up charm, then add it to the list of equippped charms. and increment charmpX spot by 1.
             charmToEquip.transform.SetParent(parentOfEquippedCharms);
-            charmToEquip.GetComponent<InventoryCharm>().charmState = CharmState.Equipped;
             charmToEquip.GetComponent<RectTransform>().anchoredPosition = new Vector2(15 + charmSpotX * charmSlotCellSize, -15);
 
             listOfEquippedCharms.Add(charmToEquip);
@@ -153,9 +164,16 @@ public class InventoryManager : MonoBehaviour
     {
         inventory.container.EquippedCharms.Clear();
 
-        for (int i = 0; i < listOfEquippedCharms.Count; i++)
+        for (int i = 0; i < listOfCharms.Count; i++)
         {
-            inventory.AddEquippedCharmToInventory(new Charm(listOfEquippedCharms[i].GetComponent<InventoryCharm>().realCharm));
+            if (listOfCharms[i].charmState == CharmState.Equipped)
+            {
+                Charm _charm = new Charm(listOfCharms[i])
+                {
+                    state = CharmState.Equipped
+                };
+                inventory.AddEquippedCharmToInventory(_charm);
+            }
         }
     }
     #endregion
@@ -190,7 +208,7 @@ public class InventoryManager : MonoBehaviour
         // Throw removed charm back into all charms area, to its correct spot, by going trough all charms.
         for (int i = 0; i < listOfCharms.Count; i++)
         {
-            if (inventoryCharmList[i].charmState == CharmState.Available)
+            if (inventoryCharmList[i].realCharm.charmState == CharmState.Available)
             {
                 charmRectTransformList[i].transform.SetParent(parentOfAllCharms);
 
@@ -210,9 +228,15 @@ public class InventoryManager : MonoBehaviour
     {
         int x = 0;
         int y = 0;
+        
+        Debug.Log("List of Charms : " + listOfCharms.Count);
+        Debug.Log("Unlocked Charms : " + inventory.container.UnlockedCharms.Count);
+
+
 
         for (int i = 0; i < listOfCharms.Count; i++)
         {
+
             // Create empty charms
             RectTransform n_charm = Instantiate(pfCharmSlot, parentOfAllCharms).GetComponent<RectTransform>();
             n_charm.anchoredPosition = new Vector2(15 + x * charmSlotCellSize, -15 + y * charmSlotCellSize);

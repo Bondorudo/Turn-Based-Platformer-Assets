@@ -26,6 +26,11 @@ public class InventoryObject : ScriptableObject
         container.Items.Add(new InventorySlot(_item.Id, _item, _amount));
     }
 
+    public void AddAllCharmsToList(Charm charm)
+    {
+        container.AllCharms.Add(new CharmSlot(charm));
+    }
+
     public void AddUnlockedCharmToInventory(Charm charm)
     {
         container.UnlockedCharms.Add(new CharmSlot(charm));
@@ -65,6 +70,7 @@ public class InventoryObject : ScriptableObject
 public class Inventory
 {
     public List<InventorySlot> Items = new List<InventorySlot>();
+    public List<CharmSlot> AllCharms = new List<CharmSlot>();
     public List<CharmSlot> UnlockedCharms = new List<CharmSlot>();
     public List<CharmSlot> EquippedCharms = new List<CharmSlot>();
 }
